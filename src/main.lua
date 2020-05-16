@@ -10,6 +10,7 @@ function love.load()
 	Heartbeat.createPlayer(Player, 100, 100)
 	Heartbeat.tilesList = {BunkerTile}
 	Heartbeat.entitiesList = {Terminal}
+	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON"}
 	Heartbeat.editor.readLevel("start")
 end
@@ -22,15 +23,72 @@ Player = {
 
 BunkerTile = {
 	id = "bunker",
+	texture = love.graphics.newImage("assets/tiles/bunker-tileset.png"),
 	height = 25,
 	width = 25
 }
 
 Terminal = {
 	id = "terminal",
+	texture = love.graphics.newImage("assets/misc/terminal.png"),
 	height = 70,
-	width = 40
+	width = 40,
+	isEnemy = false
 }
+
+DarkMatterUpgrade = {
+	id = "matterupgrade",
+	height = 20,
+	width = 20,
+	isEnemy = false
+}
+
+HealthTankUpgrade = {
+	id = "healthupgrade",
+	height = 20,
+	width = 20,
+	isEnemy = false
+}
+
+GrappelUpgrade = {
+	id = "grappleupgrade",
+	height = 20,
+	width = 20,
+	isEnemy = false
+}
+
+LongJumpUpgrade = {
+	id = "jumpupgrade",
+	height = 20,
+	width = 20,
+	isEnemy = false
+}
+
+GravityUpgrade = {
+	id = "gravityupgrade",
+	height = 20,
+	width = 20,
+	isEnemy = false
+}
+
+ChargeBeamUpgrade = {
+	id = "chargeupgrade",
+	height = 20,
+	width = 20,
+	isEnemy = false
+}
+
+TriBeamUpgrade = {
+	id = "tribeamupgrade",
+	height = 20,
+	width = 20,
+	isEnemy = false
+}
+
+function HealthTankUpgrade.onPickup(this)
+	print("Grabbed item upgrade")
+	Heartbeat.removeItem(this)
+end
 
 function Player.draw(this)
 	local scaleX = 2
@@ -39,6 +97,15 @@ function Player.draw(this)
 	local offsetY = 2
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.draw(Player.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
+end
+
+function Terminal.draw(this)
+	local scaleX = 2
+	local scaleY = 2
+	local offsetX = 10
+	local offsetY = 13
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(Terminal.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
 end
 
 function Player.shoot()
