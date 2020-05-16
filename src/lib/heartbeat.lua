@@ -127,7 +127,8 @@ function Heartbeat.newEntity(object, x, y)
 		height = object.height,
 		health = object.health,
 		attack = object.attack,
-		behaivor = object.behaivor
+		behaivor = object.behaivor,
+		draw = object.draw
 	}
 	if (object.isNPC) then
 		Heartbeat.entities[#Heartbeat.entities].isNPC = true
@@ -138,7 +139,7 @@ end
 function Heartbeat.drawEntities()
 	for i=1,#Heartbeat.entities do
 		if (Heartbeat.entities[i].draw ~= nil) then
-			Heartbeat.entities[i].draw()
+			Heartbeat.entities[i].draw(Heartbeat.entities[i])
 		else
 			Heartbeat.draw(Heartbeat.entities[i])
 		end
@@ -640,7 +641,8 @@ function Heartbeat.editor.readLevel(levelName)
 			height = entity.height,
 			width = entity.width,
 			health = entity.health,
-			attack = entity.attack
+			attack = entity.attack,
+			draw = entity.draw
 		}
 		Heartbeat.newEntity(entityData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		--Heartbeat.spawnEntity(tonumber(levelLineData[1]), tonumber(levelLineData[2]), tonumber(levelLineData[3]))
