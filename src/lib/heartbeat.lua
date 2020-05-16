@@ -85,7 +85,7 @@ end
 -- drawPlayer: Draws the player to the screen
 function Heartbeat.drawPlayer()
 	if (Player.draw ~= nil) then
-		Heartbeat.draw(Heartbeat.player)
+		--Heartbeat.draw(Heartbeat.player)
 		Player.draw(Heartbeat.player)
 	else
 		Heartbeat.draw(Heartbeat.player)
@@ -290,7 +290,7 @@ function Heartbeat.dialog.nextLine()
 	Heartbeat.dialog.printedLines = {}
 	Heartbeat.dialog.dialogIndex = Heartbeat.dialog.dialogIndex + 1
 	-- Out of bounds check
-	if (Heartbeat.dialog.currentLine == nil) then
+	if (Heartbeat.dialog.currentLine == nil or Heartbeat.dialog.currentLine == "") then
 		Heartbeat.dialog.isOpen = false
 		return
 	end
@@ -305,11 +305,9 @@ function Heartbeat.dialog.nextLine()
 	Heartbeat.dialog.currentLine = strippedString
 
 	if (string.sub(Heartbeat.dialog.currentLine, 1, 1) == "[") then
-		print("found one")
 		for i=1,#Heartbeat.dialog.speakers do
 			if (Heartbeat.dialog.currentLine == "[" .. Heartbeat.dialog.speakers[i] .. "]") then
 				Heartbeat.dialog.speaker = Heartbeat.dialog.speakers[i]
-				print(Heartbeat.dialog.speaker)
 				Heartbeat.dialog.nextLine()
 				-- Add portrait later
 			end
@@ -326,9 +324,10 @@ function Heartbeat.dialog.drawDialog()
 	love.graphics.setColor(0, 0, 1, .8)
 	love.graphics.rectangle("line", 0, windowHeight - 150, windowWidth, 150)
 	love.graphics.rectangle("line", 0, windowHeight - 180, 100, 30)
-	-- Drawing speaker and text
+	-- Drawing speaker
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.print(Heartbeat.dialog.speaker, Heartbeat.dialog.font, 0, windowHeight - 180)
+	-- Creating text lines
 	local firstLine = string.sub(Heartbeat.dialog.currentLine, 0, Heartbeat.dialog.dialogCharacter)
 	local previousLength = 0
 	if (Heartbeat.dialog.printedLines[#Heartbeat.dialog.printedLines] ~= nil) then
@@ -336,7 +335,7 @@ function Heartbeat.dialog.drawDialog()
 			previousLength = previousLength + string.len(Heartbeat.dialog.printedLines[i])
 		end
 	end
-	if (Heartbeat.dialog.font:getWidth(string.sub(Heartbeat.dialog.currentLine, previousLength, previousLength + Heartbeat.dialog.dialogCharacter)) > windowWidth - 25) then
+	if (Heartbeat.dialog.font:getWidth(string.sub(Heartbeat.dialog.currentLine, previousLength, previousLength + Heartbeat.dialog.dialogCharacter)) > windowWidth - 200) then
 		Heartbeat.dialog.printedLines[#Heartbeat.dialog.printedLines+1] = string.sub(Heartbeat.dialog.currentLine, previousLength, previousLength + Heartbeat.dialog.dialogCharacter)
 		Heartbeat.dialog.dialogCharacter = 0
 	else
@@ -345,14 +344,14 @@ function Heartbeat.dialog.drawDialog()
 	-- Print all lines
 	for i=1,#Heartbeat.dialog.printedLines do
 		if (i == #Heartbeat.dialog.printedLines) then
-			love.graphics.print(string.sub(Heartbeat.dialog.currentLine, previousLength, previousLength + Heartbeat.dialog.dialogCharacter), Heartbeat.dialog.font, 10, windowHeight - 150 + (i*20))
+			love.graphics.print(string.sub(Heartbeat.dialog.currentLine, previousLength, previousLength + Heartbeat.dialog.dialogCharacter), Heartbeat.dialog.font, 100, windowHeight - 150 + (i*30))
 		end
 		-- Print the in-progress line
-		love.graphics.print(Heartbeat.dialog.printedLines[i], Heartbeat.dialog.font, 10, windowHeight - 150 + ((i-1)*20))
+		love.graphics.print(Heartbeat.dialog.printedLines[i], Heartbeat.dialog.font, 100, windowHeight - 150 + ((i-1)*30))
 	end
 	-- Fallback for if there's only one line
 	if (#Heartbeat.dialog.printedLines == 0) then
-		love.graphics.print(firstLine, Heartbeat.dialog.font, 10, windowHeight - 150)
+		love.graphics.print(firstLine, Heartbeat.dialog.font, 100, windowHeight - 150)
 	end
 end
 
