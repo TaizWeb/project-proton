@@ -406,15 +406,15 @@ function Heartbeat.editor.handleInput(key)
 		local snapx = math.floor((love.mouse.getX() + Camera.x) / 25) * 25
 		local snapy = math.floor((love.mouse.getY() + Camera.y) / 25) * 25
 		if (Heartbeat.editor.mode == "tile") then
-			local tileInfo = Heartbeat.lookupTile(Heartbeat.editor.currentTile)
+			local tileInfo = Heartbeat.tilesList[Heartbeat.editor.currentTile]
 			Heartbeat.newTile(tileInfo, snapx, snapy)
 		end
 		if (Heartbeat.editor.mode == "entity") then
-			local entityInfo = Heartbeat.lookupEntity(Heartbeat.editor.currentEntity)
+			local entityInfo = Heartbeat.entitiesList[Heartbeat.editor.currentEntity]
 			Heartbeat.newEntity(entityInfo, love.mouse.getX(), love.mouse.getY())
 		end
 		if (Heartbeat.editor.mode == "item") then
-			local itemInfo = Heartbeat.lookupItem(Heartbeat.editor.currentItem)
+			local itemInfo = Heartbeat.itemsList[Heartbeat.editor.currentItem]
 			Heartbeat.newItem(itemInfo, love.mouse.getX(), love.mouse.getY())
 		end
 	end
