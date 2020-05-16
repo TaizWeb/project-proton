@@ -1,8 +1,14 @@
 [Gray]
-I've managed to escape. Through some sheer luck I've managed to find a room that still had power going, but I see now that it's only because it houses PROTON. I've sealed the room off, so I should be safe in here. But... I'm bleeding really badly. One of those things managed to slice me right open. I can't move much, so I'm typing a final message. A message for you, PROTON. If I've done this right, you should wake up in a few days.
+I've managed to escape. Through some sheer luck I've managed to find a room that still had power going, but I see now that it's only because it houses PROTON. I've sealed the room off, so I should be safe in here. But... I'm bleeding really badly. One of those things managed to slice me right open. 
 
 [Gray]
-I'll be gone by then, either by blood loss or starvation. It's a shame, I wanted to tell you everything in person, but I suppose this will have to do. I can't go into details, but this entire facility has been locked down tight, nothing in, nothing out. However, there is an escape pod, one we created for you in case something like this happened. I'm sure you can find it. After reading this message, the door should unlock, and the power from your life support pod should reroute to the facility. Work fast, I'm not sure how much is left. Good luck, PROTON.
+I can't move much, so I'm typing a final message. A message for you, PROTON. If I've done this right, you should wake up in a few days. I'll be gone by then, either by blood loss or starvation. It's a shame, I wanted to tell you everything in person, but I suppose this will have to do. 
+
+[Gray]
+I can't go into details, but this entire facility has been locked down tight, nothing in, nothing out. However, there is an escape pod, one we created for you in case something like this happened. I'm sure you can find it.
+
+[Gray]
+ After reading this message, the door should unlock, and the power from your life support pod should reroute to the facility. Work fast, I'm not sure how much is left. Good luck, PROTON.
 
 [PROTON]
 ...
