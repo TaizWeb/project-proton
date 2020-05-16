@@ -9,9 +9,9 @@ Heartbeat = {
 	editor = {
 		isActive = false,
 		mode = "tile",
-		currentTile = "bunker",
-		currentEntity = "terminal",
-		currentItem = "brick",
+		currentTile = 1,--"bunker",
+		currentEntity = 1,--"terminal",
+		currentItem = 1,--"jumpupgrade",
 		commandModeLine = ""
 	},
 	dialog = {
@@ -358,11 +358,11 @@ end
 function Heartbeat.editor.drawEditor()
 	if (Heartbeat.editor.isActive) then
 		if (Heartbeat.editor.mode == "tile") then
-			Heartbeat.debugLine = "Current Tile: " .. Heartbeat.lookupTile(Heartbeat.editor.currentTile).id .. "\n"
+			Heartbeat.debugLine = "Current Tile: " .. Heartbeat.tilesList[Heartbeat.editor.currentTile].id .. "\n"
 		elseif (Heartbeat.editor.mode == "entity") then
-			Heartbeat.debugLine = "Current Entity: " .. Heartbeat.lookupEntity(Heartbeat.editor.currentEntity).id .. "\n"
+			Heartbeat.debugLine = "Current Entity: " .. Heartbeat.entitiesList[Heartbeat.editor.currentEntity].id .. "\n"
 		elseif (Heartbeat.editor.mode == "item") then
-			Heartbeat.debugLine = "Current Item: " .. Heartbeat.lookupItem(Heartbeat.editor.currentItem).id .. "\n"
+			Heartbeat.debugLine = "Current Item: " .. Heartbeat.itemsList[Heartbeat.editor.currentItem].id .. "\n"
 		end
 		Heartbeat.debugLine = Heartbeat.debugLine .. "Mouse Position: " .. love.mouse.getX() .. " " .. love.mouse.getY() .. "\n"
 		-- Drawing current tile/entity/item info
@@ -473,6 +473,28 @@ function Heartbeat.editor.handleInput(key)
 			Heartbeat.editor.mode = "tile"
 		elseif (Heartbeat.editor.mode == "item") then
 			Heartbeat.editor.mode = "entity"
+		end
+	end
+	if (key == "left") then
+		if (Heartbeat.editor.mode == "tile" and Heartbeat.editor.currentTile > 1) then
+			Heartbeat.editor.currentTile = Heartbeat.editor.currentTile -1
+		end
+		if (Heartbeat.editor.mode == "entity" and Heartbeat.editor.currentEntity > 1) then
+			Heartbeat.editor.currentEntity = Heartbeat.editor.currentEntity -1
+		end
+		if (Heartbeat.editor.mode == "item" and Heartbeat.editor.currentItem > 1) then
+			Heartbeat.editor.currentItem = Heartbeat.editor.currentItem - 1
+		end
+	end
+	if (key == "right") then
+		if (Heartbeat.editor.mode == "tile" and Heartbeat.editor.currentTile < #Heartbeat.tilesList) then
+			Heartbeat.editor.currentTile = Heartbeat.editor.currentTile + 1
+		end
+		if (Heartbeat.editor.mode == "entity" and Heartbeat.editor.currentEntity < #Heartbeat.entitiesList) then
+			Heartbeat.editor.currentEntity = Heartbeat.editor.currentEntity + 1
+		end
+		if (Heartbeat.editor.mode == "item" and Heartbeat.editor.currentItem < #Heartbeat.itemsList) then
+			Heartbeat.editor.currentItem = Heartbeat.editor.currentItem + 1
 		end
 	end
 	-- Enable command mode, for saving/reading
