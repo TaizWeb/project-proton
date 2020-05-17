@@ -28,8 +28,8 @@ Screen = {
 	width = 24,
 	offsetX = 0,
 	offsetY = 0,
-	scaleX = 1,
-	scaleY = 1,
+	scaleX = 2,
+	scaleY = 2,
 	isSolid = false
 }
 
@@ -39,9 +39,9 @@ Pod = {
 	height = 47,
 	width = 28,
 	offsetX = 0,
-	offsetY = 0,
-	scaleX = 1,
-	scaleY = 1,
+	offsetY = -3,
+	scaleX = 3,
+	scaleY = 3,
 	isSolid = false
 }
 
@@ -51,9 +51,9 @@ Corpse = {
 	height = 6,
 	width = 32,
 	offsetX = 0,
-	offsetY = 0,
-	scaleX = 1,
-	scaleY = 1,
+	offsetY = -3,
+	scaleX = 3,
+	scaleY = 3,
 	isSolid = false
 }
 
