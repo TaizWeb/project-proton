@@ -8,7 +8,7 @@ function love.load()
 	love.keyboard.setKeyRepeat(true)
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 100, 100)
-	Heartbeat.tilesList = {BunkerTile}
+	Heartbeat.tilesList = {BunkerTile, Screen, Pod, Corpse}
 	Heartbeat.entitiesList = {Terminal}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON"}
@@ -21,6 +21,42 @@ Player = {
 	texture = love.graphics.newImage("assets/proton/proton-firing.png")
 }
 
+Screen = {
+	id = "screen",
+	texture = love.graphics.newImage("assets/misc/screen.png"),
+	height = 13,
+	width = 24,
+	offsetX = 0,
+	offsetY = 0,
+	scaleX = 1,
+	scaleY = 1,
+	isSolid = false
+}
+
+Pod = {
+	id = "pod",
+	texture = love.graphics.newImage("assets/misc/pod.png"),
+	height = 47,
+	width = 28,
+	offsetX = 0,
+	offsetY = 0,
+	scaleX = 1,
+	scaleY = 1,
+	isSolid = false
+}
+
+Corpse = {
+	id = "corpse",
+	texture = love.graphics.newImage("assets/misc/corpse.png"),
+	height = 6,
+	width = 32,
+	offsetX = 0,
+	offsetY = 0,
+	scaleX = 1,
+	scaleY = 1,
+	isSolid = false
+}
+
 BunkerTile = {
 	id = "bunker",
 	texture = love.graphics.newImage("assets/tiles/bunker-tileset.png"),
@@ -29,7 +65,8 @@ BunkerTile = {
 	offsetX = 0,
 	offsetY = 0,
 	scaleX = 25/16,
-	scaleY = 25/15 
+	scaleY = 25/15,
+	isSolid = true
 }
 
 Terminal = {
