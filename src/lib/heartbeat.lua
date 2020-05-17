@@ -46,7 +46,6 @@ Heartbeat = {
 function Heartbeat.draw(object)
 	love.graphics.setColor(1, 1, 1, 1)
 	if (object.texture ~= nil) then
-		print(object.x)
 		love.graphics.draw(object.texture, Camera.convert("x", object.x), Camera.convert("y", object.y), object.rotation, object.scaleX, object.scaleY, object.offsetX, object.offsetY)
 	else
 		love.graphics.rectangle("fill", Camera.convert("x", object.x), Camera.convert("y", object.y), object.width, object.height)
@@ -181,7 +180,8 @@ function Heartbeat.newTile(object, x, y)
 			scaleX = object.scaleX,
 			scaleY = object.scaleY,
 			offsetX = object.offsetX,
-			offsetY = object.offsetY
+			offsetY = object.offsetY,
+			isSolid = object.isSolid
 		}
 	end
 end
@@ -633,7 +633,8 @@ function Heartbeat.editor.readLevel(levelName)
 			scaleX = tile.scaleX,
 			scaleY = tile.scaleY,
 			offsetX = tile.offsetX,
-			offsetY = tile.offsetY
+			offsetY = tile.offsetY,
+			isSolid = tile.isSolid
 		}
 		Heartbeat.newTile(tileData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		--Heartbeat.tiles[Level.tileCount+1] = {x = tonumber(levelLineData[1]), y = tonumber(levelLineData[2]), id = tonumber(levelLineData[3])}
@@ -691,13 +692,15 @@ function Heartbeat.checkCollisions(entity)
 	local collisionY = false
 
 	for i=1,#Heartbeat.tiles do
-		if (entity.x < Heartbeat.tiles[i].x + Heartbeat.tiles[i].width and entity.x + entity.width > Heartbeat.tiles[i].x and attemptedY < Heartbeat.tiles[i].y + Heartbeat.tiles[i].height and attemptedY + entity.height > Heartbeat.tiles[i].y) then
-			entity.dy = 0
-			entity.isFalling = false
-			collisionY = true
-		end
-		if (attemptedX < Heartbeat.tiles[i].x + Heartbeat.tiles[i].width and attemptedX + entity.width > Heartbeat.tiles[i].x and entity.y < Heartbeat.tiles[i].y + Heartbeat.tiles[i].height and entity.y + entity.height > Heartbeat.tiles[i].y) then
-			collisionX = true
+		if (Heartbeat.tiles[i].isSolid) then
+			if (entity.x < Heartbeat.tiles[i].x + Heartbeat.tiles[i].width and entity.x + entity.width > Heartbeat.tiles[i].x and attemptedY < Heartbeat.tiles[i].y + Heartbeat.tiles[i].height and attemptedY + entity.height > Heartbeat.tiles[i].y) then
+				entity.dy = 0
+				entity.isFalling = false
+				collisionY = true
+			end
+			if (attemptedX < Heartbeat.tiles[i].x + Heartbeat.tiles[i].width and attemptedX + entity.width > Heartbeat.tiles[i].x and entity.y < Heartbeat.tiles[i].y + Heartbeat.tiles[i].height and entity.y + entity.height > Heartbeat.tiles[i].y) then
+				collisionX = true
+			end
 		end
 	end
 
