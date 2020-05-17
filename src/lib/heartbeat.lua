@@ -46,7 +46,8 @@ Heartbeat = {
 function Heartbeat.draw(object)
 	love.graphics.setColor(1, 1, 1, 1)
 	if (object.texture ~= nil) then
-		love.graphics.draw(object.texture, Camera.convert("x", object.x), Camera.convert("y", Camera.y), object.rotation, object.scaleX, object.scaleY, object.offsetX, object.offsetY)
+		print(object.x)
+		love.graphics.draw(object.texture, Camera.convert("x", object.x), Camera.convert("y", object.y), object.rotation, object.scaleX, object.scaleY, object.offsetX, object.offsetY)
 	else
 		love.graphics.rectangle("fill", Camera.convert("x", object.x), Camera.convert("y", object.y), object.width, object.height)
 	end

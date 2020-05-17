@@ -25,7 +25,11 @@ BunkerTile = {
 	id = "bunker",
 	texture = love.graphics.newImage("assets/tiles/bunker-tileset.png"),
 	height = 25,
-	width = 25
+	width = 25,
+	offsetX = 0,
+	offsetY = 0,
+	scaleX = 25/16,
+	scaleY = 25/15 
 }
 
 Terminal = {
