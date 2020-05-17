@@ -45,8 +45,8 @@ Heartbeat = {
 -- draw: Accepts two parameters, the object, and an optional texture. Without a texture the hitbox will be drawn.
 function Heartbeat.draw(object)
 	love.graphics.setColor(1, 1, 1, 1)
-	if (texture ~= nil) then
-		love.graphics.draw(texture, Camera.convert("x", object.x), Camera.convert("y", Camera.y), object.rotation, object.scaleX, object.scaleY, object.offsetX, object,offsetY)
+	if (object.texture ~= nil) then
+		love.graphics.draw(object.texture, Camera.convert("x", object.x), Camera.convert("y", Camera.y), object.rotation, object.scaleX, object.scaleY, object.offsetX, object.offsetY)
 	else
 		love.graphics.rectangle("fill", Camera.convert("x", object.x), Camera.convert("y", object.y), object.width, object.height)
 	end
@@ -176,7 +176,11 @@ function Heartbeat.newTile(object, x, y)
 			y = y,
 			width = object.width,
 			height = object.height,
-			texture = object.texture
+			texture = object.texture,
+			scaleX = object.scaleX,
+			scaleY = object.scaleY,
+			offsetX = object.offsetX,
+			offsetY = object.offsetY
 		}
 	end
 end
@@ -619,10 +623,16 @@ function Heartbeat.editor.readLevel(levelName)
 		end
 		levelLineData = split(levelLines[j], " ")
 		local tile = Heartbeat.lookupTile(levelLineData[3])
+		print(tile.scaleX)
 		local tileData = {
 			id = tile.id,
 			width = tile.width,
-			height = tile.height
+			height = tile.height,
+			texture = tile.texture,
+			scaleX = tile.scaleX,
+			scaleY = tile.scaleY,
+			offsetX = tile.offsetX,
+			offsetY = tile.offsetY
 		}
 		Heartbeat.newTile(tileData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		--Heartbeat.tiles[Level.tileCount+1] = {x = tonumber(levelLineData[1]), y = tonumber(levelLineData[2]), id = tonumber(levelLineData[3])}
