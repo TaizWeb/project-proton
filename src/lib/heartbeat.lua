@@ -65,21 +65,6 @@ function Heartbeat.createPlayer(object, x, y)
 	Heartbeat.player.jumpFrames = 0
 	Heartbeat.player.jumpCooldown = 0
 	Heartbeat.player.inventory = {}
-	--Heartbeat.player = {
-		--x = x,
-		--y = y,
-		--dx = 0,
-		--dy = 0,
-		--height = object.height,
-		--width = object.width,
-		--health = 0,
-		--attack = 0,
-		----health = health,
-		--jumpFrames = 0,
-		--jumpCooldown = 0,
-		---- Format is item, count
-		--inventory = {}
-	--}
 end
 
 -- drawPlayer: Draws the player to the screen
@@ -128,6 +113,7 @@ function Heartbeat.newEntity(object, x, y)
 		health = object.health,
 		attack = object.attack,
 		behaivor = object.behaivor,
+		onCollision = object.onCollision,
 		draw = object.draw
 	}
 	if (object.isNPC) then
@@ -155,7 +141,17 @@ function Heartbeat.doEntities()
 				entity.behaivor(entity)
 			end
 			entity.dy = entity.dy + Heartbeat.gravity
-			Heartbeat.checkCollisions(entity)
+			if (Heartbeat.checkCollisions(entity) and entity.onCollision ~= nil) then
+				entity.onCollision(entity)
+			end
+		end
+	end
+end
+
+function Heartbeat.removeEntity(entity)
+	for i=1,#Heartbeat.entities do
+		if (entity == Heartbeat.entities[i]) then
+			table.remove(Heartbeat.entities, i)
 		end
 	end
 end
@@ -713,6 +709,13 @@ function Heartbeat.checkCollisions(entity)
 	end
 	if (not collisionX) then
 		entity.x = entity.x + entity.dx
+	end
+
+	-- Return a bool if they collided
+	if (not collisionX and not collisionY) then
+		return false
+	else
+		return true
 	end
 end
 

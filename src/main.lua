@@ -9,7 +9,7 @@ function love.load()
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
 	Heartbeat.tilesList = {BunkerTile, BunkerWall, Door, Screen, Pod, Corpse}
-	Heartbeat.entitiesList = {Terminal}
+	Heartbeat.entitiesList = {Terminal, BasicShot}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON"}
 	Heartbeat.editor.readLevel("start")
@@ -162,6 +162,23 @@ TriBeamUpgrade = {
 	isEnemy = false
 }
 
+BasicShot = {
+	id = "basic_shot",
+	--texture = love.graphics.newImage("assets/misc/terminal.png"),
+	height = 16,
+	width = 16,
+	isEnemy = true
+}
+
+function BasicShot.behaivor(this)
+	this.dx = 12
+	this.dy = -.5
+end
+
+function BasicShot.onCollision(this)
+	Heartbeat.removeEntity(this)
+end
+
 function HealthTankUpgrade.onPickup(this)
 	print("Grabbed item upgrade")
 	Heartbeat.removeItem(this)
@@ -176,6 +193,10 @@ function Player.draw(this)
 	love.graphics.draw(Player.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
 end
 
+function Player.shoot()
+	Heartbeat.newEntity(BasicShot, Heartbeat.player.x, Heartbeat.player.y)
+end
+
 function Terminal.draw(this)
 	local scaleX = 2
 	local scaleY = 2
@@ -183,10 +204,6 @@ function Terminal.draw(this)
 	local offsetY = 13
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.draw(Terminal.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
-end
-
-function Player.shoot()
-	print("pew pew")
 end
 
 function checkTerminalRange()
