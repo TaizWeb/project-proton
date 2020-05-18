@@ -8,7 +8,7 @@ function love.load()
 	love.keyboard.setKeyRepeat(true)
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
-	Heartbeat.tilesList = {BunkerTile, BunkerWall, Screen, Pod, Corpse}
+	Heartbeat.tilesList = {BunkerTile, BunkerWall, Door, Screen, Pod, Corpse}
 	Heartbeat.entitiesList = {Terminal}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON"}
@@ -76,6 +76,14 @@ BunkerWall = {
 	width = 25,
 	scaleX = 25/16,
 	scaleY = 25/16,
+	isSolid = true
+}
+
+Door = {
+	id = "door",
+	texture = love.graphics.newImage("assets/tiles/door.png"),
+	height = 75,
+	width = 25,
 	isSolid = true
 }
 
