@@ -202,6 +202,9 @@ function Heartbeat.newItem(object, x, y)
 		dy = 0,
 		width = object.width,
 		height = object.height,
+		texture = object.texture,
+		scaleX = object.scaleX,
+		scaleY = object.scaleY,
 		onPickup = object.onPickup
 	}
 end

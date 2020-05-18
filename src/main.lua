@@ -7,8 +7,8 @@ function love.load()
 	love.window.setTitle("Project Proton")
 	love.keyboard.setKeyRepeat(true)
 	love.filesystem.setIdentity("project-proton")
-	Heartbeat.createPlayer(Player, 100, 100)
-	Heartbeat.tilesList = {BunkerTile, Screen, Pod, Corpse}
+	Heartbeat.createPlayer(Player, 200, 200)
+	Heartbeat.tilesList = {BunkerTile, BunkerWall, Screen, Pod, Corpse}
 	Heartbeat.entitiesList = {Terminal}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON"}
@@ -65,7 +65,17 @@ BunkerTile = {
 	offsetX = 0,
 	offsetY = 0,
 	scaleX = 25/16,
-	scaleY = 25/15,
+	scaleY = 25/16,
+	isSolid = true
+}
+
+BunkerWall = {
+	id = "bunker_wall",
+	texture = love.graphics.newImage("assets/tiles/bunker-wallset.png"),
+	height = 25,
+	width = 25,
+	scaleX = 25/16,
+	scaleY = 25/16,
 	isSolid = true
 }
 
@@ -79,15 +89,21 @@ Terminal = {
 
 DarkMatterUpgrade = {
 	id = "matterupgrade",
+	texture = love.graphics.newImage("assets/items/darkmatter.png"),
 	height = 20,
 	width = 20,
+	scaleX = 1.5,
+	scaleY = 1.5,
 	isEnemy = false
 }
 
 HealthTankUpgrade = {
 	id = "healthupgrade",
+	texture = love.graphics.newImage("assets/items/healthtank.png"),
 	height = 20,
 	width = 20,
+	scaleX = 1.5,
+	scaleY = 1.5,
 	isEnemy = false
 }
 
@@ -100,29 +116,41 @@ GrappelUpgrade = {
 
 LongJumpUpgrade = {
 	id = "jumpupgrade",
+	texture = love.graphics.newImage("assets/items/longjump.png"),
 	height = 20,
 	width = 20,
+	scaleX = 1.5,
+	scaleY = 1.5,
 	isEnemy = false
 }
 
 GravityUpgrade = {
 	id = "gravityupgrade",
+	texture = love.graphics.newImage("assets/items/gravity.png"),
 	height = 20,
 	width = 20,
+	scaleX = 1.5,
+	scaleY = 1.5,
 	isEnemy = false
 }
 
 ChargeBeamUpgrade = {
 	id = "chargeupgrade",
+	texture = love.graphics.newImage("assets/items/charge.png"),
 	height = 20,
 	width = 20,
+	scaleX = 1.5,
+	scaleY = 1.5,
 	isEnemy = false
 }
 
 TriBeamUpgrade = {
 	id = "tribeamupgrade",
+	texture = love.graphics.newImage("assets/items/tribeam.png"),
 	height = 20,
 	width = 20,
+	scaleX = 1.5,
+	scaleY = 1.5,
 	isEnemy = false
 }
 
@@ -201,6 +229,14 @@ function love.update(dt)
 			Heartbeat.player.dx = 5
 		else
 			Heartbeat.player.dx = 0
+		end
+	end
+	if (Heartbeat.editor.isActive) then
+		if (love.mouse.isDown(1)) then
+			Heartbeat.editor.handleInput(1)
+		end
+		if (love.mouse.isDown(2)) then
+			Heartbeat.editor.handleInput(2)
 		end
 	end
 end
