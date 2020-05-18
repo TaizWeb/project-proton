@@ -164,11 +164,25 @@ TriBeamUpgrade = {
 
 BasicShot = {
 	id = "basic_shot",
-	--texture = love.graphics.newImage("assets/misc/terminal.png"),
+	texture = love.graphics.newImage("assets/proton/shot/shot1.png"),
+	--frames = {
+		--love.graphics.newImage("assets/proton/shot/shot1.png"),
+		--love.graphics.newImage("assets/proton/shot/shot2.png"),
+		--love.graphics.newImage("assets/proton/shot/shot3.png"),
+		--love.graphics.newImage("assets/proton/shot/shot4.png"),
+		--love.graphics.newImage("assets/proton/shot/shot5.png"),
+		--love.graphics.newImage("assets/proton/shot/shot6.png"),
+	--},
+	scaleX = 1.2,
+	scaleY = 1.2,
 	height = 16,
 	width = 16,
 	isEnemy = true
 }
+function BasicShot.draw(this)
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(BasicShot.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, BasicShot.scaleX, BasicShot.scaleY, 0, 0)
+end
 
 function BasicShot.behaivor(this)
 	this.dx = 12
@@ -194,7 +208,7 @@ function Player.draw(this)
 end
 
 function Player.shoot()
-	Heartbeat.newEntity(BasicShot, Heartbeat.player.x, Heartbeat.player.y)
+	Heartbeat.newEntity(BasicShot, Heartbeat.player.x+20, Heartbeat.player.y+5)
 end
 
 function Terminal.draw(this)
