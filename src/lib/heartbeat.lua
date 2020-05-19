@@ -62,9 +62,11 @@ function Heartbeat.createPlayer(object, x, y)
 	Heartbeat.player.width = object.width
 	Heartbeat.player.health = object.health
 	Heartbeat.player.attack = object.attack
+	Heartbeat.player.walkFrames = 0
 	Heartbeat.player.jumpFrames = 0
 	Heartbeat.player.jumpCooldown = 0
 	Heartbeat.player.inventory = {}
+	Heartbeat.player.forwardFace = true
 end
 
 -- drawPlayer: Draws the player to the screen
@@ -161,7 +163,7 @@ function Heartbeat.newTile(object, x, y)
 	local isNewTile = true
 	for i=1,#Heartbeat.tiles do
 		-- If tile currently exists, set isNewTile to false
-		if (Heartbeat.tiles[i].x == x and Heartbeat.tiles[i].y == y and Heartbeat.tiles[i].id == Heartbeat.editor.currentTile) then
+		if (Heartbeat.tiles[i].x == x and Heartbeat.tiles[i].y == y) then
 			isNewTile = false
 		end
 	end
