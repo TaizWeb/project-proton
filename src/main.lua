@@ -288,7 +288,8 @@ function love.keypressed(key, scancode, isrepeat)
 					Heartbeat.dialog.openDialog("start")
 					for i=1,#Heartbeat.tiles do
 						if (Heartbeat.tiles[i].id == "door") then
-							print("Found door~")
+							table.remove(Heartbeat.tiles, i)
+							break
 						end
 					end
 				end

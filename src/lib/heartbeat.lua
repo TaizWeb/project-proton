@@ -556,7 +556,7 @@ function Heartbeat.editor.executeCommand()
 		else
 			print("Error: Invalid arguments.\nUsage: set <variable> <value>")
 		end
-	-- :room <roomfilename> <doorX> <doorY> <newroomX> <newroomY> (Creates a new door in a level)
+	-- :room <destinationroom> <doorX> <doorY> <newroomX> <newroomY> (Creates a new door in a level)
 	elseif (Heartbeat.editor.commandModeLine:sub(1, 4) == "room") then
 		local args = split(Heartbeat.editor.commandModeLine, " ")
 		Heartbeat.rooms[#Heartbeat.rooms+1] = {
@@ -706,11 +706,13 @@ end
 function Heartbeat.clear()
 	Heartbeat.tiles = {}
 	Heartbeat.entities = {}
+	Heartbeat.items = {}
+	Heartbeat.rooms = {}
 end
 
 function Heartbeat.checkRooms()
 	for i=1,#Heartbeat.rooms do
-		if ((Heartbeat.player.x >= Heartbeat.rooms[i].x and Heartbeat.player.x <= Heartbeat.rooms[i].x + 25) and Heartbeat.player.y == Heartbeat.rooms[i].y) then
+		if ((Heartbeat.player.x >= Heartbeat.rooms[i].x and Heartbeat.player.x <= Heartbeat.rooms[i].x + 25) and Heartbeat.player.y + Heartbeat.player.width >= Heartbeat.rooms[i].y) then
 			Heartbeat.gotoRoom(Heartbeat.rooms[i].location, Heartbeat.rooms[i].newX, Heartbeat.rooms[i].newY)
 		end
 	end
