@@ -192,19 +192,28 @@ function Heartbeat.drawTiles()
 end
 
 function Heartbeat.newItem(object, x, y)
-	Heartbeat.items[#Heartbeat.items+1] = {
-		id = object.id,
-		x = x,
-		y = y,
-		dx = 0,
-		dy = 0,
-		width = object.width,
-		height = object.height,
-		texture = object.texture,
-		scaleX = object.scaleX,
-		scaleY = object.scaleY,
-		onPickup = object.onPickup
-	}
+	local isNewItem = true
+	for i=1,#Heartbeat.items do
+		-- If tile currently exists, set isNewTile to false
+		if (Heartbeat.items[i].x == x and Heartbeat.items[i].y == y) then
+			isNewItem = false
+		end
+	end
+	if (isNewItem) then
+		Heartbeat.items[#Heartbeat.items+1] = {
+			id = object.id,
+			x = x,
+			y = y,
+			dx = 0,
+			dy = 0,
+			width = object.width,
+			height = object.height,
+			texture = object.texture,
+			scaleX = object.scaleX,
+			scaleY = object.scaleY,
+			onPickup = object.onPickup
+		}
+	end
 end
 
 function Heartbeat.drawItems()
@@ -650,14 +659,10 @@ function Heartbeat.editor.readLevel(levelName)
 	for k=k,#levelLines do -- -1 to avoid EOF
 		if (levelLines[k] == "ITEMS") then
 			l = k+1
-			print("it did")
 			break
 		end
-		print(k)
 		levelLineData = split(levelLines[k], " ")
-		print(levelLineData[3])
 		local entity = Heartbeat.lookupEntity(levelLineData[3])
-		print("The name is " .. entity.id)
 		local entityData = {
 			id = entity.id,
 			height = entity.height,
