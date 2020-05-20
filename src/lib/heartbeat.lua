@@ -201,6 +201,14 @@ function Heartbeat.drawTiles()
 	end
 end
 
+function Heartbeat.removeTile(tile)
+	for i=1,#Heartbeat.tiles do
+		if (tile == Heartbeat.tiles[i]) then
+			table.remove(Heartbeat.tiles, i)
+		end
+	end
+end
+
 function Heartbeat.newItem(object, x, y)
 	local isNewItem = true
 	for i=1,#Heartbeat.items do
