@@ -13,7 +13,6 @@ function love.load()
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON"}
 	Heartbeat.editor.readLevel("start")
-	print(#Heartbeat.tiles)
 end
 
 Player = {

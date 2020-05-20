@@ -581,6 +581,11 @@ function Heartbeat.editor.saveLevel(levelName)
 	for i=1,#Heartbeat.entities do
 		love.filesystem.append(levelName, Heartbeat.entities[i].x .. " " .. Heartbeat.entities[i].y .. " " .. Heartbeat.entities[i].id .. "\n")
 	end
+	-- Write the items to the file
+	love.filesystem.append(levelName, "ITEMS\n")
+	for i=1,#Heartbeat.items do
+		love.filesystem.append(levelName, Heartbeat.items[i].x .. " " .. Heartbeat.items[i].y .. " " .. Heartbeat.items[i].id .. "\n")
+	end
 	-- Print success message
 	print("Written '" .. levelName .. "' to file.")
 end
@@ -604,7 +609,8 @@ function Heartbeat.editor.readLevel(levelName)
 	local levelLineData
 	local i = 3 -- For door loop (line 1 is dimensions, 2 is a title, so 3 is where we start)
 	local j = 0 -- For tile loop
-	local k = 0 -- For item loop
+	local k = 0 -- For entity loop
+	local l = 0 -- For item loop
 
 	-- Load the doors
 	for i=i,#levelLines do
@@ -625,7 +631,6 @@ function Heartbeat.editor.readLevel(levelName)
 		end
 		levelLineData = split(levelLines[j], " ")
 		local tile = Heartbeat.lookupTile(levelLineData[3])
-		print(tile.scaleX)
 		local tileData = {
 			id = tile.id,
 			width = tile.width,
@@ -642,13 +647,17 @@ function Heartbeat.editor.readLevel(levelName)
 	end
 
 	-- Load the entities
-	for k=k,#levelLines-1 do -- -1 to avoid EOF
-		--if (levelLines[i] == "ITEMS") then
-			--l = k
-			--break
-		--end
+	for k=k,#levelLines do -- -1 to avoid EOF
+		if (levelLines[k] == "ITEMS") then
+			l = k+1
+			print("it did")
+			break
+		end
+		print(k)
 		levelLineData = split(levelLines[k], " ")
+		print(levelLineData[3])
 		local entity = Heartbeat.lookupEntity(levelLineData[3])
+		print("The name is " .. entity.id)
 		local entityData = {
 			id = entity.id,
 			height = entity.height,
@@ -660,6 +669,22 @@ function Heartbeat.editor.readLevel(levelName)
 		Heartbeat.newEntity(entityData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		--Heartbeat.spawnEntity(tonumber(levelLineData[1]), tonumber(levelLineData[2]), tonumber(levelLineData[3]))
 	end
+	for l=l,#levelLines-1 do
+		levelLineData = split(levelLines[l], " ")
+		local item = Heartbeat.lookupItem(levelLineData[3])
+		local itemData = {
+			id = item.id,
+			height = item.height,
+			width = item.width,
+			onPickup = item.onPickup,
+			texture = item.texture,
+			scaleX = item.scaleX,
+			scaleY = item.scaleY,
+			draw = item.draw
+		}
+		Heartbeat.newItem(itemData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
+	end
+
 	print("Loaded '" .. levelName .. "' successfully.")
 end
 
