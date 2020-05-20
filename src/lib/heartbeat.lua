@@ -95,7 +95,7 @@ end
 
 function Heartbeat.jump(entity)
 	if (not entity.isFalling) then
-		entity.dy = -10
+		entity.dy = -11
 		entity.isFalling = true
 	end
 end
@@ -544,7 +544,7 @@ function Heartbeat.editor.executeCommand()
 			local args = split(Heartbeat.editor.commandModeLine, " ")
 			Heartbeat.editor.readLevel(args[2])
 		end
-	-- :set <height/width> (sets level height/width)
+	-- :set <dimension> <value> (sets level height/width)
 	elseif (Heartbeat.editor.commandModeLine:sub(1, 3) == "set") then
 		local args = split(Heartbeat.editor.commandModeLine, " ")
 		if (args[2] == "height") then
@@ -638,7 +638,7 @@ function Heartbeat.editor.readLevel(levelName)
 		end
 		levelLineData = split(levelLines[i], " ")
 		Heartbeat.rooms = {}
-		Heartbeat.rooms[#Level.rooms+1] = {x = tonumber(levelLineData[1]), y = tonumber(levelLineData[2]), location = levelLineData[3], newX = tonumber(levelLineData[4]), newY = tonumber(levelLineData[5])}
+		Heartbeat.rooms[#Heartbeat.rooms+1] = {x = tonumber(levelLineData[1]), y = tonumber(levelLineData[2]), location = levelLineData[3], newX = tonumber(levelLineData[4]), newY = tonumber(levelLineData[5])}
 	end
 
 	-- Load the tiles
@@ -798,6 +798,7 @@ function Heartbeat.beat()
 	Heartbeat.drawItems()
 	Heartbeat.drawPlayer()
 	Heartbeat.editor.drawEditor()
+	Camera.update()
 	if (Heartbeat.dialog.isOpen) then
 		Heartbeat.dialog.drawDialog()
 	end
