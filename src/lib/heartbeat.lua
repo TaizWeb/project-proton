@@ -102,22 +102,31 @@ end
 
 -- newEntity: Initializes and loads the entity into Heartbeat
 function Heartbeat.newEntity(object, x, y)
-	Heartbeat.entities[#Heartbeat.entities+1] = {
-		id = object.id,
-		x = x,
-		y = y,
-		originalX = object.x,
-		originalY = object.y,
-		dx = 0,
-		dy = 0,
-		width = object.width,
-		height = object.height,
-		health = object.health,
-		attack = object.attack,
-		behaivor = object.behaivor,
-		onCollision = object.onCollision,
-		draw = object.draw
-	}
+	local isNewEntity = true
+	for i=1,#Heartbeat.entities do
+		-- If tile currently exists, set isNewTile to false
+		if (Heartbeat.entities[i].x == x and Heartbeat.entities[i].y == y) then
+			isNewEntity = false
+		end
+	end
+	if (isNewEntity) then
+		Heartbeat.entities[#Heartbeat.entities+1] = {
+			id = object.id,
+			x = x,
+			y = y,
+			originalX = object.x,
+			originalY = object.y,
+			dx = 0,
+			dy = 0,
+			width = object.width,
+			height = object.height,
+			health = object.health,
+			attack = object.attack,
+			behaivor = object.behaivor,
+			onCollision = object.onCollision,
+			draw = object.draw
+		}
+	end
 	if (object.isNPC) then
 		Heartbeat.entities[#Heartbeat.entities].isNPC = true
 	end
