@@ -152,8 +152,9 @@ function Heartbeat.doEntities()
 				entity.behaivor(entity)
 			end
 			entity.dy = entity.dy + Heartbeat.gravity
-			if (Heartbeat.checkCollisions(entity) and entity.onCollision ~= nil) then
-				entity.onCollision(entity)
+			local collidedObject = Heartbeat.checkCollisions(entity)
+			if (collidedObject ~= nil and entity.onCollision ~= nil) then
+				entity.onCollision(entity, collidedObject)
 			end
 		end
 	end
@@ -389,7 +390,7 @@ function Heartbeat.editor.drawEditor()
 		elseif (Heartbeat.editor.mode == "item") then
 			Heartbeat.debugLine = "Current Item: " .. Heartbeat.itemsList[Heartbeat.editor.currentItem].id .. "\n"
 		end
-		Heartbeat.debugLine = Heartbeat.debugLine .. "Mouse Position: " .. love.mouse.getX() .. " " .. love.mouse.getY() .. "\n"
+		Heartbeat.debugLine = Heartbeat.debugLine .. "Mouse Position: " .. love.mouse.getX() + Camera.x .. " " .. love.mouse.getY() + Camera.y .. "\n"
 		-- Drawing current tile/entity/item info
 		love.graphics.setColor(1, 1, 1, 1)
 		love.graphics.print(Heartbeat.debugLine)
@@ -732,6 +733,7 @@ function Heartbeat.checkCollisions(entity)
 	local attemptedY = entity.y + entity.dy
 	local collisionX = false
 	local collisionY = false
+	local collidedObject = nil
 
 	for i=1,#Heartbeat.tiles do
 		if (Heartbeat.tiles[i].isSolid) then
@@ -739,9 +741,11 @@ function Heartbeat.checkCollisions(entity)
 				entity.dy = 0
 				entity.isFalling = false
 				collisionY = true
+				collidedObject = Heartbeat.tiles[i]
 			end
 			if (attemptedX < Heartbeat.tiles[i].x + Heartbeat.tiles[i].width and attemptedX + entity.width > Heartbeat.tiles[i].x and entity.y < Heartbeat.tiles[i].y + Heartbeat.tiles[i].height and entity.y + entity.height > Heartbeat.tiles[i].y) then
 				collisionX = true
+				collidedObject = Heartbeat.tiles[i]
 			end
 		end
 	end
@@ -755,11 +759,7 @@ function Heartbeat.checkCollisions(entity)
 	end
 
 	-- Return a bool if they collided
-	if (not collisionX and not collisionY) then
-		return false
-	else
-		return true
-	end
+	return collidedObject
 end
 
 -- checkEntityCollisons: Compares two entities, returns true if they collide
