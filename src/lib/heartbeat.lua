@@ -544,6 +544,10 @@ function Heartbeat.editor.executeCommand()
 			print("Error: No level name defined.\n Usage: :w <filename>")
 		else
 			local args = split(Heartbeat.editor.commandModeLine, " ")
+			if (args[2] == nil or args[2] == "") then 
+				print("Error: No level name defined.\n Usage: :w <filename>")
+				return
+			end
 			Heartbeat.editor.saveLevel(args[2])
 		end
 	-- :o <filename> (reads level from file)
@@ -568,6 +572,9 @@ function Heartbeat.editor.executeCommand()
 	-- :room <destinationroom> <doorX> <doorY> <newroomX> <newroomY> (Creates a new door in a level)
 	elseif (Heartbeat.editor.commandModeLine:sub(1, 4) == "room") then
 		local args = split(Heartbeat.editor.commandModeLine, " ")
+		if (args[6] == nil) then
+			print("Usage: :room <destination> <doorX> <doorY> <newroomX> <newroomY>")
+		end
 		Heartbeat.rooms[#Heartbeat.rooms+1] = {
 			location = args[2],
 			x = tonumber(args[3]),
