@@ -645,6 +645,7 @@ function Heartbeat.editor.readLevel(levelName)
 	local j = 0 -- For tile loop
 	local k = 0 -- For entity loop
 	local l = 0 -- For item loop
+	--Heartbeat.rooms = {}
 
 	-- Load the doors
 	for i=i,#levelLines do
@@ -653,7 +654,6 @@ function Heartbeat.editor.readLevel(levelName)
 			break
 		end
 		levelLineData = split(levelLines[i], " ")
-		Heartbeat.rooms = {}
 		Heartbeat.rooms[#Heartbeat.rooms+1] = {x = tonumber(levelLineData[1]), y = tonumber(levelLineData[2]), location = levelLineData[3], newX = tonumber(levelLineData[4]), newY = tonumber(levelLineData[5])}
 	end
 
@@ -728,6 +728,7 @@ end
 
 function Heartbeat.checkRooms()
 	for i=1,#Heartbeat.rooms do
+		if (Heartbeat.rooms[i] == nil) then return end -- Room changing duct tape
 		if ((Heartbeat.player.x >= Heartbeat.rooms[i].x and Heartbeat.player.x <= Heartbeat.rooms[i].x + 25) and Heartbeat.player.y + Heartbeat.player.width >= Heartbeat.rooms[i].y) then
 			Heartbeat.gotoRoom(Heartbeat.rooms[i].location, Heartbeat.rooms[i].newX, Heartbeat.rooms[i].newY)
 		end
