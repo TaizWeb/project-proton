@@ -219,8 +219,12 @@ function BasicShot.behaivor(this)
 	this.dy = -.5
 end
 
-function BasicShot.onCollision(this)
+function BasicShot.onCollision(this, collidedObject)
 	Heartbeat.removeEntity(this)
+	if (collidedObject.id == "door") then
+		Heartbeat.removeTile(collidedObject)
+	end
+	print(collidedObject.id)
 end
 
 function HealthTankUpgrade.onPickup(this)
@@ -247,6 +251,7 @@ function Player.draw(this)
 	end
 	if (not Heartbeat.player.forwardFace) then
 		scaleX = -2
+		offsetX = 22
 	end
 	-- Walk animation
 	if (Heartbeat.player.isWalking) then
