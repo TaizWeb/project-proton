@@ -714,6 +714,7 @@ function Heartbeat.editor.readLevel(levelName)
 		Heartbeat.newItem(itemData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 	end
 
+	Heartbeat.levelName = levelName
 	print("Loaded '" .. levelName .. "' successfully.")
 end
 
@@ -728,7 +729,7 @@ end
 function Heartbeat.checkRooms()
 	for i=1,#Heartbeat.rooms do
 		if (Heartbeat.rooms[i] == nil) then return end -- Room changing duct tape
-		if ((Heartbeat.player.x >= Heartbeat.rooms[i].x and Heartbeat.player.x <= Heartbeat.rooms[i].x + 25) and Heartbeat.player.y + Heartbeat.player.width >= Heartbeat.rooms[i].y) then
+		if ((Heartbeat.player.x >= Heartbeat.rooms[i].x and Heartbeat.player.x <= Heartbeat.rooms[i].x + 25) and Heartbeat.player.y + Heartbeat.player.width >= Heartbeat.rooms[i].y and Heartbeat.player.y <= Heartbeat.rooms[i].y + 25) then
 			Heartbeat.gotoRoom(Heartbeat.rooms[i].location, Heartbeat.rooms[i].newX, Heartbeat.rooms[i].newY)
 		end
 	end
