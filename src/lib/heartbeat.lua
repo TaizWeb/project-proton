@@ -445,11 +445,11 @@ function Heartbeat.editor.handleInput(key)
 		end
 		if (Heartbeat.editor.mode == "entity") then
 			local entityInfo = Heartbeat.entitiesList[Heartbeat.editor.currentEntity]
-			Heartbeat.newEntity(entityInfo, love.mouse.getX(), love.mouse.getY())
+			Heartbeat.newEntity(entityInfo, love.mouse.getX() + Camera.x, love.mouse.getY() + Camera.y)
 		end
 		if (Heartbeat.editor.mode == "item") then
 			local itemInfo = Heartbeat.itemsList[Heartbeat.editor.currentItem]
-			Heartbeat.newItem(itemInfo, love.mouse.getX(), love.mouse.getY())
+			Heartbeat.newItem(itemInfo, love.mouse.getX() + Camera.x, love.mouse.getY() + Camera.y)
 		end
 	end
 	-- Handle right mouse click, remove tile
@@ -467,8 +467,8 @@ function Heartbeat.editor.handleInput(key)
 		end
 		if (Heartbeat.editor.mode == "entity") then
 			local mouseHitbox = {
-				x = love.mouse.getX(),
-				y = love.mouse.getY(),
+				x = love.mouse.getX() + Camera.x,
+				y = love.mouse.getY() + Camera.y,
 				width = 1,
 				height = 1,
 			}
@@ -481,8 +481,8 @@ function Heartbeat.editor.handleInput(key)
 		end
 		if (Heartbeat.editor.mode == "item") then
 			local mouseHitbox = {
-				x = love.mouse.getX(),
-				y = love.mouse.getY(),
+				x = love.mouse.getX() + Camera.x,
+				y = love.mouse.getY() + Camera.y,
 				width = 1,
 				height = 1,
 			}
@@ -645,7 +645,6 @@ function Heartbeat.editor.readLevel(levelName)
 	local j = 0 -- For tile loop
 	local k = 0 -- For entity loop
 	local l = 0 -- For item loop
-	--Heartbeat.rooms = {}
 
 	-- Load the doors
 	for i=i,#levelLines do
