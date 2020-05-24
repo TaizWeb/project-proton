@@ -63,6 +63,12 @@ end
 Slime = {
 	id = "slime",
 	texture = love.graphics.newImage("assets/enemies/slime-anim1.png"),
+	frames = {
+		love.graphics.newImage("assets/enemies/slime-anim1.png"),
+		love.graphics.newImage("assets/enemies/slime-anim2.png"),
+		love.graphics.newImage("assets/enemies/slime-anim3.png"),
+		love.graphics.newImage("assets/enemies/slime-anim4.png"),
+	},
 	scaleX = 3,
 	scaleY = 3,
 	height = 24,
@@ -70,13 +76,19 @@ Slime = {
 	offsetX = 0,
 	offsetY = 8,
 	isEnemy = true,
-	moveLeft = true
+	moveLeft = true,
+	movementFrames = 0
 }
 
 function Slime.draw(this)
+	this.movementFrames = this.movementFrames + 1
+	if (this.movementFrames >= 40) then
+		this.movementFrames = 0
+	end
+	this.texture = Slime.frames[1 + math.floor(this.movementFrames / 10)]
 	love.graphics.setColor(1, 1, 1, 1)
 	--love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
-	love.graphics.draw(Slime.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Slime.scaleX, Slime.scaleY, Slime.offsetX, Slime.offsetY)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Slime.scaleX, Slime.scaleY, Slime.offsetX, Slime.offsetY)
 end
 
 function Slime.behaivor(this)
