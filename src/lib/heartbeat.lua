@@ -112,6 +112,7 @@ function Heartbeat.newEntity(object, x, y)
 	if (isNewEntity) then
 		Heartbeat.entities[#Heartbeat.entities+1] = {
 			id = object.id,
+			texture = object.texture,
 			x = x,
 			y = y,
 			originalX = object.x,
@@ -124,7 +125,8 @@ function Heartbeat.newEntity(object, x, y)
 			attack = object.attack,
 			behaivor = object.behaivor,
 			onCollision = object.onCollision,
-			draw = object.draw
+			draw = object.draw,
+			movementFrames = object.movementFrames
 		}
 	end
 	if (object.isNPC) then
