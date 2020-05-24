@@ -1,9 +1,9 @@
+love.graphics.setDefaultFilter("nearest", "nearest")
 require("lib/heartbeat")
 require("tiles")
 require("items")
 require("entities")
 require("player")
-love.graphics.setDefaultFilter("nearest", "nearest")
 
 function love.load()
 	windowWidth = love.graphics.getWidth()
@@ -13,7 +13,7 @@ function love.load()
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
 	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Door, Screen, Pod, Corpse}
-	Heartbeat.entitiesList = {Terminal, BasicShot}
+	Heartbeat.entitiesList = {Terminal, BasicShot, Slime}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague"}
 	Heartbeat.editor.readLevel("start")
