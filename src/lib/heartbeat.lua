@@ -789,6 +789,23 @@ function Heartbeat.checkEntityCollision(entity1, entity2)
 	end
 end
 
+function Heartbeat.getTile(x, y)
+	local checker = {
+		x = x,
+		y = y,
+		width = 1,
+		height = 1
+	}
+
+	for i=1,#Heartbeat.tiles do
+		if (Heartbeat.checkEntityCollision(Heartbeat.tiles[i], checker)) then
+			return Heartbeat.tiles[i]
+		end
+	end
+
+	return nil
+end
+
 -- setDimensions: Sets the dimensions of the level
 function Heartbeat.setDimensions(width, height)
 	Heartbeat.levelWidth = width
