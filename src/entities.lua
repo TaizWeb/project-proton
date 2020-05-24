@@ -59,3 +59,36 @@ function BasicShot.onCollision(this, collidedObject)
 	end
 	print(collidedObject.id)
 end
+
+Slime = {
+	id = "slime",
+	texture = love.graphics.newImage("assets/enemies/slime-anim1.png"),
+	scaleX = 3,
+	scaleY = 3,
+	height = 24,
+	width = 48,
+	offsetX = 0,
+	offsetY = 8,
+	isEnemy = true,
+	moveLeft = true
+}
+
+function Slime.draw(this)
+	love.graphics.setColor(1, 1, 1, 1)
+	--love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
+	love.graphics.draw(Slime.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Slime.scaleX, Slime.scaleY, Slime.offsetX, Slime.offsetY)
+end
+
+function Slime.behaivor(this)
+	this.x = this.x + 1
+	local checkerHitbox = {
+		x = this.x + this.width + 1,
+		y = this.y + this.height + 1,
+		width = 1,
+		height = 1
+	}
+	if (Heartbeat.getTile(checkerHitbox.x, checkerHitbox.y) == nil) then
+		print("turning")
+	end
+end
+
