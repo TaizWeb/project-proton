@@ -80,15 +80,17 @@ function Slime.draw(this)
 end
 
 function Slime.behaivor(this)
-	this.x = this.x + 1
-	local checkerHitbox = {
-		x = this.x + this.width + 1,
-		y = this.y + this.height + 1,
-		width = 1,
-		height = 1
-	}
-	if (Heartbeat.getTile(checkerHitbox.x, checkerHitbox.y) == nil) then
-		print("turning")
+	if (this.moveLeft) then
+		this.x = this.x + 1
+		this.checkX = this.x + this.width + 1
+		this.checkY = this.y + this.height + 1
+	else
+		this.x = this.x - 1
+		this.checkX = this.x + 1
+		this.checkY = this.y + this.height + 1
+	end
+	if (Heartbeat.getTile(this.checkX, this.checkY) == nil) then
+		this.moveLeft = not this.moveLeft
 	end
 end
 
