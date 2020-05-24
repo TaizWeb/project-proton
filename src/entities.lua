@@ -104,6 +104,9 @@ function Slime.behaivor(this)
 	if (Heartbeat.getTile(this.checkX, this.checkY) == nil) then
 		this.moveLeft = not this.moveLeft
 	end
+	if (Heartbeat.checkEntityCollision(Heartbeat.player, this)) then
+		Heartbeat.player.updateHealth(Heartbeat.player.health - 10)
+	end
 end
 
 Imp = {

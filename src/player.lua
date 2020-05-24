@@ -1,6 +1,7 @@
 Player = {
 	height = 60,
 	width = 25,
+	health = 99,
 	texture = love.graphics.newImage("assets/proton/proton-firing.png"),
 	idle = love.graphics.newImage("assets/proton/proton-firing.png"),
 	walk = {
@@ -43,6 +44,10 @@ function Player.draw(this)
 		Player.texture = Player.walk[1 + math.floor(Heartbeat.player.walkFrames / 10)]
 	end
 	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.print("Health: " .. Heartbeat.player.health)
+	if (not (Heartbeat.player.cooldownFrames <= 0)) then
+		love.graphics.setColor(1, 1, 1, .5)
+	end
 	love.graphics.draw(Player.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
 end
 

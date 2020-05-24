@@ -67,6 +67,7 @@ function Heartbeat.createPlayer(object, x, y)
 	Heartbeat.player.jumpCooldown = 0
 	Heartbeat.player.inventory = {}
 	Heartbeat.player.forwardFace = true
+	Heartbeat.player.cooldownFrames = 0
 end
 
 -- drawPlayer: Draws the player to the screen
@@ -160,6 +161,7 @@ function Heartbeat.doEntities()
 			end
 		end
 	end
+	Heartbeat.player.cooldownFrames = Heartbeat.player.cooldownFrames - 1
 end
 
 function Heartbeat.removeEntity(entity)
@@ -280,6 +282,20 @@ function Heartbeat.player.hasInventoryItem(item)
 			return -1
 		end
 	end
+end
+
+function Heartbeat.player.updateHealth(value)
+	if (Heartbeat.player.cooldownFrames <= 0) then
+		if (value <= 0) then
+			Heartbeat.player.killPlayer()
+		end
+		Heartbeat.player.health = value
+		Heartbeat.player.cooldownFrames = 30
+	end
+end
+
+function Heartbeat.player.killPlayer()
+	print("You died!")
 end
 
 function Heartbeat.lookupTile(id)
