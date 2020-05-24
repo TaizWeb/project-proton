@@ -106,3 +106,57 @@ function Slime.behaivor(this)
 	end
 end
 
+Imp = {
+	id = "imp",
+	texture = love.graphics.newImage("assets/enemies/imp1.png"),
+	frames = {
+		love.graphics.newImage("assets/enemies/imp1.png"),
+		love.graphics.newImage("assets/enemies/imp2.png"),
+		love.graphics.newImage("assets/enemies/imp3.png"),
+		love.graphics.newImage("assets/enemies/imp4.png"),
+	},
+	scaleX = 3,
+	scaleY = 3,
+	height = 24,
+	width = 48,
+	offsetX = 0,
+	offsetY = 3,
+	isEnemy = true,
+	movementFrames = 0,
+	noticedPlayer = false
+}
+
+function Imp.draw(this)
+	this.movementFrames = this.movementFrames + 1
+	if (this.movementFrames >= 40) then
+		this.movementFrames = 0
+	end
+	this.texture = Imp.frames[1 + math.floor(this.movementFrames / 10)]
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Imp.scaleX, Imp.scaleY, Imp.offsetX, Imp.offsetY)
+end
+
+function Imp.behaivor(this)
+	this.dy = -.5
+	if (math.abs(Heartbeat.player.x - this.x) < 200 and math.abs(Heartbeat.player.y - this.y) < 200) then
+		this.noticedPlayer = true
+	else
+		this.noticedPlayer = false
+	end
+	if (this.noticedPlayer) then
+		if (Heartbeat.player.x < this.x) then
+			this.x = this.x - 3
+		else
+			this.x = this.x + 3
+		end
+		if (Heartbeat.player.y < this.y) then
+			this.y = this.y - 1.5
+		else
+			this.y = this.y + 1.5
+		end
+	else
+		this.x = this.x + math.cos(this.movementFrames)
+		this.y = this.y + math.sin(this.movementFrames)
+	end
+end
+
