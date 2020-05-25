@@ -8,6 +8,15 @@ HealthPickup = {
 	isEnemy = false
 }
 
+function HealthPickup.onPickup(this)
+	if ((Player.health + 25) < Player.maxHealth) then
+		Player.health = Player.health + 25
+	else
+		Player.health = Player.maxHealth
+	end
+	Heartbeat.removeItem(this)
+end
+
 DarkPickup = {
 	id = "darkpickup",
 	texture = love.graphics.newImage("assets/misc/darkpickup.png"),
@@ -17,6 +26,15 @@ DarkPickup = {
 	scaleY = 1,
 	isEnemy = false
 }
+
+function DarkPickup.onPickup(this)
+	if ((Player.matter + 5) < Player.maxMatter) then
+		Player.matter = Player.matter + 5
+	else
+		Player.matter = Player.maxMatter
+	end
+	Heartbeat.removeItem(this)
+end
 
 DarkMatterUpgrade = {
 	id = "matterupgrade",
@@ -28,6 +46,11 @@ DarkMatterUpgrade = {
 	isEnemy = false
 }
 
+function DarkMatterUpgrade.onPickup(this)
+	Player.maxMatter = Player.maxMatter + 10
+	Heartbeat.removeItem(this)
+end
+
 HealthTankUpgrade = {
 	id = "healthupgrade",
 	texture = love.graphics.newImage("assets/items/healthtank.png"),
@@ -38,8 +61,9 @@ HealthTankUpgrade = {
 	isEnemy = false
 }
 
+-- TODO: Add level flags so they don't respawn
 function HealthTankUpgrade.onPickup(this)
-	print("Grabbed item upgrade")
+	Player.maxHealth = Player.maxHealth + 100
 	Heartbeat.removeItem(this)
 end
 
@@ -60,6 +84,11 @@ LongJumpUpgrade = {
 	isEnemy = false
 }
 
+function LongJumpUpgrade.onPickup(this)
+	Player.hasJumpUpgrade = true
+	Heartbeat.removeItem(this)
+end
+
 GravityUpgrade = {
 	id = "gravityupgrade",
 	texture = love.graphics.newImage("assets/items/gravity.png"),
@@ -69,6 +98,11 @@ GravityUpgrade = {
 	scaleY = 1.5,
 	isEnemy = false
 }
+
+function GravityUpgrade.onPickup(this)
+	Player.hasGravityUpgrade = true
+	Heartbeat.removeItem(this)
+end
 
 ChargeBeamUpgrade = {
 	id = "chargeupgrade",
@@ -80,6 +114,11 @@ ChargeBeamUpgrade = {
 	isEnemy = false
 }
 
+function ChargeBeamUpgrade.onPickup(this)
+	Player.hasChargeBeamUpgrade = true
+	Heartbeat.removeItem(this)
+end
+
 TriBeamUpgrade = {
 	id = "tribeamupgrade",
 	texture = love.graphics.newImage("assets/items/tribeam.png"),
@@ -89,3 +128,9 @@ TriBeamUpgrade = {
 	scaleY = 1.5,
 	isEnemy = false
 }
+
+function TriBeamUpgrade.onPickup(this)
+	Player.hasTriBeamUpgrade = true
+	Heartbeat.removeItem(this)
+end
+
