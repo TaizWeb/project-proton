@@ -1,3 +1,23 @@
+HealthPickup = {
+	id = "healthpickup",
+	texture = love.graphics.newImage("assets/misc/healthpickup.png"),
+	height = 16,
+	width = 16,
+	scaleX = 1,
+	scaleY = 1,
+	isEnemy = false
+}
+
+DarkPickup = {
+	id = "darkpickup",
+	texture = love.graphics.newImage("assets/misc/darkpickup.png"),
+	height = 16,
+	width = 16,
+	scaleX = 1,
+	scaleY = 1,
+	isEnemy = false
+}
+
 DarkMatterUpgrade = {
 	id = "matterupgrade",
 	texture = love.graphics.newImage("assets/items/darkmatter.png"),
