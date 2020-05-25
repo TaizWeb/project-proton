@@ -68,6 +68,16 @@ BunkerWall = {
 	isSolid = true
 }
 
+Cobble = {
+	id = "cobble",
+	texture = love.graphics.newImage("assets/tiles/cobble.png"),
+	height = 25,
+	width = 25,
+	scaleX = 25/16,
+	scaleY = 25/16,
+	isSolid = true
+}
+
 Door = {
 	id = "door",
 	texture = love.graphics.newImage("assets/tiles/door.png"),
