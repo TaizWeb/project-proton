@@ -21,15 +21,20 @@ function love.load()
 end
 
 function love.keypressed(key, scancode, isrepeat)
+	-- Activate editor
 	if (key == "e" and not Heartbeat.editor.commandMode) then
 		Heartbeat.editor.isActive = not Heartbeat.editor.isActive
 	end
+	-- Send keys to editor if active
 	if (Heartbeat.editor.isActive) then
 		Heartbeat.editor.handleInput(key)
 	else
+		-- Jump
 		if (key == "z" and not Heartbeat.dialog.isOpen) then
 			Heartbeat.jump(Heartbeat.player)
+			Heartbeat.player.isCrouched = false
 		end
+		-- Interact/fire
 		if (key == "x") then
 			if (checkTerminalRange()) then
 				Heartbeat.player.dx = 0
@@ -52,6 +57,9 @@ function love.keypressed(key, scancode, isrepeat)
 				Player.shoot()
 			end
 		end
+		if (key == "down") then
+			Player.setCrouch()
+		end
 	end
 end
 
@@ -65,8 +73,10 @@ function love.update(dt)
 	if (not Heartbeat.editor.isActive and not Heartbeat.dialog.isOpen) then
 		if (love.keyboard.isDown("left")) then
 			Heartbeat.player.dx = -5
+			Heartbeat.player.isCrouched = false
 		elseif (love.keyboard.isDown("right")) then
 			Heartbeat.player.dx = 5
+			Heartbeat.player.isCrouched = false
 		else
 			Heartbeat.player.dx = 0
 		end

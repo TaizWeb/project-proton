@@ -10,7 +10,12 @@ Player = {
 		love.graphics.newImage("assets/proton/walk/proton-walk3.png"),
 		love.graphics.newImage("assets/proton/walk/proton-walk4.png"),
 		love.graphics.newImage("assets/proton/walk/proton-walk5.png"),
-		love.graphics.newImage("assets/proton/walk/proton-walk6.png"),
+		love.graphics.newImage("assets/proton/walk/proton-walk6.png")
+	},
+	crouch = {
+		love.graphics.newImage("assets/proton/crouch/proton-crouch1.png"),
+		love.graphics.newImage("assets/proton/crouch/proton-crouch2.png"),
+		love.graphics.newImage("assets/proton/crouch/proton-crouch3.png")
 	}
 }
 
@@ -43,6 +48,15 @@ function Player.draw(this)
 		end
 		Player.texture = Player.walk[1 + math.floor(Heartbeat.player.walkFrames / 10)]
 	end
+	if (Heartbeat.player.isCrouched) then
+		if (Heartbeat.player.crouchFrames < 3) then
+			Player.texture = Player.crouch[2]
+			Heartbeat.player.crouchFrames = Heartbeat.player.crouchFrames + 1
+		else
+			Player.texture = Player.crouch[3]
+		end
+	end
+
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.print("Health: " .. Heartbeat.player.health)
 	if (not (Heartbeat.player.cooldownFrames <= 0)) then
@@ -51,6 +65,15 @@ function Player.draw(this)
 	love.graphics.draw(Player.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
 end
 
+function Player.setCrouch()
+	Heartbeat.player.isCrouched = true
+	Heartbeat.player.crouchFrames = 0
+end
+
 function Player.shoot()
-	Heartbeat.newEntity(BasicShot, Heartbeat.player.x+20, Heartbeat.player.y+5)
+	if (not Heartbeat.player.isCrouched) then
+		Heartbeat.newEntity(BasicShot, Heartbeat.player.x+20, Heartbeat.player.y+5)
+	else
+		Heartbeat.newEntity(BasicShot, Heartbeat.player.x+25, Heartbeat.player.y+25)
+	end
 end
