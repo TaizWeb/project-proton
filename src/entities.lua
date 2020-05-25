@@ -55,6 +55,7 @@ function BasicShot.behaivor(this)
 		print(Heartbeat.entities[i].id)
 		if (Heartbeat.entities[i].isEnemy and Heartbeat.checkEntityCollision(this, Heartbeat.entities[i])) then
 			Heartbeat.updateEntityHealth(Heartbeat.entities[i], Heartbeat.entities[i].health - BasicShot.damage)
+			Heartbeat.removeEntity(this)
 		end
 	end
 	this.dy = -.5
@@ -119,10 +120,10 @@ function Slime.behaivor(this)
 end
 
 function Slime.onDeath(this)
-	local dropChance = math.floor(math.random() * 3)
-	if (dropChance == 1) then
+	local dropChance = math.floor(math.random() * 9)
+	if (dropChance == 7) then
 		Heartbeat.newItem(HealthPickup, this.x, this.y)
-	elseif (dropChance == 2) then
+	elseif (dropChance == 6) then
 		Heartbeat.newItem(DarkPickup, this.x, this.y)
 	end
 end
