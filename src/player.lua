@@ -66,8 +66,10 @@ function Player.draw(this)
 end
 
 function Player.setCrouch()
-	Heartbeat.player.isCrouched = true
-	Heartbeat.player.crouchFrames = 0
+	if (Heartbeat.player.isCrouched ~= nil and not Heartbeat.player.isCrouched) then
+		Heartbeat.player.isCrouched = true
+		Heartbeat.player.crouchFrames = 0
+	end
 end
 
 function Player.shoot()
