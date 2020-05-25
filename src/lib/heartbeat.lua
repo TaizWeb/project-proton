@@ -126,7 +126,9 @@ function Heartbeat.newEntity(object, x, y)
 			attack = object.attack,
 			behaivor = object.behaivor,
 			onCollision = object.onCollision,
+			onDeath = object.onDeath,
 			draw = object.draw,
+			isEnemy = object.isEnemy,
 			movementFrames = object.movementFrames
 		}
 	end
@@ -162,6 +164,16 @@ function Heartbeat.doEntities()
 		end
 	end
 	Heartbeat.player.cooldownFrames = Heartbeat.player.cooldownFrames - 1
+end
+
+function Heartbeat.updateEntityHealth(this, value)
+	if (value <= 0) then
+		if (this.onDeath ~= nil) then
+			this.onDeath(this)
+		end
+		Heartbeat.removeEntity(this)
+	end
+	this.health = value
 end
 
 function Heartbeat.removeEntity(entity)
@@ -711,7 +723,11 @@ function Heartbeat.editor.readLevel(levelName)
 			width = entity.width,
 			health = entity.health,
 			attack = entity.attack,
-			draw = entity.draw
+			draw = entity.draw,
+			behaivor = entity.behaivor,
+			onDeath = entity.onDeath,
+			isEnemy = entity.isEnemy,
+			onCollision = entity.onCollision
 		}
 		Heartbeat.newEntity(entityData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		--Heartbeat.spawnEntity(tonumber(levelLineData[1]), tonumber(levelLineData[2]), tonumber(levelLineData[3]))
