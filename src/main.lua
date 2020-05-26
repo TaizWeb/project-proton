@@ -13,7 +13,7 @@ function love.load()
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
 	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse}
-	Heartbeat.entitiesList = {Terminal, BasicShot, Slime, Imp}
+	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague"}
 	Heartbeat.editor.readLevel("start")
@@ -54,7 +54,11 @@ function love.keypressed(key, scancode, isrepeat)
 					end
 				end
 			else
-				Player.shoot()
+				if (love.keyboard.isDown("lshift")) then
+					Player.shootMatter()
+				else
+					Player.shoot()
+				end
 			end
 		end
 		if (key == "down") then

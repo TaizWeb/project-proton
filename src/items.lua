@@ -48,7 +48,11 @@ DarkMatterUpgrade = {
 
 function DarkMatterUpgrade.onPickup(this)
 	Player.maxMatter = Player.maxMatter + 10
+	Player.matter = Player.matter + 10
 	Heartbeat.removeItem(this)
+	if (Heartbeat.levelName == "bunker5") then
+		Player.flags.hasFirstMatter = true
+	end
 end
 
 HealthTankUpgrade = {
