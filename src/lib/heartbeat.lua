@@ -748,7 +748,10 @@ function Heartbeat.editor.readLevel(levelName)
 			scaleY = item.scaleY,
 			draw = item.draw
 		}
-		if (not (item.id == "matterupgrade" and Player.flags.hasFirstMatter)) then
+		if (
+			not (item.id == "matterupgrade" and Player.flags.hasFirstMatter) and 
+			not (item.id == "healthupgrade" and Player.flags.hasFirstHealth)
+		) then
 			Heartbeat.newItem(itemData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		end
 	end

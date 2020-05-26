@@ -68,7 +68,11 @@ HealthTankUpgrade = {
 -- TODO: Add level flags so they don't respawn
 function HealthTankUpgrade.onPickup(this)
 	Player.maxHealth = Player.maxHealth + 100
+	Heartbeat.player.health = Heartbeat.player.health + 100
 	Heartbeat.removeItem(this)
+	if (Heartbeat.levelName == "bunker6") then
+		Player.flags.hasFirstHealth = true
+	end
 end
 
 GrappelUpgrade = {
