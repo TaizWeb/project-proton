@@ -727,11 +727,14 @@ function Heartbeat.editor.readLevel(levelName)
 			behaivor = entity.behaivor,
 			onDeath = entity.onDeath,
 			isEnemy = entity.isEnemy,
-			onCollision = entity.onCollision
+			onCollision = entity.onCollision,
+			moveLeft = entity.moveleft,
+			movementFrames = entity.movementFrames
 		}
 		Heartbeat.newEntity(entityData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		--Heartbeat.spawnEntity(tonumber(levelLineData[1]), tonumber(levelLineData[2]), tonumber(levelLineData[3]))
 	end
+	-- Load the items
 	for l=l,#levelLines-1 do
 		levelLineData = split(levelLines[l], " ")
 		local item = Heartbeat.lookupItem(levelLineData[3])
@@ -745,7 +748,9 @@ function Heartbeat.editor.readLevel(levelName)
 			scaleY = item.scaleY,
 			draw = item.draw
 		}
-		Heartbeat.newItem(itemData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
+		if (not (item.id == "matterupgrade" and Player.flags.hasFirstMatter)) then
+			Heartbeat.newItem(itemData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
+		end
 	end
 
 	Heartbeat.levelName = levelName

@@ -23,6 +23,10 @@ Player = {
 		love.graphics.newImage("assets/proton/crouch/proton-crouch1.png"),
 		love.graphics.newImage("assets/proton/crouch/proton-crouch2.png"),
 		love.graphics.newImage("assets/proton/crouch/proton-crouch3.png")
+	},
+	-- These track if the player has collected key items
+	flags = {
+		hasFirstMatter = false
 	}
 }
 
@@ -64,8 +68,12 @@ function Player.draw(this)
 		end
 	end
 
+	-- Draw health/missile count
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.print("Health: " .. Heartbeat.player.health)
+	if (Player.maxMatter > 0) then
+		love.graphics.print("\nDark Matter: " .. Player.matter .. "/" .. Player.maxMatter)
+	end
 	if (not (Heartbeat.player.cooldownFrames <= 0)) then
 		love.graphics.setColor(1, 1, 1, .5)
 	end
@@ -86,3 +94,15 @@ function Player.shoot()
 		Heartbeat.newEntity(BasicShot, Heartbeat.player.x+25, Heartbeat.player.y+25)
 	end
 end
+
+function Player.shootMatter()
+	if (not (Player.matter <= 0)) then
+		if (not Heartbeat.player.isCrouched) then
+			Heartbeat.newEntity(MatterShot, Heartbeat.player.x+20, Heartbeat.player.y+5)
+		else
+			Heartbeat.newEntity(MatterShot, Heartbeat.player.x+25, Heartbeat.player.y+25)
+		end
+		Player.matter = Player.matter - 1
+	end
+end
+
