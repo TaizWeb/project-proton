@@ -9,10 +9,10 @@ HealthPickup = {
 }
 
 function HealthPickup.onPickup(this)
-	if ((Player.health + 25) < Player.maxHealth) then
-		Player.health = Player.health + 25
+	if ((Heartbeat.player.health + 25) < Player.maxHealth) then
+		Heartbeat.player.health = Heartbeat.player.health + 25
 	else
-		Player.health = Player.maxHealth
+		Heartbeat.player.health = Player.maxHealth
 	end
 	Heartbeat.removeItem(this)
 end
