@@ -63,10 +63,50 @@ end
 
 function BasicShot.onCollision(this, collidedObject)
 	Heartbeat.removeEntity(this)
+end
+
+MatterShot = {
+	id = "matter_shot",
+	texture = love.graphics.newImage("assets/proton/shot/missile.png"),
+	scaleX = 1.2,
+	scaleY = 1.2,
+	height = 16,
+	width = 16,
+	damage = 5,
+	isEnemy = false
+}
+
+function MatterShot.draw(this)
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(MatterShot.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, MatterShot.scaleX, MatterShot.scaleY, 0, 0)
+end
+
+function MatterShot.behaivor(this)
+	if (Heartbeat.player.forwardFace) then
+		if (this.dx ~= -15) then
+			this.dx = 15
+		end
+	else
+		if (this.dx ~= 15) then
+			this.dx = -15
+		end
+	end
+	for i=1,#Heartbeat.entities do
+		if (Heartbeat.entities[i] == nil) then return end
+		print(Heartbeat.entities[i].id)
+		if (Heartbeat.entities[i].isEnemy and Heartbeat.checkEntityCollision(this, Heartbeat.entities[i])) then
+			Heartbeat.updateEntityHealth(Heartbeat.entities[i], Heartbeat.entities[i].health - MatterShot.damage)
+			Heartbeat.removeEntity(this)
+		end
+	end
+	this.dy = -.5
+end
+
+function MatterShot.onCollision(this, collidedObject)
+	Heartbeat.removeEntity(this)
 	if (collidedObject.id == "door") then
 		Heartbeat.removeTile(collidedObject)
 	end
-	print(collidedObject.id)
 end
 
 Slime = {
