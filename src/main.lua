@@ -18,6 +18,8 @@ function love.load()
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague"}
 	Heartbeat.editor.readLevel("start")
 	Heartbeat.setDimensions(windowWidth, windowHeight)
+	-- Some godmode features
+	Player.matter = 10
 end
 
 function love.keypressed(key, scancode, isrepeat)

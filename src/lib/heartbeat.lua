@@ -596,6 +596,12 @@ function Heartbeat.editor.executeCommand()
 		elseif (args[2] == "width") then
 			Heartbeat.levelWidth = args[3]
 			print("Level width set to " .. args[3])
+		elseif (args[2] == "x") then
+			Heartbeat.player.x = args[3]
+			print("Player x set to " .. args[3])
+		elseif (args[2] == "y") then
+			Heartbeat.player.y = args[3]
+			print("Player y set to " .. args[3])
 		else
 			print("Error: Invalid arguments.\nUsage: set <variable> <value>")
 		end
