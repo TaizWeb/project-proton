@@ -26,7 +26,10 @@ Player = {
 	},
 	-- These track if the player has collected key items
 	flags = {
-		hasFirstMatter = false
+		hasFirstMatter = false,
+		hasFirstHealth = false,
+		hasSecondMatter = false,
+		hasSecondHealth = false
 	}
 }
 

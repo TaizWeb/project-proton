@@ -420,13 +420,14 @@ function Heartbeat.dialog.drawDialog()
 end
 
 function Heartbeat.editor.drawEditor()
+	Heartbeat.debugLine = "\n\n\n"
 	if (Heartbeat.editor.isActive) then
 		if (Heartbeat.editor.mode == "tile") then
-			Heartbeat.debugLine = "Current Tile: " .. Heartbeat.tilesList[Heartbeat.editor.currentTile].id .. "\n"
+			Heartbeat.debugLine = Heartbeat.debugLine .. "Current Tile: " .. Heartbeat.tilesList[Heartbeat.editor.currentTile].id .. "\n"
 		elseif (Heartbeat.editor.mode == "entity") then
-			Heartbeat.debugLine = "Current Entity: " .. Heartbeat.entitiesList[Heartbeat.editor.currentEntity].id .. "\n"
+			Heartbeat.debugLine = Heartbeat.debugLine .. "Current Entity: " .. Heartbeat.entitiesList[Heartbeat.editor.currentEntity].id .. "\n"
 		elseif (Heartbeat.editor.mode == "item") then
-			Heartbeat.debugLine = "Current Item: " .. Heartbeat.itemsList[Heartbeat.editor.currentItem].id .. "\n"
+			Heartbeat.debugLine = Heartbeat.debugLine .. "Current Item: " .. Heartbeat.itemsList[Heartbeat.editor.currentItem].id .. "\n"
 		end
 		Heartbeat.debugLine = Heartbeat.debugLine .. "Mouse Position: " .. love.mouse.getX() + Camera.x .. " " .. love.mouse.getY() + Camera.y .. "\n"
 		-- Drawing current tile/entity/item info
@@ -591,16 +592,16 @@ function Heartbeat.editor.executeCommand()
 	elseif (Heartbeat.editor.commandModeLine:sub(1, 3) == "set") then
 		local args = split(Heartbeat.editor.commandModeLine, " ")
 		if (args[2] == "height") then
-			Heartbeat.levelHeight = args[3]
+			Heartbeat.levelHeight = tonumber(args[3])
 			print("Level height set to " .. args[3])
 		elseif (args[2] == "width") then
-			Heartbeat.levelWidth = args[3]
+			Heartbeat.levelWidth = tonumber(args[3])
 			print("Level width set to " .. args[3])
 		elseif (args[2] == "x") then
-			Heartbeat.player.x = args[3]
+			Heartbeat.player.x = tonumber(args[3])
 			print("Player x set to " .. args[3])
 		elseif (args[2] == "y") then
-			Heartbeat.player.y = args[3]
+			Heartbeat.player.y = tonumber(args[3])
 			print("Player y set to " .. args[3])
 		else
 			print("Error: Invalid arguments.\nUsage: set <variable> <value>")
@@ -735,6 +736,7 @@ function Heartbeat.editor.readLevel(levelName)
 			isEnemy = entity.isEnemy,
 			onCollision = entity.onCollision,
 			moveLeft = entity.moveleft,
+			opacity = entity.opacity,
 			movementFrames = entity.movementFrames
 		}
 		Heartbeat.newEntity(entityData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
@@ -754,9 +756,12 @@ function Heartbeat.editor.readLevel(levelName)
 			scaleY = item.scaleY,
 			draw = item.draw
 		}
+
 		if (
-			not (item.id == "matterupgrade" and Player.flags.hasFirstMatter) and 
-			not (item.id == "healthupgrade" and Player.flags.hasFirstHealth)
+			not (levelName == "bunker5" and Player.flags.hasFirstMatter) and
+			not (levelName == "bunker6" and Player.flags.hasFirstHealth) and
+			not (levelName == "cave3" and Player.flags.hasSecondMatter) and
+			not (levelName == "cave4" and Player.flags.hasSecondHealth)
 		) then
 			Heartbeat.newItem(itemData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		end
