@@ -13,7 +13,7 @@ function love.load()
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
 	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse}
-	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp}
+	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague"}
 	Heartbeat.editor.readLevel("start")
@@ -45,6 +45,7 @@ function love.keypressed(key, scancode, isrepeat)
 				else
 					if (Heartbeat.levelName == "start") then
 						Heartbeat.dialog.openDialog("start")
+						-- Open the door up
 						for i=1,#Heartbeat.tiles do
 							if (Heartbeat.tiles[i].id == "door") then
 								table.remove(Heartbeat.tiles, i)
@@ -53,6 +54,8 @@ function love.keypressed(key, scancode, isrepeat)
 						end
 					elseif (Heartbeat.levelName == "bunker4") then
 						Heartbeat.dialog.openDialog("log2")
+					elseif (Heartbeat.levelName == "cave4") then
+						Heartbeat.dialog.openDialog("log3")
 					end
 				end
 			else
@@ -88,7 +91,7 @@ function love.update(dt)
 		end
 	end
 	if (Heartbeat.editor.isActive) then
-		if (love.mouse.isDown(1)) then
+		if (love.mouse.isDown(1) and Heartbeat.editor.mode == "tile") then
 			Heartbeat.editor.handleInput(1)
 		end
 		if (love.mouse.isDown(2)) then
