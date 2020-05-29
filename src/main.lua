@@ -69,6 +69,9 @@ function love.keypressed(key, scancode, isrepeat)
 		if (key == "down") then
 			Player.setCrouch()
 		end
+		if (key == "up") then
+			Player.setUp()
+		end
 	end
 end
 
@@ -83,9 +86,11 @@ function love.update(dt)
 		if (love.keyboard.isDown("left")) then
 			Heartbeat.player.dx = -5
 			Heartbeat.player.isCrouched = false
+			Heartbeat.player.isUp = false
 		elseif (love.keyboard.isDown("right")) then
 			Heartbeat.player.dx = 5
 			Heartbeat.player.isCrouched = false
+			Heartbeat.player.isUp = false
 		else
 			Heartbeat.player.dx = 0
 		end
