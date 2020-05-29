@@ -1,3 +1,5 @@
+require("lib/standard")
+
 Terminal = {
 	id = "terminal",
 	texture = love.graphics.newImage("assets/misc/terminal.png"),
@@ -12,6 +14,10 @@ function Terminal.draw(this)
 	local offsetX = 10
 	local offsetY = 13
 	love.graphics.setColor(1, 1, 1, 1)
+	-- Yolo, I could've done something clever with the editor but I just got lazy with adding flipping
+	if (Heartbeat.levelName == "cave4") then
+		scaleX = -2
+	end
 	love.graphics.draw(Terminal.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
 end
 
