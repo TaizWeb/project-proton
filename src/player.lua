@@ -24,6 +24,11 @@ Player = {
 		love.graphics.newImage("assets/proton/crouch/proton-crouch2.png"),
 		love.graphics.newImage("assets/proton/crouch/proton-crouch3.png")
 	},
+	up = {
+		love.graphics.newImage("assets/proton/up/proton-up1.png"),
+		love.graphics.newImage("assets/proton/up/proton-up2.png"),
+		love.graphics.newImage("assets/proton/up/proton-up3.png")
+	},
 	-- These track if the player has collected key items
 	flags = {
 		hasFirstMatter = false,
@@ -62,12 +67,22 @@ function Player.draw(this)
 		end
 		Player.texture = Player.walk[1 + math.floor(Heartbeat.player.walkFrames / 10)]
 	end
+	-- Crouching
 	if (Heartbeat.player.isCrouched) then
 		if (Heartbeat.player.crouchFrames < 3) then
 			Player.texture = Player.crouch[2]
 			Heartbeat.player.crouchFrames = Heartbeat.player.crouchFrames + 1
 		else
 			Player.texture = Player.crouch[3]
+		end
+	end
+	-- Firing up
+	if (Heartbeat.player.isUp) then
+		if (Heartbeat.player.upFrames < 3) then
+			Player.texture = Player.up[2]
+			Heartbeat.player.upFrames = Heartbeat.player.upFrames + 1
+		else
+			Player.texture = Player.up[3]
 		end
 	end
 
@@ -84,17 +99,38 @@ function Player.draw(this)
 end
 
 function Player.setCrouch()
+	Heartbeat.player.isUp = false
 	if (Heartbeat.player.isCrouched ~= nil and not Heartbeat.player.isCrouched) then
 		Heartbeat.player.isCrouched = true
 		Heartbeat.player.crouchFrames = 0
 	end
 end
 
+function Player.setUp()
+	Heartbeat.player.isCrouched = false
+	if (Heartbeat.player.isUp ~= nil and not Heartbeat.player.isUp) then
+		Heartbeat.player.isUp = true
+		Heartbeat.player.upFrames = 0
+	end
+end
+
 function Player.shoot()
-	if (not Heartbeat.player.isCrouched) then
-		Heartbeat.newEntity(BasicShot, Heartbeat.player.x+20, Heartbeat.player.y+5)
+	if (Heartbeat.player.forwardFace) then
+		if (not Heartbeat.player.isCrouched and not Heartbeat.player.isUp) then
+			Heartbeat.newEntity(BasicShot, Heartbeat.player.x+20, Heartbeat.player.y+5)
+		elseif (Heartbeat.player.isCrouched) then
+			Heartbeat.newEntity(BasicShot, Heartbeat.player.x+25, Heartbeat.player.y+25)
+		elseif (Heartbeat.player.isUp) then
+			Heartbeat.newEntity(BasicShot, Heartbeat.player.x + 10, Heartbeat.player.y + 15)
+		end
 	else
-		Heartbeat.newEntity(BasicShot, Heartbeat.player.x+25, Heartbeat.player.y+25)
+		if (not Heartbeat.player.isCrouched and not Heartbeat.player.isUp) then
+			Heartbeat.newEntity(BasicShot, Heartbeat.player.x + 10, Heartbeat.player.y+20)
+		elseif (Heartbeat.player.isCrouched) then
+			Heartbeat.newEntity(BasicShot, Heartbeat.player.x + 0, Heartbeat.player.y+40)
+		elseif (Heartbeat.player.isUp) then
+			Heartbeat.newEntity(BasicShot, Heartbeat.player.x - 0, Heartbeat.player.y + 15)
+		end
 	end
 end
 

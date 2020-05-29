@@ -38,33 +38,54 @@ BasicShot = {
 	height = 16,
 	width = 16,
 	damage = 5,
+	rotation = 0,
 	isEnemy = false
 }
 
 function BasicShot.draw(this)
 	love.graphics.setColor(1, 1, 1, 1)
-	love.graphics.draw(BasicShot.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, BasicShot.scaleX, BasicShot.scaleY, 0, 0)
+	love.graphics.draw(BasicShot.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), this.rotation, BasicShot.scaleX, BasicShot.scaleY, 0, 0)
 end
 
 function BasicShot.behaivor(this)
-	if (Heartbeat.player.forwardFace) then
-		if (this.dx ~= -12) then
-			this.dx = 12
+	-- Figure out shot position
+	if (this.rightShot == nil and this.rightUpShot == nil and this.leftUpShot == nil and this.leftShot == nil) then
+		if (Heartbeat.player.forwardFace) then
+			if (Heartbeat.player.isUp) then
+				this.rightUpShot = true
+			else
+				this.rightShot = true
+			end
+		else
+			if (Heartbeat.player.isUp) then
+				this.leftUpShot = true
+			else
+				this.leftShot = true
+			end
 		end
-	else
-		if (this.dx ~= 12) then
-			this.dx = -12
-		end
+	end
+	-- Give it proper velocity
+	if (this.rightShot) then
+		this.dx = 12
+	end
+	if (this.leftShot) then
+		this.dx = -12
+		this.rotation = math.pi
+	end
+	if (this.rightUpShot or this.leftUpShot) then
+		this.dy = -12
+		this.rotation = math.pi * 1.5
 	end
 	for i=1,#Heartbeat.entities do
 		if (Heartbeat.entities[i] == nil) then return end
-		print(Heartbeat.entities[i].id)
 		if (Heartbeat.entities[i].isEnemy and Heartbeat.checkEntityCollision(this, Heartbeat.entities[i])) then
 			Heartbeat.updateEntityHealth(Heartbeat.entities[i], Heartbeat.entities[i].health - BasicShot.damage)
 			Heartbeat.removeEntity(this)
 		end
 	end
-	this.dy = -.5
+	if (this.dx == 12 or this.dx == -12) then
+		this.dy = -.5
+	end
 end
 
 function BasicShot.onCollision(this, collidedObject)
