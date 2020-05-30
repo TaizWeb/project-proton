@@ -249,3 +249,86 @@ function Imp.behaivor(this)
 	end
 end
 
+Frog = {
+	id = "frog",
+	texture = love.graphics.newImage("assets/enemies/frog1.png"),
+	frames = {
+		love.graphics.newImage("assets/enemies/frog1.png"),
+		love.graphics.newImage("assets/enemies/frog2.png"),
+		love.graphics.newImage("assets/enemies/frog3.png"),
+		love.graphics.newImage("assets/enemies/frog4.png"),
+	},
+	scaleX = 3,
+	scaleY = 3,
+	height = 192,
+	width = 150,
+	offsetX = 0,
+	offsetY = 3,
+	isEnemy = true,
+	movementFrames = 0,
+	health = 500
+}
+
+Tadpole = {
+	id = "tadpole",
+	texture = love.graphics.newImage("assets/enemies/tadpole1.png"),
+	frames = {
+		love.graphics.newImage("assets/enemies/tadpole1.png"),
+		love.graphics.newImage("assets/enemies/tadpole1.png")
+	},
+	scaleX = 3,
+	scaleY = 3,
+	offsetX = 0,
+	offsetY = 9,
+	width = 24,
+	height = 20,
+	isEnemy = true,
+	health = 1,
+	forwardFace = false
+}
+
+function Frog.draw(this)
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Frog.scaleX, Frog.scaleY, 12, 0)
+end
+
+function Frog.behaivor(this)
+	if (math.ceil(math.random() * 180) == 1) then
+		this.isAttacking = true
+	end
+	if (this.isAttacking ~= nil and this.isAttacking) then
+		if (this.movementFrames >= 40) then
+			this.isAttacking = false
+			Heartbeat.newEntity(Tadpole, this.x - 10, this.y + 20)
+			this.movementFrames = 0
+		end
+		this.movementFrames = this.movementFrames + 1
+		this.texture = Frog.frames[math.ceil(this.movementFrames / 10)]
+	end
+end
+
+function Tadpole.draw(this)
+	love.graphics.setColor(1, 1, 1, 1)
+	if (not this.forwardFace) then
+		this.scaleX = 3
+		this.offsetX = 0
+	else
+		this.scaleX = -3
+		this.offsetX = 10
+	end
+	love.graphics.draw(Tadpole.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, this.scaleX, Tadpole.scaleY, this.offsetX, Tadpole.offsetY)
+end
+
+function Tadpole.behaivor(this)
+	if (Heartbeat.getTile(this.x + this.width + 5, this.y) ~= nil) then
+		this.forwardFace = false
+	elseif (Heartbeat.getTile(this.x - 5, this.y) ~= nil) then
+		this.forwardFace = true
+	end
+	if (this.forwardFace) then
+		this.dx = 5
+	else
+		this.dx = -5
+	end
+end
+
