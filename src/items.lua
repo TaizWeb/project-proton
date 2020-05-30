@@ -56,6 +56,9 @@ function DarkMatterUpgrade.onPickup(this)
 	if (Heartbeat.levelName == "cave3") then
 		Player.flags.hasSecondMatter = true
 	end
+	if (Heartbeat.levelName == "cave6") then
+		Player.flags.hasThirdMatter = true
+	end
 end
 
 HealthTankUpgrade = {

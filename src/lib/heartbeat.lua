@@ -96,7 +96,11 @@ end
 
 function Heartbeat.jump(entity)
 	if (not entity.isFalling) then
-		entity.dy = -11
+		if (Player.hasJumpUpgrade) then
+			entity.dy = -18
+		else
+			entity.dy = -11
+		end
 		entity.isFalling = true
 	end
 end
@@ -129,6 +133,7 @@ function Heartbeat.newEntity(object, x, y)
 			onDeath = object.onDeath,
 			draw = object.draw,
 			isEnemy = object.isEnemy,
+			forwardFace = object.forwardFace,
 			movementFrames = object.movementFrames
 		}
 	end
@@ -761,7 +766,8 @@ function Heartbeat.editor.readLevel(levelName)
 			not (levelName == "bunker5" and Player.flags.hasFirstMatter) and
 			not (levelName == "bunker6" and Player.flags.hasFirstHealth) and
 			not (levelName == "cave3" and Player.flags.hasSecondMatter) and
-			not (levelName == "cave4" and Player.flags.hasSecondHealth)
+			not (levelName == "cave4" and Player.flags.hasSecondHealth) and
+			not (levelName == "cave6" and Player.flags.hasThirdMatter)
 		) then
 			Heartbeat.newItem(itemData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		end
