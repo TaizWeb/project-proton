@@ -34,7 +34,8 @@ Player = {
 		hasFirstMatter = false,
 		hasFirstHealth = false,
 		hasSecondMatter = false,
-		hasSecondHealth = false
+		hasSecondHealth = false,
+		hasThirdMatter = false
 	}
 }
 
