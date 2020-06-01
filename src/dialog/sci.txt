@@ -1,0 +1,77 @@
+[Proton]
+Who are you?
+
+[Specks]
+Oh my god, you must be...
+
+[Proton]
+Project Proton.
+
+[Specks]
+Oh... Right. Have you noticed those doors yet? They don't unlock.
+
+[Proton]
+I've noticed.
+
+[Specks]
+The lab is locking itself down to prevent those monsters from getting deeper.
+This passageway here leads back to the main bunker. I plan to go in there and unlock the doors.
+The problem is, if I do that, the monsters will undoubtedly get to the others.
+
+[Proton]
+Others?
+
+[Specks]
+There's a group of survivors not too far from here and a lift to get them underground to safety.
+
+[Proton]
+So you don't want to risk them getting hurt?
+
+[Specks]
+Exactly. So I came up with a solution. I'm going to blow up the lab and the cave sections when I activate the doors. That should prevent the advancing army of monsters from getting to them, and it should buy you some time.
+
+[Specks]
+The thing is... I get blown up too.
+
+[Proton]
+That's stupid.
+
+[Specks]
+Excuse me?
+
+[Proton]
+Your goal should be for yourself to survive. Anything else is foolish.
+
+[Specks]
+...You don't feel much anymore, do you, "Proton"?
+
+[Proton]
+...
+
+[Specks]
+Do you even remember who you are? The kind of person you used to be?
+
+[Proton]
+...
+
+[Specks]
+Maybe you think what I'm doing is stupid. But other's would say what I'm doing is being a hero.
+
+[Specks]
+But me? I don't say any of that. I call it being human. Simple as that.
+
+[Proton]
+Being human...
+
+[Specks]
+Well, I'm going to go ahead and do my part. It shouldn't take me long, so you should get going.
+
+[Specks]
+And Proton?
+
+[Proton]
+Yes?
+
+[Specks]
+Maybe you should try being human again someday.
+
