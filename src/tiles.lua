@@ -78,9 +78,47 @@ Cobble = {
 	isSolid = true
 }
 
+CobbleWeb = {
+	id = "cobble_web",
+	texture = love.graphics.newImage("assets/tiles/cobble-web.png"),
+	height = 25,
+	width = 25,
+	scaleX = 25/16,
+	scaleY = 25/16,
+	isSolid = true
+}
+
+BunkerWeb = {
+	id = "bunker_web",
+	texture = love.graphics.newImage("assets/tiles/bunker-web.png"),
+	height = 25,
+	width = 25,
+	scaleX = 25/16,
+	scaleY = 25/16,
+	isSolid = true
+}
+
+BunkerExtWeb = {
+	id = "bunker_ext_web",
+	texture = love.graphics.newImage("assets/tiles/bunker-ext-web.png"),
+	height = 25,
+	width = 25,
+	scaleX = 25/16,
+	scaleY = 25/16,
+	isSolid = true
+}
+
 Door = {
 	id = "door",
 	texture = love.graphics.newImage("assets/tiles/door.png"),
+	height = 75,
+	width = 25,
+	isSolid = true
+}
+
+LockedDoor = {
+	id = "lockeddoor",
+	texture = love.graphics.newImage("assets/tiles/lockeddoor.png"),
 	height = 75,
 	width = 25,
 	isSolid = true

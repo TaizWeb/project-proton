@@ -12,7 +12,7 @@ function love.load()
 	love.keyboard.setKeyRepeat(true)
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
-	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse}
+	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb}
 	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague"}
