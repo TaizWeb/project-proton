@@ -266,7 +266,7 @@ Frog = {
 	offsetY = 3,
 	isEnemy = true,
 	movementFrames = 0,
-	health = 500
+	health = 200
 }
 
 Tadpole = {
@@ -288,6 +288,9 @@ Tadpole = {
 }
 
 function Frog.draw(this)
+	if (this.texture == nil) then
+		this.texture = Frog.texture
+	end
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Frog.scaleX, Frog.scaleY, 12, 0)
 end
@@ -305,6 +308,24 @@ function Frog.behaivor(this)
 		this.movementFrames = this.movementFrames + 1
 		this.texture = Frog.frames[math.ceil(this.movementFrames / 10)]
 	end
+end
+
+function Frog.onDeath(this)
+	-- Unlock the doors
+	for i=1,#Heartbeat.tiles do
+		if (Heartbeat.tiles[i] ~= nil) then
+			if (Heartbeat.tiles[i].id == "lockeddoor") then
+				Heartbeat.removeTile(Heartbeat.tiles[i])
+			end
+		end
+	end
+	-- Drop some pickups
+	Heartbeat.newItem(HealthPickup, this.x - 50, this.y - 50)
+	Heartbeat.newItem(HealthPickup, this.x - 10, this.y - 10)
+	Heartbeat.newItem(HealthPickup, this.x - 30, this.y)
+	Heartbeat.newItem(DarkPickup, this.x + 37, this.y - 20)
+	Heartbeat.newItem(DarkPickup, this.x + 68, this.y - 24)
+	Player.flags.hasKilledFrog = true
 end
 
 function Tadpole.draw(this)
