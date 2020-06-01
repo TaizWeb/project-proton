@@ -31,6 +31,7 @@ Player = {
 	},
 	-- These track if the player has collected key items
 	flags = {
+		hasKilledFrog = false,
 		hasFirstMatter = false,
 		hasFirstHealth = false,
 		hasSecondMatter = false,

@@ -717,8 +717,9 @@ function Heartbeat.editor.readLevel(levelName)
 			offsetY = tile.offsetY,
 			isSolid = tile.isSolid
 		}
-		Heartbeat.newTile(tileData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
-		--Heartbeat.tiles[Level.tileCount+1] = {x = tonumber(levelLineData[1]), y = tonumber(levelLineData[2]), id = tonumber(levelLineData[3])}
+		if (not (tileData.id == "lockeddoor" and Player.hasKilledFrog and levelName == "cave10")) then
+			Heartbeat.newTile(tileData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
+		end
 	end
 
 	-- Load the entities
@@ -744,8 +745,9 @@ function Heartbeat.editor.readLevel(levelName)
 			opacity = entity.opacity,
 			movementFrames = entity.movementFrames
 		}
-		Heartbeat.newEntity(entityData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
-		--Heartbeat.spawnEntity(tonumber(levelLineData[1]), tonumber(levelLineData[2]), tonumber(levelLineData[3]))
+		if (not (levelname == "cave10" and Player.hasKilledFrog)) then
+			Heartbeat.newEntity(entityData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
+		end
 	end
 	-- Load the items
 	for l=l,#levelLines-1 do
