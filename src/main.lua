@@ -13,9 +13,9 @@ function love.load()
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
 	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb}
-	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole}
+	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
-	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague"}
+	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks"}
 	Heartbeat.editor.readLevel("start")
 	Heartbeat.setDimensions(windowWidth, windowHeight)
 	-- Some godmode features
@@ -38,7 +38,7 @@ function love.keypressed(key, scancode, isrepeat)
 		end
 		-- Interact/fire
 		if (key == "x") then
-			if (checkTerminalRange()) then
+			if (checkTerminalRange() or Heartbeat.levelName == "spider6") then
 				Heartbeat.player.dx = 0
 				if (Heartbeat.dialog.isOpen) then
 					Heartbeat.dialog.nextLine()
