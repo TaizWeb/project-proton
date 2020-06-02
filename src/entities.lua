@@ -132,7 +132,9 @@ end
 function MatterShot.onCollision(this, collidedObject)
 	Heartbeat.removeEntity(this)
 	if (collidedObject.id == "door") then
-		Heartbeat.removeTile(collidedObject)
+		if (not (Heartbeat.levelName == "spider5" and Player.flags.hasSeenSpecks)) then
+			Heartbeat.removeTile(collidedObject)
+		end
 	end
 end
 
@@ -350,6 +352,40 @@ function Tadpole.behaivor(this)
 		this.dx = 5
 	else
 		this.dx = -5
+	end
+end
+
+Specks = {
+	id = "specks",
+	texture = love.graphics.newImage("assets/misc/specks.png"),
+	frames = {},
+	scaleX = 3,
+	scaleY = 3,
+	offsetX = 0,
+	offsetY = 0,
+	width = 27,
+	height = 81,
+	isEnemy = false,
+	health = 11037,
+	frameCounter = 0,
+	forwardFace = true
+}
+
+function Specks.draw(this)
+	this.texture = Specks.texture
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Specks.scaleX, Specks.scaleY, this.offsetX, this.offsetY)
+end
+
+function Specks.behaivor(this)
+	if (Specks.frameCounter < 30) then
+		Heartbeat.player.dx = -5
+		Specks.frameCounter = Specks.frameCounter + 1
+	elseif (Specks.frameCounter == 30) then
+		Heartbeat.dialog.openDialog("sci")
+		Specks.frameCounter = Specks.frameCounter + 1
+	elseif (Specks.frameCounter == 31 and not Heartbeat.dialog.isOpen) then
+		Heartbeat.player.dx = 5
+		Player.flags.hasSeenSpecks = true
 	end
 end
 
