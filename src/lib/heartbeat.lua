@@ -405,7 +405,7 @@ function Heartbeat.dialog.drawDialog()
 		end
 	end
 	if (Heartbeat.dialog.font:getWidth(string.sub(Heartbeat.dialog.currentLine, previousLength, previousLength + Heartbeat.dialog.dialogCharacter)) > windowWidth - 200) then
-		Heartbeat.dialog.printedLines[#Heartbeat.dialog.printedLines+1] = string.sub(Heartbeat.dialog.currentLine, previousLength, previousLength + Heartbeat.dialog.dialogCharacter)
+		Heartbeat.dialog.printedLines[#Heartbeat.dialog.printedLines+1] = string.sub(Heartbeat.dialog.currentLine, previousLength + 1, previousLength + Heartbeat.dialog.dialogCharacter)
 		Heartbeat.dialog.dialogCharacter = 0
 	else
 		Heartbeat.dialog.dialogCharacter = Heartbeat.dialog.dialogCharacter + 1
@@ -413,7 +413,7 @@ function Heartbeat.dialog.drawDialog()
 	-- Print all lines
 	for i=1,#Heartbeat.dialog.printedLines do
 		if (i == #Heartbeat.dialog.printedLines) then
-			love.graphics.print(string.sub(Heartbeat.dialog.currentLine, previousLength, previousLength + Heartbeat.dialog.dialogCharacter), Heartbeat.dialog.font, 100, windowHeight - 150 + (i*30))
+			love.graphics.print(string.sub(Heartbeat.dialog.currentLine, previousLength + 1, previousLength + Heartbeat.dialog.dialogCharacter), Heartbeat.dialog.font, 100, windowHeight - 150 + (i*30))
 		end
 		-- Print the in-progress line
 		love.graphics.print(Heartbeat.dialog.printedLines[i], Heartbeat.dialog.font, 100, windowHeight - 150 + ((i-1)*30))
