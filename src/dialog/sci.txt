@@ -1,66 +1,79 @@
-[Proton]
+[PROTON]
 Who are you?
 
 [Specks]
 Oh my god, you must be...
 
-[Proton]
+[PROTON]
 Project Proton.
 
 [Specks]
 Oh... Right. Have you noticed those doors yet? They don't unlock.
 
-[Proton]
+[PROTON]
 I've noticed.
 
 [Specks]
 The lab is locking itself down to prevent those monsters from getting deeper.
+
+[Specks]
 This passageway here leads back to the main bunker. I plan to go in there and unlock the doors.
+
+[Specks]
 The problem is, if I do that, the monsters will undoubtedly get to the others.
 
-[Proton]
+[PROTON]
 Others?
 
 [Specks]
 There's a group of survivors not too far from here and a lift to get them underground to safety.
 
-[Proton]
+[PROTON]
 So you don't want to risk them getting hurt?
 
 [Specks]
-Exactly. So I came up with a solution. I'm going to blow up the lab and the cave sections when I activate the doors. That should prevent the advancing army of monsters from getting to them, and it should buy you some time.
+Exactly. So I came up with a solution.
+
+[Specks]
+I'm going to blow up the lab and the cave sections when I activate the doors. That should prevent the advancing army of monsters from getting to them, and it should buy you some time.
 
 [Specks]
 The thing is... I get blown up too.
 
-[Proton]
+[PROTON]
 That's stupid.
 
 [Specks]
 Excuse me?
 
-[Proton]
+[PROTON]
 Your goal should be for yourself to survive. Anything else is foolish.
 
 [Specks]
 ...You don't feel much anymore, do you, "Proton"?
 
-[Proton]
+[PROTON]
 ...
 
 [Specks]
 Do you even remember who you are? The kind of person you used to be?
 
-[Proton]
+[PROTON]
 ...
 
 [Specks]
-Maybe you think what I'm doing is stupid. But other's would say what I'm doing is being a hero.
+Maybe you think what I'm doing is stupid. But other's would say what I'm doing is "being a hero".
 
 [Specks]
-But me? I don't say any of that. I call it being human. Simple as that.
+But me?
 
-[Proton]
+[Specks]
+I don't say any of that.
+
+[Specks]
+I call it "being human". Simple as that.
+
+[PROTON]
 Being human...
 
 [Specks]
@@ -69,9 +82,8 @@ Well, I'm going to go ahead and do my part. It shouldn't take me long, so you sh
 [Specks]
 And Proton?
 
-[Proton]
+[PROTON]
 Yes?
 
 [Specks]
 Maybe you should try being human again someday.
-
