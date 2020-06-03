@@ -15,7 +15,7 @@ function love.load()
 	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb}
 	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
-	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks"}
+	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle"}
 	Heartbeat.editor.readLevel("start")
 	Heartbeat.setDimensions(windowWidth, windowHeight)
 	-- Some godmode features
@@ -58,6 +58,10 @@ function love.keypressed(key, scancode, isrepeat)
 						Heartbeat.dialog.openDialog("log3")
 					elseif (Heartbeat.levelName == "cave8") then
 						Heartbeat.dialog.openDialog("log4")
+					elseif (Heartbeat.levelName == "spider4") then
+						Heartbeat.dialog.openDialog("log5")
+					elseif (Heartbeat.levelName == "spider8") then
+						Heartbeat.dialog.openDialog("log6")
 					end
 				end
 			else
