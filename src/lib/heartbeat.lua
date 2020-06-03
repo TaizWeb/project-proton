@@ -717,7 +717,10 @@ function Heartbeat.editor.readLevel(levelName)
 			offsetY = tile.offsetY,
 			isSolid = tile.isSolid
 		}
-		if (not (tileData.id == "lockeddoor" and Player.hasKilledFrog and levelName == "cave10")) then
+		if (
+			not (tileData.id == "lockeddoor" and Player.flags.hasKilledFrog and levelName == "cave10") and
+			not (tileData.id == "lockeddoor" and Player.flags.hasSeenSpecks and levelName == "spider5")
+			) then
 			Heartbeat.newTile(tileData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		end
 	end
