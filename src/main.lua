@@ -13,7 +13,7 @@ function love.load()
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
 	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb}
-	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks}
+	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks, Widow, Spiderling}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle"}
 	Heartbeat.editor.readLevel("start")
@@ -40,7 +40,7 @@ function love.keypressed(key, scancode, isrepeat)
 		if (key == "x") then
 			if (checkTerminalRange() or Heartbeat.levelName == "spider6") then
 				Heartbeat.player.dx = 0
-				if (Heartbeat.dialog.isOpen) then
+				if (Heartbeat.dialog.isOpen and Heartbeat.redText == nil) then
 					Heartbeat.dialog.nextLine()
 				else
 					if (Heartbeat.levelName == "start") then
@@ -62,6 +62,8 @@ function love.keypressed(key, scancode, isrepeat)
 						Heartbeat.dialog.openDialog("log5")
 					elseif (Heartbeat.levelName == "spider8") then
 						Heartbeat.dialog.openDialog("log6")
+					elseif (Heartbeat.levelName == "spider10" and Heartbeat.redText == nil) then
+						Heartbeat.dialog.openDialog("log7")
 					end
 				end
 			else

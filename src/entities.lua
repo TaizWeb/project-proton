@@ -15,7 +15,7 @@ function Terminal.draw(this)
 	local offsetY = 13
 	love.graphics.setColor(1, 1, 1, 1)
 	-- Yolo, I could've done something clever with the editor but I just got lazy with adding flipping
-	if (Heartbeat.levelName == "cave4") then
+	if (Heartbeat.levelName == "cave4" or Heartbeat.levelName == "spider10") then
 		scaleX = -2
 	end
 	love.graphics.draw(Terminal.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
@@ -389,3 +389,75 @@ function Specks.behaivor(this)
 	end
 end
 
+Widow = {
+	id = "widow",
+	texture = love.graphics.newImage("assets/enemies/widow1.png"),
+	frames = {
+		love.graphics.newImage("assets/enemies/widow1.png"),
+		love.graphics.newImage("assets/enemies/widow2.png"),
+		love.graphics.newImage("assets/enemies/widow3.png"),
+		love.graphics.newImage("assets/enemies/widow4.png"),
+	},
+	scaleX = 5,
+	scaleY = 5,
+	height = 23 * 5,
+	width = 53 * 5,
+	offsetX = 0,
+	offsetY = 0,
+	isEnemy = true,
+	moveLeft = true,
+	health = 10,
+	movementFrames = 0
+}
+
+function Widow.draw(this)
+	this.movementFrames = this.movementFrames + 1
+	if (this.movementFrames >= 40) then
+		this.movementFrames = 0
+	end
+	this.texture = Widow.frames[1 + math.floor(this.movementFrames / 10)]
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Widow.scaleX, Widow.scaleY, Widow.offsetX, Widow.offsetY)
+end
+
+Spiderling = {
+	id = "spiderling",
+	texture = love.graphics.newImage("assets/enemies/spiderling1.png"),
+	frames = {
+		love.graphics.newImage("assets/enemies/spiderling1.png"),
+		love.graphics.newImage("assets/enemies/spiderling2.png"),
+	},
+	scaleX = 3,
+	scaleY = 3,
+	height = 7 * 3,
+	width = 21 * 3,
+	offsetX = 0,
+	offsetY = 0,
+	isEnemy = true,
+	moveLeft = true,
+	health = 10,
+	movementFrames = 0
+}
+
+function Spiderling.draw(this)
+	-- Making them flip around
+	if (not this.forwardFace) then
+		this.scaleX = 3
+		this.offsetX = 0
+	else
+		this.scaleX = -3
+		this.offsetX = 21
+	end
+	-- Animation
+	this.movementFrames = this.movementFrames + 1
+	if (this.movementFrames >= 20) then
+		this.movementFrames = 0
+	end
+	this.texture = Spiderling.frames[1 + math.floor(this.movementFrames / 10)]
+	love.graphics.setColor(1, 1, 1, 1)
+	--love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, this.scaleX, Spiderling.scaleY, this.offsetX, Spiderling.offsetY)
+end
+
+Spiderling.behaivor = Tadpole.behaivor
