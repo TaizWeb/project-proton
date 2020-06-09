@@ -394,7 +394,11 @@ function Heartbeat.dialog.drawDialog()
 	love.graphics.rectangle("line", 0, windowHeight - 150, windowWidth, 150)
 	love.graphics.rectangle("line", 0, windowHeight - 180, 100, 30)
 	-- Drawing speaker
-	love.graphics.setColor(1, 1, 1, 1)
+	if (Heartbeat.redText == nil) then
+		love.graphics.setColor(1, 1, 1, 1)
+	else
+		love.graphics.setColor(1, 0, 0, 1)
+	end
 	love.graphics.print(Heartbeat.dialog.speaker, Heartbeat.dialog.font, 0, windowHeight - 180)
 	-- Creating text lines
 	local firstLine = string.sub(Heartbeat.dialog.currentLine, 0, Heartbeat.dialog.dialogCharacter)
