@@ -1,5 +1,7 @@
 800 600
 DOORS
+800 100 spider3 30 765
+800 430 spider5 30 90
 TILES
 775 150 bunker
 750 150 bunker
@@ -316,4 +318,5 @@ TILES
 775 375 bunker_wall
 0 325 bunker_floor_ext
 ENTITIES
+50 255 terminal
 ITEMS
