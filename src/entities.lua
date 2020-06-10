@@ -398,10 +398,19 @@ Widow = {
 		love.graphics.newImage("assets/enemies/widow3.png"),
 		love.graphics.newImage("assets/enemies/widow4.png"),
 	},
+	butt = {
+		love.graphics.newImage("assets/enemies/spider-butt1.png"),
+		love.graphics.newImage("assets/enemies/spider-butt2.png"),
+		love.graphics.newImage("assets/enemies/spider-butt3.png"),
+		love.graphics.newImage("assets/enemies/spider-butt4.png"),
+		love.graphics.newImage("assets/enemies/spider-butt5.png"),
+		love.graphics.newImage("assets/enemies/spider-butt6.png"),
+	},
 	scaleX = 5,
 	scaleY = 5,
 	height = 23 * 5,
 	width = 53 * 5,
+	rotation = 0,
 	offsetX = 0,
 	offsetY = 0,
 	isEnemy = true,
@@ -412,13 +421,66 @@ Widow = {
 
 function Widow.draw(this)
 	this.movementFrames = this.movementFrames + 1
-	if (this.movementFrames >= 40) then
-		this.movementFrames = 0
+	if (not this.isHanging) then
+		if (this.movementFrames >= 40) then
+			this.movementFrames = 0
+		end
+		this.texture = Widow.frames[1 + math.floor(this.movementFrames / 10)]
+	else
+		if (this.movementFrames >= 60) then
+			this.movementFrames = 0
+		end
+		this.texture = Widow.butt[1 + math.floor(this.movementFrames / 10)]
+		if (this.texture == Widow.butt[6]) then
+			Widow.lay(this)
+		end
 	end
-	this.texture = Widow.frames[1 + math.floor(this.movementFrames / 10)]
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
-	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Widow.scaleX, Widow.scaleY, Widow.offsetX, Widow.offsetY)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), this.rotation, Widow.scaleX, Widow.scaleY, this.offsetX, this.offsetY)
+end
+
+function Widow.behaivor(this)
+	-- Have the spider climb up walls
+	if (Heartbeat.getTile(this.x - 4, this.y) ~= nil and not this.isClimbing) then
+		this.rotation = math.pi/2
+		-- A very clever way to swap two variables without using a temp
+		this.width = this.width + this.height
+		this.height = this.width - this.height
+		this.width = this.width - this.height
+		this.y = this.y - 200
+		this.offsetY = 23
+		this.isClimbing = true
+	end
+	if (this.isClimbing) then
+		this.dy = -4
+	elseif (not this.isHanging) then
+		this.dx = -4
+	end
+	-- Egg laying
+	if ((this.y + this.height) < 0 and not this.isHanging) then
+		this.isClimbing = false
+		this.isHanging = true
+		this.width = 25 * 5
+		this.height = 22 * 5
+		this.x = 300
+		this.y = 0
+		this.offsetY = 0
+		this.rotation = 0
+		this.texture = Widow.butt[1]
+	end
+	if (this.isHanging) then
+		this.dy = -.5
+		this.dx = 0
+	end
+end
+
+function Widow.lay(this)
+	if (this.layCount == nil) then
+		this.layCount = 0
+	end
+	Heartbeat.newEntity(Spiderling, this.x + (this.width / 2), this.y + this.height)
+	this.layCount = this.layCount + 1
 end
 
 Spiderling = {
