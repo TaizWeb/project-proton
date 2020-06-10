@@ -126,6 +126,7 @@ function Heartbeat.newEntity(object, x, y)
 			dy = 0,
 			width = object.width,
 			height = object.height,
+			rotation = object.rotation,
 			health = object.health,
 			attack = object.attack,
 			behaivor = object.behaivor,
