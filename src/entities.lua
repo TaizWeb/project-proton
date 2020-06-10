@@ -353,6 +353,9 @@ function Tadpole.behaivor(this)
 	else
 		this.dx = -5
 	end
+	if (Heartbeat.checkEntityCollision(Heartbeat.player, this)) then
+		Heartbeat.player.updateHealth(Heartbeat.player.health - 10)
+	end
 end
 
 Specks = {
@@ -415,7 +418,7 @@ Widow = {
 	offsetY = 0,
 	isEnemy = true,
 	moveLeft = true,
-	health = 10,
+	health = 400,
 	movementFrames = 0
 }
 
@@ -427,16 +430,20 @@ function Widow.draw(this)
 		end
 		this.texture = Widow.frames[1 + math.floor(this.movementFrames / 10)]
 	else
+		-- Laying
 		if (this.movementFrames >= 60) then
 			this.movementFrames = 0
+			this.hasLaid = false
 		end
 		this.texture = Widow.butt[1 + math.floor(this.movementFrames / 10)]
-		if (this.texture == Widow.butt[6]) then
+		if (this.texture == Widow.butt[6] and not this.hasLaid) then
 			Widow.lay(this)
+			this.hasLaid = true
 		end
 	end
+	-- Draw
 	love.graphics.setColor(1, 1, 1, 1)
-	love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
+	--love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
 	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), this.rotation, Widow.scaleX, Widow.scaleY, this.offsetX, this.offsetY)
 end
 
@@ -469,10 +476,34 @@ function Widow.behaivor(this)
 		this.rotation = 0
 		this.texture = Widow.butt[1]
 	end
+	-- Stop it from obeying gravity when hanging
 	if (this.isHanging) then
 		this.dy = -.5
 		this.dx = 0
 	end
+	-- Collision
+	if (Heartbeat.checkEntityCollision(Heartbeat.player, this)) then
+		Heartbeat.player.updateHealth(Heartbeat.player.health - 20)
+	end
+end
+
+function Widow.onDeath(this)
+	-- Unlock the doors
+	for i=1,#Heartbeat.tiles do
+		if (Heartbeat.tiles[i] ~= nil) then
+			if (Heartbeat.tiles[i].id == "lockeddoor") then
+				Heartbeat.removeTile(Heartbeat.tiles[i])
+			end
+		end
+	end
+	-- Drop some pickups
+	Heartbeat.newItem(HealthPickup, this.x - 50, this.y - 50)
+	Heartbeat.newItem(HealthPickup, this.x - 10, this.y - 10)
+	Heartbeat.newItem(HealthPickup, this.x - 30, this.y)
+	Heartbeat.newItem(DarkPickup, this.x + 37, this.y - 20)
+	Heartbeat.newItem(DarkPickup, this.x + 68, this.y - 24)
+	Heartbeat.newItem(GravityUpgrade, Heartbeat.player.x + 50, Heartbeat.player.y + Heartbeat.player.width - 20)
+	Player.flags.hasKilledWidow = true
 end
 
 function Widow.lay(this)
@@ -481,6 +512,12 @@ function Widow.lay(this)
 	end
 	Heartbeat.newEntity(Spiderling, this.x + (this.width / 2), this.y + this.height)
 	this.layCount = this.layCount + 1
+	if (this.layCount >= 3) then
+		this.height = 23 * 5
+		this.width = 53 * 5
+		this.layCount = 0
+		this.isHanging = false
+	end
 end
 
 Spiderling = {
