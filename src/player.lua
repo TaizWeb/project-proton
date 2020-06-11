@@ -105,6 +105,15 @@ function Player.draw(this)
 		end
 	end
 
+	-- Gravity
+	if (Player.isUpsideDown) then
+		Player.rotation = math.pi
+		offsetY = 32
+		scaleX = -1 * scaleX
+	else
+		Player.rotation = 0
+	end
+
 	-- Draw health/missile count
 	love.graphics.setColor(1, 1, 1, 1)
 	love.graphics.print("Health: " .. Heartbeat.player.health)
@@ -114,7 +123,7 @@ function Player.draw(this)
 	if (not (Heartbeat.player.cooldownFrames <= 0)) then
 		love.graphics.setColor(1, 1, 1, .5)
 	end
-	love.graphics.draw(Player.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
+	love.graphics.draw(Player.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), Player.rotation, scaleX, scaleY, offsetX, offsetY)
 end
 
 function Player.setCrouch()

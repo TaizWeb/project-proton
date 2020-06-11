@@ -68,10 +68,12 @@ function love.keypressed(key, scancode, isrepeat)
 					end
 				end
 			else
-				if (love.keyboard.isDown("lshift")) then
-					Player.shootMatter()
-				else
-					Player.shoot()
+				if (not Player.isUpsideDown) then
+					if (love.keyboard.isDown("lshift")) then
+						Player.shootMatter()
+					else
+						Player.shoot()
+					end
 				end
 			end
 		end
