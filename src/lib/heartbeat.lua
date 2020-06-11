@@ -82,7 +82,12 @@ end
 
 -- doPlayer: Updates the player's dy/dx and moves them
 function Heartbeat.doPlayer()
-	Heartbeat.player.dy = Heartbeat.player.dy + Heartbeat.gravity
+	-- Yet another exception
+	if (Player.isUpsideDown) then
+		Heartbeat.player.dy = Heartbeat.player.dy - Heartbeat.gravity
+	else
+		Heartbeat.player.dy = Heartbeat.player.dy + Heartbeat.gravity
+	end
 	Heartbeat.checkCollisions(Heartbeat.player)
 	for i=1,#Heartbeat.items do
 		if (Heartbeat.checkEntityCollision(Heartbeat.items[i], Heartbeat.player)) then
@@ -754,7 +759,7 @@ function Heartbeat.editor.readLevel(levelName)
 			opacity = entity.opacity,
 			movementFrames = entity.movementFrames
 		}
-		if (not (levelname == "cave10" and Player.hasKilledFrog)) then
+		if (not (levelName == "cave10" and Player.flags.hasKilledFrog)) then
 			Heartbeat.newEntity(entityData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		end
 	end
