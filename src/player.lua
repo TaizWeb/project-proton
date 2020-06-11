@@ -9,6 +9,7 @@ Player = {
 	hasGravityUpgrade = false,
 	hasChargeBeamUpgrade = false,
 	hasTriBeamUpgrade = false,
+	isUpsideDown = false,
 	texture = love.graphics.newImage("assets/proton/proton-firing.png"),
 	idle = love.graphics.newImage("assets/proton/proton-firing.png"),
 	walk = {
