@@ -34,6 +34,30 @@ Corpse = {
 	isSolid = false
 }
 
+Bed = {
+	id = "bed",
+	texture = love.graphics.newImage("assets/tiles/bed.png"),
+	height = 16,
+	width = 32,
+	offsetX = 0,
+	offsetY = -3,
+	scaleX = 4,
+	scaleY = 4,
+	isSolid = false
+}
+
+BloodyBed = {
+	id = "bed_bloody",
+	texture = love.graphics.newImage("assets/tiles/bed-bloody.png"),
+	height = 16,
+	width = 32,
+	offsetX = 0,
+	offsetY = -3,
+	scaleX = 4,
+	scaleY = 4,
+	isSolid = false
+}
+
 BunkerTile = {
 	id = "bunker",
 	texture = love.graphics.newImage("assets/tiles/bunker-tileset.png"),
@@ -76,6 +100,27 @@ Cobble = {
 	scaleX = 25/16,
 	scaleY = 25/16,
 	isSolid = true
+}
+
+Stalagtite = {
+	id = "stalagtite",
+	texture = love.graphics.newImage("assets/tiles/stalagtite.png"),
+	height = 16,
+	width = 16,
+	scaleX = 3,
+	scaleY = 3,
+	isSolid = false
+}
+
+Pebble = {
+	id = "pebble",
+	texture = love.graphics.newImage("assets/tiles/pebble.png"),
+	height = 16,
+	width = 16,
+	scaleX = 3,
+	scaleY = 3,
+	offsetY = -1,
+	isSolid = false
 }
 
 CobbleWeb = {

@@ -12,7 +12,7 @@ function love.load()
 	love.keyboard.setKeyRepeat(true)
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
-	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb}
+	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb, Bed, BloodyBed, Stalagtite, Pebble}
 	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks, Widow, Spiderling}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle"}
@@ -80,6 +80,10 @@ function love.keypressed(key, scancode, isrepeat)
 		if (key == "up") then
 			Player.setUp()
 		end
+		if (key == "lctrl" and Player.hasGravityUpgrade) then
+			Player.isUpsideDown = not Player.isUpsideDown
+			print(Player.isUpsideDown)
+		end
 	end
 end
 
@@ -110,6 +114,9 @@ function love.update(dt)
 		if (love.mouse.isDown(2)) then
 			Heartbeat.editor.handleInput(2)
 		end
+	end
+	if (Player.isUpsideDown) then
+		Player.dy = -1
 	end
 end
 
