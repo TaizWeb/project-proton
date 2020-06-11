@@ -276,7 +276,7 @@ Tadpole = {
 	texture = love.graphics.newImage("assets/enemies/tadpole1.png"),
 	frames = {
 		love.graphics.newImage("assets/enemies/tadpole1.png"),
-		love.graphics.newImage("assets/enemies/tadpole1.png")
+		love.graphics.newImage("assets/enemies/tadpole2.png")
 	},
 	scaleX = 3,
 	scaleY = 3,
@@ -387,6 +387,7 @@ function Specks.behaivor(this)
 		Heartbeat.dialog.openDialog("sci")
 		Specks.frameCounter = Specks.frameCounter + 1
 	elseif (Specks.frameCounter == 31 and not Heartbeat.dialog.isOpen) then
+		Player.setNewObjective("Mission Objective: Find the Survivors")
 		Heartbeat.player.dx = 5
 		Player.flags.hasSeenSpecks = true
 	end

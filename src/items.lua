@@ -59,6 +59,7 @@ function DarkMatterUpgrade.onPickup(this)
 	if (Heartbeat.levelName == "cave6") then
 		Player.flags.hasThirdMatter = true
 	end
+	Player.setNewObjective("Dark Matter Storage Increased by 5 Units")
 end
 
 HealthTankUpgrade = {
@@ -82,6 +83,7 @@ function HealthTankUpgrade.onPickup(this)
 	if (Heartbeat.levelName == "cave4") then
 		Player.flags.hasSecondHealth = true
 	end
+	Player.setNewObjective("Health Increased by 100 Units")
 end
 
 GrappelUpgrade = {
@@ -104,6 +106,7 @@ LongJumpUpgrade = {
 function LongJumpUpgrade.onPickup(this)
 	Player.hasJumpUpgrade = true
 	Heartbeat.removeItem(this)
+	Player.setNewObjective("Long Jump Obtained: Shift-jump to jump higher")
 end
 
 GravityUpgrade = {
@@ -119,6 +122,7 @@ GravityUpgrade = {
 function GravityUpgrade.onPickup(this)
 	Player.hasGravityUpgrade = true
 	Heartbeat.removeItem(this)
+	Player.setNewObjective("Gravity Upgrade Obtained: Left-ctrl to reverse gravity")
 end
 
 ChargeBeamUpgrade = {

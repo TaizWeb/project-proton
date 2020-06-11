@@ -10,6 +10,8 @@ Player = {
 	hasChargeBeamUpgrade = false,
 	hasTriBeamUpgrade = false,
 	isUpsideDown = false,
+	displayObjective = false,
+	objectiveCounter = 0,
 	texture = love.graphics.newImage("assets/proton/proton-firing.png"),
 	idle = love.graphics.newImage("assets/proton/proton-firing.png"),
 	walk = {
@@ -41,6 +43,19 @@ Player = {
 		hasThirdMatter = false
 	}
 }
+
+function Player.setNewObjective(objective)
+	Player.displayObjective = true
+	Player.objectiveText = objective
+	Player.objectiveCounter = 0
+end
+
+function Player.drawObjective()
+	if (Player.objectiveCounter < 300) then
+		love.graphics.setColor(0, 1, 0, 1)
+		love.graphics.print(string.sub(Player.objectiveText, 1, Player.objectiveCounter), Heartbeat.dialog.font, 0, 100)
+	end
+end
 
 function Player.draw(this)
 	local scaleX = 2

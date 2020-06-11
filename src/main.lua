@@ -45,6 +45,7 @@ function love.keypressed(key, scancode, isrepeat)
 				else
 					if (Heartbeat.levelName == "start") then
 						Heartbeat.dialog.openDialog("start")
+						Player.setNewObjective("Mission Objective: Locate Escape Pod")
 						-- Open the door up
 						for i=1,#Heartbeat.tiles do
 							if (Heartbeat.tiles[i].id == "door") then
@@ -118,9 +119,15 @@ function love.update(dt)
 	if (Player.isUpsideDown) then
 		Player.dy = -1
 	end
+	if (Player.displayObjective) then
+		Player.objectiveCounter = Player.objectiveCounter + 1
+	end
 end
 
 function love.draw()
 	Heartbeat.beat()
+	if (Player.displayObjective) then
+		Player.drawObjective()
+	end
 end
 
