@@ -210,6 +210,7 @@ Imp = {
 	scaleY = 3,
 	height = 24,
 	width = 48,
+	health = 10,
 	offsetX = 0,
 	offsetY = 3,
 	isEnemy = true,
@@ -248,6 +249,9 @@ function Imp.behaivor(this)
 	else
 		this.x = this.x + math.cos(this.movementFrames)
 		this.y = this.y + math.sin(this.movementFrames)
+	end
+	if (Heartbeat.checkEntityCollision(Heartbeat.player, this)) then
+		Heartbeat.player.updateHealth(Heartbeat.player.health - 10)
 	end
 end
 
