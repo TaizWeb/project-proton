@@ -168,3 +168,11 @@ LockedDoor = {
 	width = 25,
 	isSolid = true
 }
+
+Lift = {
+	id = "lift",
+	texture = love.graphics.newImage("assets/tiles/lift.png"),
+	height = 64 * 2,
+	width = 64 * 2,
+	isSolid = false
+}
