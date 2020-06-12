@@ -329,6 +329,15 @@ TILES
 725 150 cobble
 725 175 cobble
 725 100 cobble
+475 100 stalagtite
+350 250 stalagtite
+675 50 stalagtite
+400 375 pebble
+225 400 pebble
+50 350 pebble
+350 325 pebble
 ENTITIES
+85 169 imp
+493 166 imp
 ITEMS
 83 418 matterupgrade

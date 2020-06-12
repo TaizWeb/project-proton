@@ -209,5 +209,11 @@ TILES
 0 300 bunker_wall
 400 550 bunker
 425 550 bunker
+125 250 screen
+225 250 screen
+325 250 screen
+425 250 screen
 ENTITIES
+207 376 slime
+583 702 slime
 ITEMS

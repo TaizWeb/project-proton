@@ -356,6 +356,18 @@ TILES
 775 350 cobble
 750 350 cobble
 750 325 cobble
+375 225 stalagtite
+725 75 stalagtite
+125 100 stalagtite
+250 175 stalagtite
+250 400 pebble
+400 400 pebble
+25 500 pebble
+650 400 pebble
+475 150 stalagtite
+0 475 cobble
+0 500 cobble
+0 525 cobble
 ENTITIES
 39 230 terminal
 ITEMS

@@ -248,6 +248,9 @@ TILES
 1125 0 bunker_wall
 925 0 bunker_wall
 1150 0 bunker_wall
+650 350 bed
+775 350 bed
+900 350 bed
 ENTITIES
-492 301 slime
+498 301 slime
 ITEMS

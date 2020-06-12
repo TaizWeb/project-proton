@@ -203,6 +203,7 @@ TILES
 575 250 bunker_wall
 325 250 bunker_wall
 375 250 bunker_wall
+275 400 bed_bloody
 ENTITIES
 -93 405 terminal
 ITEMS

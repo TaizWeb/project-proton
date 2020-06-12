@@ -328,5 +328,10 @@ TILES
 0 525 door
 0 500 bunker_wall
 775 300 bunker_wall
+150 125 screen
+275 125 screen
+400 125 screen
+525 125 screen
+625 125 screen
 ENTITIES
 ITEMS

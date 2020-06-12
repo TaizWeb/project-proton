@@ -225,7 +225,14 @@ TILES
 575 300 cobble
 575 275 cobble
 575 250 cobble
+100 25 stalagtite
+250 25 stalagtite
+525 25 stalagtite
+275 400 pebble
+600 200 pebble
+50 400 pebble
 ENTITIES
 561 379 terminal
+691 226 slime
 ITEMS
 684 226 healthupgrade

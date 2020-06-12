@@ -294,5 +294,13 @@ TILES
 725 150 cobble
 700 150 cobble
 775 600 cobble
+575 550 pebble
+325 650 pebble
+150 650 pebble
+25 650 pebble
+300 650 pebble
+550 625 stalagtite
+600 25 stalagtite
 ENTITIES
+169.78074860269 639.06010661808 imp
 ITEMS

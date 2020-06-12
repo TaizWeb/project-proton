@@ -175,6 +175,10 @@ TILES
 0 325 bunker_floor_ext
 0 300 bunker_floor_ext
 0 375 bunker_floor_ext
+550 250 screen
+450 250 screen
+350 250 screen
+250 250 screen
 ENTITIES
 ITEMS
 48 273 healthupgrade
