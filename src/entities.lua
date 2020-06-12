@@ -397,6 +397,85 @@ function Specks.behaivor(this)
 	end
 end
 
+Scientist1 = {
+	id = "scientist1",
+	texture = love.graphics.newImage("assets/misc/scientist1.png"),
+	frames = {},
+	scaleX = 3,
+	scaleY = 3,
+	offsetX = 0,
+	offsetY = 0,
+	width = 27,
+	height = 81,
+	isEnemy = false,
+	health = 11037,
+	frameCounter = 0,
+	forwardFace = true
+}
+
+Scientist2 = {
+	id = "scientist2",
+	texture = love.graphics.newImage("assets/misc/scientist2.png"),
+	frames = {},
+	scaleX = 3,
+	scaleY = 3,
+	offsetX = 0,
+	offsetY = 0,
+	width = 27,
+	height = 81,
+	isEnemy = false,
+	health = 11037,
+	frameCounter = 0,
+	forwardFace = true
+}
+
+Mother = {
+	id = "mother",
+	texture = love.graphics.newImage("assets/misc/mother.png"),
+	frames = {},
+	scaleX = 3,
+	scaleY = 3,
+	offsetX = 0,
+	offsetY = 0,
+	width = 27,
+	height = 81,
+	isEnemy = false,
+	health = 11037,
+	frameCounter = 0,
+	forwardFace = true
+}
+
+Elle = {
+	id = "elle",
+	texture = love.graphics.newImage("assets/misc/elle.png"),
+	frames = {},
+	scaleX = 3,
+	scaleY = 3,
+	offsetX = 0,
+	offsetY = 0,
+	width = 14 * 2,
+	height = 28 * 2,
+	isEnemy = false,
+	health = 11037,
+	frameCounter = 0,
+	forwardFace = true
+}
+
+function Scientist1.draw(this)
+	local scaleX = 3
+	local scaleY = 3
+	if (this.texture == Elle.texture) then
+		scaleX = 2
+		scaleY = 2
+	end
+
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, this.offsetX, this.offsetY)
+end
+
+Scientist2.draw = Scientist1.draw
+Mother.draw = Scientist1.draw
+Elle.draw = Scientist1.draw
+
 Widow = {
 	id = "widow",
 	texture = love.graphics.newImage("assets/enemies/widow1.png"),
