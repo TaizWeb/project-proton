@@ -345,7 +345,11 @@ function Heartbeat.lookupItem(id)
 	end
 end
 
-function Heartbeat.dialog.openDialog(dialog)
+function Heartbeat.dialog.openDialog(dialog, afterFunc)
+	if (afterFunc ~= nil) then
+		Heartbeat.dialog.afterFunc = afterFunc
+		print("AFTERFUNC SRT")
+	end
 	if (not Heartbeat.dialog.isOpen) then
 		-- Load the speech file and split it
 		local rawDialog = love.filesystem.read("dialog/" .. dialog .. ".txt")
@@ -367,6 +371,12 @@ function Heartbeat.dialog.nextLine()
 	-- Out of bounds check
 	if (Heartbeat.dialog.currentLine == nil or Heartbeat.dialog.currentLine == "") then
 		Heartbeat.dialog.isOpen = false
+		if (Heartbeat.dialog.afterFunc ~= nil) then
+			print("DOES IT?")
+			Heartbeat.dialog.afterFunc()
+			--Heartbeat.dialog.afterFunc = nil
+		end
+		--Heartbeat.dialog.afterFunc = nil
 		return
 	end
 
@@ -746,6 +756,7 @@ function Heartbeat.editor.readLevel(levelName)
 		local entity = Heartbeat.lookupEntity(levelLineData[3])
 		local entityData = {
 			id = entity.id,
+			texture = entity.texture,
 			height = entity.height,
 			width = entity.width,
 			health = entity.health,
