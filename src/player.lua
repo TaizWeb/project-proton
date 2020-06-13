@@ -32,6 +32,16 @@ Player = {
 		love.graphics.newImage("assets/proton/up/proton-up2.png"),
 		love.graphics.newImage("assets/proton/up/proton-up3.png")
 	},
+	smash = {
+		love.graphics.newImage("assets/proton/smash/proton-smash1.png"),
+		love.graphics.newImage("assets/proton/smash/proton-smash2.png"),
+		love.graphics.newImage("assets/proton/smash/proton-smash3.png"),
+		love.graphics.newImage("assets/proton/smash/proton-smash4.png"),
+		love.graphics.newImage("assets/proton/smash/proton-smash5.png"),
+		love.graphics.newImage("assets/proton/smash/proton-smash6.png"),
+		love.graphics.newImage("assets/proton/smash/proton-smash7.png"),
+		love.graphics.newImage("assets/proton/smash/proton-smash8.png")
+	},
 	-- These track if the player has collected key items
 	flags = {
 		hasKilledFrog = false,
@@ -40,7 +50,8 @@ Player = {
 		hasFirstHealth = false,
 		hasSecondMatter = false,
 		hasSecondHealth = false,
-		hasThirdMatter = false
+		hasThirdMatter = false,
+		hasObjective = false
 	}
 }
 
