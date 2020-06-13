@@ -174,5 +174,17 @@ Lift = {
 	texture = love.graphics.newImage("assets/tiles/lift.png"),
 	height = 64 * 2,
 	width = 64 * 2,
+	scaleX = 3.5,
+	scaleY = 3,
 	isSolid = false
+}
+
+Facade = {
+	id = "facade",
+	texture = love.graphics.newImage("assets/tiles/door.png"),
+	height = 25,
+	width = 25,
+	scaleX = 0,
+	scaleY = 0,
+	isSolid = true
 }
