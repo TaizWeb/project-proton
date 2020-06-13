@@ -461,6 +461,29 @@ Elle = {
 	forwardFace = true
 }
 
+function Elle.behaivor()
+	if (Player.flags.hasSeenMemory == nil) then
+		Heartbeat.clear()
+		Heartbeat.player.x = 1000
+		Heartbeat.player.y = 1000
+		Heartbeat.dialog.openDialog("memory", reloadEnd)
+		Player.flags.hasSeenMemory = true
+	end
+end
+
+function reloadEnd()
+	Heartbeat.editor.readLevel("end")
+	Heartbeat.player.dy = 0
+	Heartbeat.player.x = 30
+	Heartbeat.player.y = 390
+	print("ATTEMPTING TO SET AFTERFUNC")
+	Heartbeat.dialog.openDialog("end", leaveThem)
+end
+
+function leaveThem()
+	Player.setNewObjective("Mission Objective: Escape the facility")
+end
+
 function Scientist1.draw(this)
 	local scaleX = 3
 	local scaleY = 3
