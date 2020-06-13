@@ -1,8 +1,14 @@
 [Montague]
-The lab boys are losing their minds over the girl. She's dead by all rights: no pulse, brain activity, and pale as a ghost. However she's still giving off life signs in other ways.
+The lab boys are losing their minds over the girl.
 
 [Montague]
-It's like her cells haven't figured out she's dead yet. The blood we've tested on is showing the same results. The government is getting uneasy about our findings, and now they're threatening to cut our funding unless we start posting some progress.
+She's dead by all rights: no pulse, brain activity, and pale as a ghost. However she's still giving off life signs in other ways.
+
+[Montague]
+It's like her cells haven't figured out she's dead yet. The blood we've tested on is showing the same results.
+
+[Montague]
+The Government is getting uneasy about our findings, and now they're threatening to cut our funding unless we start posting some progress.
 
 [Montague]
 The lab boys wanted to see how these cells would react in a living host, so we've gotten some of our subjects to submit for it. After the experiment... they started undergoing mass psychosis.

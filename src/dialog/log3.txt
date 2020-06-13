@@ -1,11 +1,29 @@
 [Montague]
-I've found it. Sorry, the cult from my last log. Apparently there was some sort of fallout between them and some religious zealots. Despite them all being thought to be wiped out, the Government still believes them to be the cause.
+I've found it.
 
 [Montague]
-My lab members are really interested in the whole thing, so I gave them the go-ahead to do some investigating of their own. They're currently out investigating the destroyed mansion for clues.
+Sorry, the cult from my last log.
 
 [Montague]
-Continuing where we left off, they've returned now. They found... things... that are shockingly similar to what the army is currently up against. Mostly just mangled corpses, human or otherwise.
+Apparently there was some sort of fallout between them and some religious zealots.
+
+[Montague]
+Despite them all being thought to be wiped out, the Government still believes them to be the cause.
+
+[Montague]
+My lab members are really interested in the whole thing, so I gave them the go-ahead to do some investigating of their own.
+
+[Montague]
+They're currently out investigating the destroyed mansion for clues.
+
+[Montague]
+Continuing where we left off, they've returned now.
+
+[Montague]
+They found... things... that are shockingly similar to what the army is currently up against.
+
+[Montague]
+Mostly just mangled corpses, human or otherwise.
 
 [Montague]
 But here's the catch: They found a body. 
@@ -14,4 +32,7 @@ But here's the catch: They found a body.
 Fresh.
 
 [Montague]
-It's a young girl, but she's all cut up. Someone had to have put it there pretty recently, so we're performing an autopsy to figure out what the hell happened to her.
+It's a young girl, but she's all cut up.
+
+[Montague]
+Someone had to have put it there pretty recently, so we're performing an autopsy to figure out what the hell happened to her.
