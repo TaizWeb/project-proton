@@ -1,0 +1,44 @@
+[Elle]
+It's you...
+
+[Scientist]
+Project Proton... you're awake?
+
+[PROTON]
+I need to get to my lift.
+
+[Scientist]
+...It's right over there at the end of the room.
+
+[Elle]
+There isn't enough power...
+
+[PROTON]
+What?
+
+[Elle]
+Since the power was cut, we've been running off the auxilary but...
+
+[Scientist]
+It's ran out. There isn't enough for both our lift and yours to run.
+
+[Elle]
+We were waiting for Specks to come back, he said he would!
+
+[PROTON]
+He's dead.
+
+[Elle]
+You can't mean...
+
+[Scientist]
+Proton, you're priority. You need to get out of here and to the surface.
+
+[PROTON]
+That was my plan.
+
+[Elle]
+But...
+
+[PROTON]
+I'll be taking my leave now.
