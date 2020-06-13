@@ -33,6 +33,7 @@ end
 BasicShot = {
 	id = "basic_shot",
 	texture = love.graphics.newImage("assets/proton/shot/shot1.png"),
+	bluetexture = love.graphics.newImage("assets/proton/shot/blueshot.png"),
 	scaleX = 1.2,
 	scaleY = 1.2,
 	height = 16,
@@ -136,6 +137,55 @@ function MatterShot.onCollision(this, collidedObject)
 			Heartbeat.removeTile(collidedObject)
 		end
 	end
+end
+
+ZeroShot = {
+	id = "zero_shot",
+	texture = love.graphics.newImage("assets/misc/zeroshot1.png"),
+	frames = {
+		love.graphics.newImage("assets/misc/zeroshot1.png"),
+		love.graphics.newImage("assets/misc/zeroshot2.png"),
+		love.graphics.newImage("assets/misc/zeroshot3.png"),
+		love.graphics.newImage("assets/misc/zeroshot4.png"),
+	},
+	scaleX = 1.2,
+	scaleY = 1.2,
+	height = 32,
+	width = 32,
+	damage = 5,
+	rotation = 0,
+	isEnemy = false
+}
+
+function ZeroShot.behaivor(this)
+	local zeroX = 0
+	local zeroY = 0
+	if (this.initialX == nil) then
+		this.initialX = this.x
+		this.initialY = this.y
+	end
+	if (this.radians == nil) then
+		this.radians = 0
+	end
+	for i=1,#Heartbeat.entities do
+		if (Heartbeat.entities[i].id == "zero") then
+			zeroX = Heartbeat.entities[i].x
+			zeroY = Heartbeat.entities[i].y
+		end
+	end
+	this.x = zeroX + (50 * math.cos(this.radians))
+	this.y = zeroY + (50 * math.sin(this.radians))
+	this.radians = this.radians + .1
+	-- Update health on hit
+	if (Heartbeat.checkEntityCollision(this, Heartbeat.player)) then
+		Heartbeat.player.updateHealth(Heartbeat.player.health - 20)
+	end
+end
+
+function ZeroShot.draw(this)
+	love.graphics.setColor(1, 1, 1, 1)
+	--love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
+	love.graphics.draw(ZeroShot.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, MatterShot.scaleX, MatterShot.scaleY, 0, 0)
 end
 
 Slime = {
@@ -468,6 +518,39 @@ function Elle.behaivor()
 		Heartbeat.player.y = 1000
 		Heartbeat.dialog.openDialog("memory", reloadEnd)
 		Player.flags.hasSeenMemory = true
+		Elle.frames = 420
+	end
+	if (Player.flags.hasObjective) then
+		-- Movement speeds
+		if (Elle.frames > 300) then
+			Heartbeat.player.dx = 3
+		elseif (Elle.frames > 180) then
+			Heartbeat.player.dx = 2
+		elseif (Elle.frames > 60) then
+			Heartbeat.player.dx = 1
+		elseif (Elle.frames == 0) then
+			Heartbeat.player.dx = 0
+		elseif (Elle.frames < -120 and not Heartbeat.dialog.isOpen) then
+			Heartbeat.player.dx = -5
+		end
+		-- Objective setters
+		if (Elle.frames == 240) then
+			Player.setNewObjective("Escape the facility")
+		end
+		if (Elle.frames == 180) then
+			Player.setNewObjective("Esca e the facl ty")
+		end
+		if (Elle.frames == 120) then
+			Player.setNewObjective("Escae faclty")
+		end
+		if (Elle.frames == 60) then
+			Player.setNewObjective("GET OUT")
+		end
+		if (Elle.frames == -120) then
+			Player.setNewObjective("Mission Objective: B E   H U M A N")
+			Heartbeat.dialog.openDialog("behuman")
+		end
+		Elle.frames = Elle.frames - 1
 	end
 end
 
@@ -482,6 +565,7 @@ end
 
 function leaveThem()
 	Player.setNewObjective("Mission Objective: Escape the facility")
+	Player.flags.hasObjective = true
 end
 
 function Scientist1.draw(this)
@@ -498,6 +582,144 @@ end
 Scientist2.draw = Scientist1.draw
 Mother.draw = Scientist1.draw
 Elle.draw = Scientist1.draw
+
+Zero = {
+	id = "zero",
+	texture = love.graphics.newImage("assets/misc/zero.png"),
+	shot = love.graphics.newImage("assets/misc/zeroshot.png"),
+	frames = {},
+	frameCounter = 120,
+	scaleX = 3,
+	scaleY = 3,
+	width = 9 * 3,
+	height = 27 * 3,
+	isEnemy = true,
+	health = 66,
+	forwardFace = true,
+	opacity = 0,
+	event = false,
+	grabbedPlayer = false,
+	isButtMad = false,
+	spawnedShot = false
+}
+
+function Zero.draw(this)
+	--this.opacity = 1
+	Player.flags.hasObjective = true
+	Zero.event = true
+	if (Player.flags.hasObjective or Zero.event) then
+		this.opacity = 1
+		Player.flags.hasObjective = false
+	else
+		this.opacity = 0
+	end
+	love.graphics.setColor(1, 1, 1, this.opacity)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Zero.scaleX, Zero.scaleY, this.offsetX, this.offsetY)
+end
+
+function Zero.behaivor(this)
+	if (this.opacity == 1 and not Zero.event) then
+		Heartbeat.dialog.openDialog("zero")
+		Zero.event = true
+	end
+	if (not Heartbeat.dialog.isOpen and not Zero.isButtMad) then
+		this.dx = 5
+	end
+	if (Heartbeat.checkEntityCollision(this, Heartbeat.player) or Zero.grabbedPlayer) then
+		Zero.grabbedPlayer = true
+		--print("GOTCHA")
+		-- These are being set every frame?? Yep. I have two days left, sue me.
+		this.offsetX = 10
+		Zero.scaleX = 2.5
+		Zero.scaleY = 2.5
+		if (Zero.frameCounter == 120) then
+			this.texture = Player.smash[1]
+		elseif (Zero.frameCounter == 110) then
+			this.texture = Player.smash[2]
+		elseif (Zero.frameCounter == 100) then
+			this.texture = Player.smash[3]
+		elseif (Zero.frameCounter == 90) then
+			this.texture = Player.smash[4]
+		elseif (Zero.frameCounter == 80) then
+			this.texture = Player.smash[5]
+		elseif (Zero.frameCounter == 50) then
+			this.texture = Player.smash[4]
+		elseif (Zero.frameCounter == 40) then
+			this.texture = Player.smash[5]
+		elseif (Zero.frameCounter == 10) then
+			this.texture = Player.smash[4]
+		elseif (Zero.frameCounter == 0) then
+			this.texture = Player.smash[5]
+		elseif (Zero.frameCounter == -30) then
+			this.texture = Player.smash[4]
+		elseif (Zero.frameCounter == -40) then
+			this.texture = Player.smash[6]
+		elseif (Zero.frameCounter == -50) then
+			this.texture = Player.smash[7]
+		elseif (Zero.frameCounter == -60) then
+			this.texture = Player.smash[8]
+		elseif (Zero.frameCounter == -80) then
+			Heartbeat.clear()
+			-- Hide the player off-screen
+			Heartbeat.player.x = 1000
+			Heartbeat.dialog.openDialog("break", wakeUp)
+			Zero.grabbedPlayer = false
+		end
+		--print(Zero.frameCounter)
+		Zero.frameCounter = Zero.frameCounter - 1
+	end
+	if (Zero.isButtMad and not Zero.spawnedShot and not Heartbeat.dialog.isOpen) then
+		Zero.event = false
+		this.dy = -10
+		Heartbeat.newEntity(ZeroShot, this.x+10, this.y+10)
+		Zero.spawnedShot = true
+		this.moveLeft = true
+	end
+	if (Zero.isButtMad) then
+		-- Checking if he's near the wall
+		if (this.x < 200) then
+			this.moveLeft = true
+		elseif (this.x > 800) then
+			this.moveLeft = false
+		end
+		-- Movement code
+		if (this.moveLeft) then
+			this.dx = 5
+		else
+			this.dx = -5
+		end
+	end
+	if (this.dy > -.5) then
+		this.dy = -.5
+	end
+end
+
+function Zero.onDeath(this)
+	this.y = 390
+	Heartbeat.dialog.openDialog("defeat", detonate)
+end
+
+function wakeUp()
+	-- TODO: Add the dy fix to heartbeat
+	Heartbeat.player.dy = 0
+	Heartbeat.player.forwardFace = false
+	Heartbeat.gotoRoom("spider14", 720, 390)
+	Heartbeat.dialog.openDialog("zerospeech", blowItOutYourAss)
+end
+
+function blowItOutYourAss()
+	BasicShot.texture = BasicShot.bluetexture
+	Heartbeat.newEntity(BasicShot, Heartbeat.player.x, Heartbeat.player.y)
+	Heartbeat.dialog.openDialog("blowitoutyourass")
+	Heartbeat.dialog.afterFunc = nil
+	Zero.isButtMad = true
+end
+
+function detonate()
+	love.graphics.setColor(1, 1, 1, .5)
+	whiteOut = true
+	love.graphics.rectangle("fill", 0, 0, 1000, 1000)
+end
 
 Widow = {
 	id = "widow",
