@@ -12,12 +12,17 @@ function love.load()
 	love.keyboard.setKeyRepeat(true)
 	love.filesystem.setIdentity("project-proton")
 	Heartbeat.createPlayer(Player, 200, 200)
+	whiteOut = false
+	whiteOutShade = 0
 	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb, Bed, BloodyBed, Stalagtite, Pebble, Lift, Facade}
-	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks, Widow, Spiderling, Scientist1, Scientist2, Mother, Elle}
+	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks, Widow, Spiderling, Scientist1, Scientist2, Mother, Elle, Zero, ZeroShot}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
-	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle", "Scientist"}
-	Heartbeat.editor.readLevel("start")
-	Heartbeat.setDimensions(windowWidth, windowHeight)
+	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle", "Scientist", "???", "Zero"}
+	--Heartbeat.editor.readLevel("start")
+	--Heartbeat.setDimensions(windowWidth, windowHeight)
+	Heartbeat.editor.readLevel("spider14")
+	Heartbeat.player.x = 940
+	Heartbeat.player.y = 390
 	-- Some godmode features
 	Player.matter = 10
 end
@@ -38,7 +43,7 @@ function love.keypressed(key, scancode, isrepeat)
 		end
 		-- Interact/fire
 		if (key == "x") then
-			if (checkTerminalRange() or Heartbeat.levelName == "spider6" or Heartbeat.levelName == "end") then
+			if (checkTerminalRange() or Heartbeat.levelName == "spider6" or Heartbeat.levelName == "end" or Heartbeat.dialog.isOpen or (Zero.event and not Zero.spawnedShot)) then
 				Heartbeat.player.dx = 0
 				if (Heartbeat.dialog.isOpen and Heartbeat.redText == nil) then
 					Heartbeat.dialog.nextLine()
@@ -97,7 +102,7 @@ function love.mousepressed(x, y, button, istouch, presses)
 end
 
 function love.update(dt)
-	if (not Heartbeat.editor.isActive and not Heartbeat.dialog.isOpen) then
+	if (not Heartbeat.editor.isActive and not Heartbeat.dialog.isOpen and not Player.flags.hasObjective) then
 		if (love.keyboard.isDown("left")) then
 			Heartbeat.player.dx = -5
 			Heartbeat.player.isCrouched = false
@@ -131,5 +136,19 @@ function love.draw()
 	if (Player.displayObjective) then
 		Player.drawObjective()
 	end
+	if (whiteOut) then
+		if (whiteOutShade > 1) then
+			Heartbeat.clear()
+			whiteOutShade = 0
+			Heartbeat.dialog.openDialog("epilouge", thankYou)
+		elseif (not Heartbeat.dialog.isOpen) then
+			love.graphics.setColor(1, 1, 1, whiteOutShade)
+			love.graphics.rectangle("fill", 0, 0, 1000, 1000)
+			whiteOutShade = whiteOutShade + .1
+		end
+	end
 end
 
+function thankYou()
+	love.event.quit()
+end
