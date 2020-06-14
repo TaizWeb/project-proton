@@ -50,7 +50,10 @@ There's too many... I can't.
 MINIMUM SAFE LIFT DISTANCE REACHED
 
 [PROTON]
-Perfect. Here goes.
+I see.
+
+[Montague]
+...Try to be good when I'm gone.
 
 [PROTON]
 [FISSION CORE DESTABILIZED]
@@ -58,5 +61,5 @@ Perfect. Here goes.
 [PROTON]
 [DETONATION OF PROTON SUIT IMMINENT]
 
-[PROTON]
+[Montague]
 Mission... Complete.
