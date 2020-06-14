@@ -1,6 +1,6 @@
 1000 600
 DOORS
-0 410 spider14 970 390
+0 410 spider14 940 390
 TILES
 0 450 bunker
 25 450 bunker
@@ -14,9 +14,6 @@ TILES
 225 450 bunker
 250 450 bunker
 275 450 bunker
-450 450 bunker
-475 450 bunker
-500 450 bunker
 525 450 bunker
 550 450 bunker
 575 450 bunker
@@ -204,13 +201,6 @@ TILES
 25 550 bunker_floor_ext
 250 550 bunker_floor_ext
 275 575 bunker_floor_ext
-450 475 bunker_floor_ext
-450 500 bunker_floor_ext
-450 525 bunker_floor_ext
-450 550 bunker_floor_ext
-450 575 bunker_floor_ext
-475 475 bunker_floor_ext
-500 475 bunker_floor_ext
 525 475 bunker_floor_ext
 550 475 bunker_floor_ext
 575 475 bunker_floor_ext
@@ -246,12 +236,6 @@ TILES
 575 575 bunker_floor_ext
 550 575 bunker_floor_ext
 525 575 bunker_floor_ext
-500 575 bunker_floor_ext
-475 575 bunker_floor_ext
-475 550 bunker_floor_ext
-475 525 bunker_floor_ext
-475 500 bunker_floor_ext
-500 500 bunker_floor_ext
 525 500 bunker_floor_ext
 550 500 bunker_floor_ext
 575 500 bunker_floor_ext
@@ -282,8 +266,6 @@ TILES
 575 550 bunker_floor_ext
 550 550 bunker_floor_ext
 525 550 bunker_floor_ext
-500 550 bunker_floor_ext
-500 525 bunker_floor_ext
 525 525 bunker_floor_ext
 550 525 bunker_floor_ext
 575 525 bunker_floor_ext
@@ -315,5 +297,19 @@ TILES
 925 475 bunker_floor_ext
 925 500 bunker_floor_ext
 950 550 bunker_floor_ext
+500 450 facade
+475 450 facade
+450 450 facade
+425 450 facade
+400 450 facade
+375 450 facade
+350 450 facade
+325 450 facade
+300 450 facade
+300 275 lift
 ENTITIES
+185 394 elle
+235 369 mother
+381 376 scientist1
+426 377 scientist2
 ITEMS
