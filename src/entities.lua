@@ -24,7 +24,7 @@ function Terminal.draw(this)
 	local offsetY = 13
 	love.graphics.setColor(1, 1, 1, 1)
 	-- Yolo, I could've done something clever with the editor but I just got lazy with adding flipping
-	if (Heartbeat.levelName == "cave4" or Heartbeat.levelName == "spider10") then
+	if (Heartbeat.levelName == "cave4" or Heartbeat.levelName == "spider10" or Heartbeat.levelName == "spider13") then
 		scaleX = -2
 	end
 	love.graphics.draw(Terminal.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, scaleX, scaleY, offsetX, offsetY)
@@ -892,6 +892,16 @@ function Widow.draw(this)
 end
 
 function Widow.behaivor(this)
+	if (Player.flags.hasKilledWidow) then
+		Heartbeat.removeEntity(this)
+		for i=1,#Heartbeat.tiles do
+			if (Heartbeat.tiles[i] ~= nil) then
+				if (Heartbeat.tiles[i].id == "lockeddoor") then
+					Heartbeat.removeTile(Heartbeat.tiles[i])
+				end
+			end
+		end
+	end
 	-- Have the spider climb up walls
 	if (Heartbeat.getTile(this.x - 4, this.y) ~= nil and not this.isClimbing) then
 		this.rotation = math.pi/2
@@ -946,7 +956,7 @@ function Widow.onDeath(this)
 	Heartbeat.newItem(HealthPickup, this.x - 30, this.y)
 	Heartbeat.newItem(DarkPickup, this.x + 37, this.y - 20)
 	Heartbeat.newItem(DarkPickup, this.x + 68, this.y - 24)
-	Heartbeat.newItem(GravityUpgrade, Heartbeat.player.x + 50, Heartbeat.player.y + Heartbeat.player.width - 20)
+	Heartbeat.newItem(GravityUpgrade, Heartbeat.player.x + 50, Heartbeat.player.y - 20)
 	Player.flags.hasKilledWidow = true
 end
 

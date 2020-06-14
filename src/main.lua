@@ -15,14 +15,14 @@ function love.load()
 	whiteOut = false
 	whiteOutShade = 0
 	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb, Bed, BloodyBed, Stalagtite, Pebble, Lift, Facade}
-	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks, Widow, Spiderling, Scientist1, Scientist2, Mother, Elle, Zero, ZeroShot}
+	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks, Widow, Spiderling, Scientist1, Scientist2, Mother, Elle, Zero, ZeroShot, Egg}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle", "Scientist", "???", "Zero"}
-	--Heartbeat.editor.readLevel("start")
-	--Heartbeat.setDimensions(windowWidth, windowHeight)
-	Heartbeat.editor.readLevel("spider14")
-	Heartbeat.player.x = 940
-	Heartbeat.player.y = 390
+	Heartbeat.editor.readLevel("start")
+	Heartbeat.setDimensions(windowWidth, windowHeight)
+	--Heartbeat.editor.readLevel("spider14")
+	--Heartbeat.player.x = 940
+	--Heartbeat.player.y = 390
 	-- Some godmode features
 	Player.matter = 10
 end
@@ -68,6 +68,8 @@ function love.keypressed(key, scancode, isrepeat)
 						Heartbeat.dialog.openDialog("log5")
 					elseif (Heartbeat.levelName == "spider8") then
 						Heartbeat.dialog.openDialog("log6")
+					elseif (Heartbeat.levelName == "spider13") then
+						Heartbeat.dialog.openDialog("log8")
 					elseif (Heartbeat.levelName == "spider10" and Heartbeat.redText == nil) then
 						Heartbeat.dialog.openDialog("log7")
 					end
