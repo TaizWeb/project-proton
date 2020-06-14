@@ -1,5 +1,14 @@
 require("lib/standard")
 
+function genericDrop(this)
+	local dropChance = math.floor(math.random() * 9)
+	if (dropChance == 7) then
+		Heartbeat.newItem(HealthPickup, this.x, this.y)
+	elseif (dropChance == 6) then
+		Heartbeat.newItem(DarkPickup, this.x, this.y)
+	end
+end
+
 Terminal = {
 	id = "terminal",
 	texture = love.graphics.newImage("assets/misc/terminal.png"),
@@ -239,12 +248,7 @@ function Slime.behaivor(this)
 end
 
 function Slime.onDeath(this)
-	local dropChance = math.floor(math.random() * 9)
-	if (dropChance == 7) then
-		Heartbeat.newItem(HealthPickup, this.x, this.y)
-	elseif (dropChance == 6) then
-		Heartbeat.newItem(DarkPickup, this.x, this.y)
-	end
+	genericDrop(this)
 end
 
 Imp = {
@@ -303,6 +307,119 @@ function Imp.behaivor(this)
 	if (Heartbeat.checkEntityCollision(Heartbeat.player, this)) then
 		Heartbeat.player.updateHealth(Heartbeat.player.health - 10)
 	end
+end
+
+function Imp.onDeath(this)
+	genericDrop(this)
+end
+
+Egg = {
+	id = "egg",
+	texture = love.graphics.newImage("assets/enemies/egg1.png"),
+	frames = {
+		love.graphics.newImage("assets/enemies/egg1.png"),
+		love.graphics.newImage("assets/enemies/egg2.png"),
+		love.graphics.newImage("assets/enemies/egg3.png"),
+		love.graphics.newImage("assets/enemies/egg4.png"),
+		love.graphics.newImage("assets/enemies/egg5.png"),
+		love.graphics.newImage("assets/enemies/egg6.png"),
+		love.graphics.newImage("assets/enemies/egg7.png"),
+	},
+	scaleX = 3,
+	scaleY = 3,
+	height = 30,
+	width = 45,
+	health = 10,
+	offsetX = 0,
+	offsetY = 0,
+	isEnemy = true,
+	movementFrames = 0,
+	noticedPlayer = false
+}
+
+Hatchling = {
+	id = "hatchling",
+	texture = love.graphics.newImage("assets/enemies/hatchling1.png"),
+	frames = {
+		love.graphics.newImage("assets/enemies/hatchling1.png"),
+		love.graphics.newImage("assets/enemies/hatchling2.png"),
+		love.graphics.newImage("assets/enemies/hatchling3.png"),
+	},
+	scaleX = 3,
+	scaleY = 3,
+	height = 45,
+	width = 33,
+	health = 20,
+	offsetX = 0,
+	offsetY = 0,
+	isEnemy = true,
+	movementFrames = 0
+}
+
+function Egg.draw(this)
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, Egg.scaleX, Egg.scaleY, Egg.offsetX, Egg.offsetY)
+end
+
+function Hatchling.draw(this)
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, this.scaleX, Hatchling.scaleY, this.offsetX, Hatchling.offsetY)
+end
+
+function Egg.behaivor(this)
+	if (this.frameCounter == nil) then
+		this.frameCounter = 0
+	end
+	if (math.abs(this.x - Heartbeat.player.x) < 100) then
+		if (this.frameCounter == 0) then
+			this.frameCounter = 30
+		end
+	end
+	if (this.frameCounter > 0) then
+		if (this.frameCounter == 25) then
+			this.texture = Egg.frames[2]
+		elseif (this.frameCounter == 20) then
+			this.texture = Egg.frames[3]
+		elseif (this.frameCounter ==15) then
+			this.texture = Egg.frames[4]
+		elseif (this.frameCounter == 10) then
+			this.texture = Egg.frames[5]
+		elseif (this.frameCounter == 5) then
+			this.texture = Egg.frames[6]
+		elseif (this.frameCounter == 1) then
+			this.texture = Egg.frames[7]
+			Heartbeat.newEntity(Hatchling, this.x, this.y - 20)
+			Heartbeat.removeEntity(this)
+		end
+		this.frameCounter = this.frameCounter - 1
+	end
+end
+
+function Hatchling.behaivor(this)
+	if (this.movementFrames <= 0) then
+		this.movementFrames = 30
+	end
+	if ((this.x - Heartbeat.player.x) > 0) then
+		this.moveLeft = false
+		this.scaleX = 3
+	else
+		this.moveLeft = true
+		this.scaleX = -3
+	end
+	if (this.moveLeft) then
+		this.dx = 3
+	else
+		this.dx = -3
+	end
+	this.texture = Hatchling.frames[math.ceil(this.movementFrames / 10)]
+	this.movementFrames = this.movementFrames - 1
+	if (Heartbeat.checkEntityCollision(this, Heartbeat.player)) then
+		Heartbeat.player.updateHealth(Heartbeat.player.health - 10)
+	end
+end
+
+function Hatchling.onDeath(this)
+	genericDrop(this)
 end
 
 Frog = {
@@ -716,9 +833,7 @@ function blowItOutYourAss()
 end
 
 function detonate()
-	love.graphics.setColor(1, 1, 1, .5)
 	whiteOut = true
-	love.graphics.rectangle("fill", 0, 0, 1000, 1000)
 end
 
 Widow = {
