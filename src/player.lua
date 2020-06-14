@@ -50,7 +50,9 @@ Player = {
 		hasFirstHealth = false,
 		hasSecondMatter = false,
 		hasSecondHealth = false,
+		hasThirdHealth = false,
 		hasThirdMatter = false,
+		hasFourthMatter = false,
 		hasObjective = false
 	}
 }

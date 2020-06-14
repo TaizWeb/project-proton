@@ -794,7 +794,9 @@ function Heartbeat.editor.readLevel(levelName)
 			not (levelName == "bunker6" and Player.flags.hasFirstHealth) and
 			not (levelName == "cave3" and Player.flags.hasSecondMatter) and
 			not (levelName == "cave4" and Player.flags.hasSecondHealth) and
-			not (levelName == "cave6" and Player.flags.hasThirdMatter)
+			not (levelName == "cave6" and Player.flags.hasThirdMatter) and
+			not (levelName == "spider3" and Player.flags.hasThirdHealth) and
+			not (levelName == "spider7" and Player.flags.hasFourthMatter)
 		) then
 			Heartbeat.newItem(itemData, tonumber(levelLineData[1]), tonumber(levelLineData[2]))
 		end
