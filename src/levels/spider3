@@ -126,7 +126,6 @@ TILES
 1100 225 bunker
 1125 225 bunker
 1150 225 bunker
-1175 225 bunker
 1175 100 bunker_wall
 1175 75 bunker_wall
 1175 50 bunker_wall
@@ -525,5 +524,17 @@ TILES
 375 475 bunker_floor_ext
 400 475 bunker_floor_ext
 0 475 bunker_floor_ext
+1175 225 bunker_wall
+1175 200 bunker_wall
+1175 175 bunker_wall
+1175 150 bunker_wall
 ENTITIES
+824 420 egg
+700.67118821802 390.29055519687 imp
+702.56421118943 389.14320622118 imp
+789 201 slime
+525 201 slime
+734 701 slime
+263 701 slime
 ITEMS
+1084 198 healthupgrade

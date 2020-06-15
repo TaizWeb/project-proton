@@ -204,4 +204,6 @@ TILES
 0 325 bunker_wall
 0 350 bunker_wall
 ENTITIES
+531 420 egg
+779 426 slime
 ITEMS

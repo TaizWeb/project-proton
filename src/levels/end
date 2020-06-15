@@ -307,6 +307,7 @@ TILES
 325 450 facade
 300 450 facade
 300 275 lift
+875 300 escape_pod
 ENTITIES
 185 394 elle
 235 369 mother

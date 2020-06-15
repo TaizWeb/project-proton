@@ -131,5 +131,7 @@ TILES
 775 25 bunker_ext_web
 775 0 bunker_ext_web
 775 125 bunker_ext_web
+775 375 lockeddoor
 ENTITIES
+383 331.5 widow
 ITEMS

@@ -5,7 +5,6 @@ DOORS
 -5 560 spider8 770 390
 1200 930 spider9 30 390
 TILES
-0 300 bunker
 25 300 bunker
 50 300 bunker
 75 300 bunker
@@ -397,7 +396,6 @@ TILES
 50 325 bunker_floor_ext
 25 325 bunker_floor_ext
 125 325 bunker_floor_ext
-0 325 bunker_floor_ext
 0 650 bunker_wall
 0 675 bunker_wall
 0 700 bunker_wall
@@ -408,7 +406,18 @@ TILES
 0 825 bunker_wall
 0 850 bunker_wall
 0 875 bunker_wall
+0 325 bunker_wall
+0 300 bunker_wall
+0 275 bunker_wall
+0 250 bunker_wall
+0 225 bunker_wall
 ENTITIES
-3269762 1095 basic_shot
--266214 955 basic_shot
+3294098 1095 basic_shot
+-241878 955 basic_shot
+531 651 slime
+119.88040184378 304.79080969572 imp
+485.04684421831 598.13164772634 imp
+911.01389340006 255.23435140439 imp
+793 945 egg
 ITEMS
+45 269 matterupgrade
