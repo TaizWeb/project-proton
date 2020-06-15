@@ -5,6 +5,19 @@ require("items")
 require("entities")
 require("player")
 
+Sounds = {
+	bunker_theme = love.audio.newSource("assets/sound/bunker_theme.ogg", "stream"),
+	cave_theme = love.audio.newSource("assets/sound/cave_theme.ogg", "stream"),
+	boss_theme = love.audio.newSource("assets/sound/boss_theme.ogg", "stream"),
+	outro_theme = love.audio.newSource("assets/sound/outro_theme.ogg", "stream"),
+	alert = love.audio.newSource("assets/sound/alert.ogg", "static"),
+	door = love.audio.newSource("assets/sound/door.ogg", "static"),
+	shot = love.audio.newSource("assets/sound/shot.ogg", "static"),
+	shot_hit = love.audio.newSource("assets/sound/thud_shot.ogg", "static"),
+	shot_crash = love.audio.newSource("assets/sound/thud_shot2.ogg", "static"),
+	currentTheme = nil
+}
+
 function love.load()
 	windowWidth = love.graphics.getWidth()
 	windowHeight = love.graphics.getHeight()

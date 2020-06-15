@@ -90,6 +90,8 @@ function BasicShot.behaivor(this)
 		if (Heartbeat.entities[i] == nil) then return end
 		if (Heartbeat.entities[i].isEnemy and Heartbeat.checkEntityCollision(this, Heartbeat.entities[i])) then
 			Heartbeat.updateEntityHealth(Heartbeat.entities[i], Heartbeat.entities[i].health - BasicShot.damage)
+			love.audio.stop(Sounds.shot_hit)
+			love.audio.play(Sounds.shot_hit)
 			Heartbeat.removeEntity(this)
 		end
 	end
@@ -99,6 +101,8 @@ function BasicShot.behaivor(this)
 end
 
 function BasicShot.onCollision(this, collidedObject)
+	love.audio.stop(Sounds.shot_crash)
+	love.audio.play(Sounds.shot_crash)
 	Heartbeat.removeEntity(this)
 end
 
@@ -132,6 +136,8 @@ function MatterShot.behaivor(this)
 		if (Heartbeat.entities[i] == nil) then return end
 		if (Heartbeat.entities[i].isEnemy and Heartbeat.checkEntityCollision(this, Heartbeat.entities[i])) then
 			Heartbeat.updateEntityHealth(Heartbeat.entities[i], Heartbeat.entities[i].health - MatterShot.damage)
+			love.audio.stop(Sounds.shot_hit)
+			love.audio.play(Sounds.shot_hit)
 			Heartbeat.removeEntity(this)
 		end
 	end
@@ -142,8 +148,12 @@ function MatterShot.onCollision(this, collidedObject)
 	Heartbeat.removeEntity(this)
 	if (collidedObject.id == "door") then
 		if (not (Heartbeat.levelName == "spider5" and Player.flags.hasSeenSpecks)) then
+			love.audio.play(Sounds.door)
 			Heartbeat.removeTile(collidedObject)
 		end
+	else
+		love.audio.stop(Sounds.shot_crash)
+		love.audio.play(Sounds.shot_crash)
 	end
 end
 
@@ -473,6 +483,13 @@ function Frog.draw(this)
 end
 
 function Frog.behaivor(this)
+	-- Play that sweet boss theme
+	if (Sounds.currentTheme ~= Sounds.boss_theme) then
+		love.audio.stop()
+		love.audio.play(Sounds.boss_theme)
+		Sounds.currentTheme = Sounds.boss_theme
+	end
+	-- Behaivor
 	if (math.ceil(math.random() * 180) == 1) then
 		this.isAttacking = true
 	end
@@ -715,7 +732,7 @@ Zero = {
 	width = 9 * 3,
 	height = 27 * 3,
 	isEnemy = true,
-	health = 66,
+	health = 666,
 	forwardFace = true,
 	opacity = 0,
 	event = false,
@@ -793,6 +810,12 @@ function Zero.behaivor(this)
 		Zero.frameCounter = Zero.frameCounter - 1
 	end
 	if (Zero.isButtMad and not Zero.spawnedShot and not Heartbeat.dialog.isOpen) then
+		-- Play that sweet boss theme
+		if (Sounds.currentTheme ~= Sounds.boss_theme) then
+			love.audio.stop()
+			love.audio.play(Sounds.boss_theme)
+			Sounds.currentTheme = Sounds.boss_theme
+		end
 		Zero.event = false
 		this.dy = -10
 		Heartbeat.newEntity(ZeroShot, this.x+10, this.y+10)
@@ -840,6 +863,7 @@ end
 function Zero.onDeath(this)
 	Heartbeat.newEntity(ZeroDefeated, Heartbeat.player.x - 50, Heartbeat.player.y)
 	Heartbeat.dialog.openDialog("defeat", limitbreak)
+	love.audio.stop()
 end
 
 function wakeUp()
@@ -871,6 +895,12 @@ end
 function detonate()
 	whiteOut = true
 	Heartbeat.player.x = 1400
+	-- Play that sad outro theme
+	if (Sounds.currentTheme ~= Sounds.outro_theme) then
+		love.audio.stop()
+		love.audio.play(Sounds.outro_theme)
+		Sounds.currentTheme = Sounds.outro_theme
+	end
 end
 
 Widow = {
@@ -929,6 +959,12 @@ function Widow.draw(this)
 end
 
 function Widow.behaivor(this)
+	-- Play that sweet boss theme
+	if (Sounds.currentTheme ~= Sounds.boss_theme) then
+		love.audio.stop()
+		love.audio.play(Sounds.boss_theme)
+		Sounds.currentTheme = Sounds.boss_theme
+	end
 	if (Player.flags.hasKilledWidow) then
 		Heartbeat.removeEntity(this)
 		for i=1,#Heartbeat.tiles do

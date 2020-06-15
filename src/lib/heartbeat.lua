@@ -825,6 +825,16 @@ function Heartbeat.checkRooms()
 end
 
 function Heartbeat.gotoRoom(room, x, y)
+	if ((string.sub(room, 1, 1) == "s" or string.sub(room, 1, 1) == "b" or Heartbeat.levelName == "end") and Sounds.currentTheme ~= Sounds.bunker_theme) then
+		love.audio.stop()
+		love.audio.play(Sounds.bunker_theme)
+		Sounds.currentTheme = Sounds.bunker_theme
+	end
+	if ((string.sub(room, 1, 1) == "c") and Sounds.currentTheme ~= Sounds.cave_theme) then
+		love.audio.stop()
+		love.audio.play(Sounds.cave_theme)
+		Sounds.currentTheme = Sounds.cave_theme
+	end
 	print("Room " .. room .. " loaded.")
 	Heartbeat.clear()
 	Heartbeat.editor.readLevel(room)

@@ -158,6 +158,8 @@ function Player.setUp()
 end
 
 function Player.shoot()
+	love.audio.stop(Sounds.shot)
+	love.audio.play(Sounds.shot)
 	if (Heartbeat.player.forwardFace) then
 		if (not Heartbeat.player.isCrouched and not Heartbeat.player.isUp) then
 			Heartbeat.newEntity(BasicShot, Heartbeat.player.x+20, Heartbeat.player.y+5)
@@ -179,6 +181,8 @@ end
 
 function Player.shootMatter()
 	if (not (Player.matter <= 0)) then
+		love.audio.stop(Sounds.shot)
+		love.audio.play(Sounds.shot)
 		if (not Heartbeat.player.isCrouched) then
 			Heartbeat.newEntity(MatterShot, Heartbeat.player.x+20, Heartbeat.player.y+5)
 		else

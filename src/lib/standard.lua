@@ -30,6 +30,8 @@ function Pained.behaivor(this)
 		end
 		this.dy = -.5
 	elseif (Heartbeat.levelName == "spider10" and Player.seenTerm == nil) then
+		love.audio.stop()
+		-- GET OUT OF MY HEAD GET OUT OF MY HEAD GET OUT OF MY HEAD GET OU
 		if (this.frames == nil) then
 			this.frames = 0
 			this.opacity = 0
