@@ -655,6 +655,7 @@ function Elle.behaivor()
 		Heartbeat.player.x = 1000
 		Heartbeat.player.y = 1000
 		Heartbeat.dialog.openDialog("memory", reloadEnd)
+		love.audio.stop()
 		Player.flags.hasSeenMemory = true
 		Elle.frames = 420
 	end
@@ -767,6 +768,7 @@ function Zero.behaivor(this)
 	end
 	if ((Heartbeat.checkEntityCollision(this, Heartbeat.player) or Zero.grabbedPlayer) and Zero.event) then
 		Zero.grabbedPlayer = true
+		love.audio.stop()
 		this.x = 922
 		--print("GOTCHA")
 		-- These are being set every frame?? Yep. I have two days left, sue me.
