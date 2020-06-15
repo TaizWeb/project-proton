@@ -20,16 +20,11 @@ function love.load()
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle", "Scientist", "???", "Zero"}
 	Heartbeat.editor.readLevel("start")
 	Heartbeat.setDimensions(windowWidth, windowHeight)
-	--Heartbeat.editor.readLevel("spider14")
-	--Heartbeat.player.x = 940
-	--Heartbeat.player.y = 390
-	-- Some godmode features
-	Player.matter = 10
 end
 
 function love.keypressed(key, scancode, isrepeat)
 	-- Activate editor
-	if (key == "e" and not Heartbeat.editor.commandMode) then
+	if (key == "`" and not Heartbeat.editor.commandMode) then
 		Heartbeat.editor.isActive = not Heartbeat.editor.isActive
 	end
 	-- Send keys to editor if active
