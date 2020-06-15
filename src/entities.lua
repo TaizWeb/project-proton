@@ -722,11 +722,13 @@ Zero = {
 
 function Zero.draw(this)
 	--this.opacity = 1
-	Player.flags.hasObjective = true
-	Zero.event = true
-	if (Player.flags.hasObjective or Zero.event) then
+	--Player.flags.hasObjective = true
+	--Zero.event = true
+	if (Player.flags.hasObjective or Zero.event or Zero.isButtMad) then
 		this.opacity = 1
 		Player.flags.hasObjective = false
+		Heartbeat.newTile(LockedDoor, 975, 375)
+		Heartbeat.newTile(LockedDoor, 0, 375)
 	else
 		this.opacity = 0
 	end
@@ -735,15 +737,16 @@ function Zero.draw(this)
 end
 
 function Zero.behaivor(this)
-	if (this.opacity == 1 and not Zero.event) then
+	if (this.opacity == 1 and not Zero.event and not Zero.isButtMad) then
 		Heartbeat.dialog.openDialog("zero")
 		Zero.event = true
 	end
-	if (not Heartbeat.dialog.isOpen and not Zero.isButtMad) then
+	if (not Heartbeat.dialog.isOpen and not Zero.isButtMad and Zero.event) then
 		this.dx = 5
 	end
-	if (Heartbeat.checkEntityCollision(this, Heartbeat.player) or Zero.grabbedPlayer) then
+	if ((Heartbeat.checkEntityCollision(this, Heartbeat.player) or Zero.grabbedPlayer) and Zero.event) then
 		Zero.grabbedPlayer = true
+		this.x = 922
 		--print("GOTCHA")
 		-- These are being set every frame?? Yep. I have two days left, sue me.
 		this.offsetX = 10
@@ -778,7 +781,7 @@ function Zero.behaivor(this)
 		elseif (Zero.frameCounter == -80) then
 			Heartbeat.clear()
 			-- Hide the player off-screen
-			Heartbeat.player.x = 1000
+			Heartbeat.player.x = 1200
 			Heartbeat.dialog.openDialog("break", wakeUp)
 			Zero.grabbedPlayer = false
 		end
@@ -793,6 +796,7 @@ function Zero.behaivor(this)
 		this.moveLeft = true
 	end
 	if (Zero.isButtMad) then
+		this.opacity = 1
 		-- Checking if he's near the wall
 		if (this.x < 200) then
 			this.moveLeft = true
@@ -811,9 +815,27 @@ function Zero.behaivor(this)
 	end
 end
 
+ZeroDefeated = {
+	id = "zero_defeated",
+	texture = love.graphics.newImage("assets/misc/zero.png"),
+	scaleX = 3,
+	scaleY = 3,
+	width = 9 * 3,
+	height = 27 * 3,
+}
+
+function ZeroDefeated.draw(this)
+	if (Heartbeat.dialog.isOpen) then
+		love.graphics.setColor(1, 1, 1, 1)
+	else
+		love.graphics.setColor(1, 1, 1, 0)
+	end
+	love.graphics.draw(ZeroDefeated.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, ZeroDefeated.scaleX, ZeroDefeated.scaleY, ZeroDefeated.offsetX, ZeroDefeated.offsetY)
+end
+
 function Zero.onDeath(this)
-	this.y = 390
-	Heartbeat.dialog.openDialog("defeat", detonate)
+	Heartbeat.newEntity(ZeroDefeated, Heartbeat.player.x - 50, Heartbeat.player.y)
+	Heartbeat.dialog.openDialog("defeat", limitbreak)
 end
 
 function wakeUp()
@@ -832,8 +854,19 @@ function blowItOutYourAss()
 	Zero.isButtMad = true
 end
 
+function limitbreak()
+	Heartbeat.newEntity(Imp, 50, 200)
+	Heartbeat.newEntity(Imp, 100, 150)
+	Heartbeat.newEntity(Imp, 200, 200)
+	Heartbeat.newEntity(Imp, 123, 255)
+	Heartbeat.newEntity(Imp, 280, 300)
+	Heartbeat.dialog.openDialog("missioncomplete", detonate)
+	Heartbeat.player.health = 99999
+end
+
 function detonate()
 	whiteOut = true
+	Heartbeat.player.x = 1400
 end
 
 Widow = {

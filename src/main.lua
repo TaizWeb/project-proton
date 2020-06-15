@@ -14,8 +14,8 @@ function love.load()
 	Heartbeat.createPlayer(Player, 200, 200)
 	whiteOut = false
 	whiteOutShade = 0
-	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb, Bed, BloodyBed, Stalagtite, Pebble, Lift, Facade}
-	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks, Widow, Spiderling, Scientist1, Scientist2, Mother, Elle, Zero, ZeroShot, Egg}
+	Heartbeat.tilesList = {BunkerTile, BunkerFloorExtended, BunkerWall, Cobble, Door, Screen, Pod, Corpse, LockedDoor, CobbleWeb, BunkerWeb, BunkerExtWeb, Bed, BloodyBed, Stalagtite, Pebble, Lift, Facade, EscapePod}
+	Heartbeat.entitiesList = {Terminal, BasicShot, MatterShot, Slime, Imp, Pained, Frog, Tadpole, Specks, Widow, Spiderling, Scientist1, Scientist2, Mother, Elle, Zero, ZeroShot, Egg, ZeroDefeated}
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle", "Scientist", "???", "Zero"}
 	Heartbeat.editor.readLevel("start")
