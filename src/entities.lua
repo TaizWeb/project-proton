@@ -166,6 +166,11 @@ ZeroShot = {
 }
 
 function ZeroShot.behaivor(this)
+	if (this.frameCounter == nil or this.frameCounter == 5) then
+		this.frameCounter = 1
+	end
+	this.texture = ZeroShot.frames[this.frameCounter]
+	this.frameCounter = this.frameCounter + 1
 	local zeroX = 0
 	local zeroY = 0
 	if (this.initialX == nil) then
@@ -193,7 +198,7 @@ end
 function ZeroShot.draw(this)
 	love.graphics.setColor(1, 1, 1, 1)
 	--love.graphics.rectangle("fill", Camera.convert("x", this.x), Camera.convert("y", this.y), this.width, this.height)
-	love.graphics.draw(ZeroShot.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, MatterShot.scaleX, MatterShot.scaleY, 0, 0)
+	love.graphics.draw(this.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), 0, MatterShot.scaleX, MatterShot.scaleY, 0, 0)
 end
 
 Slime = {
