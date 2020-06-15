@@ -2,7 +2,7 @@
 Start the lift.
 
 [Scientist]
-What are you
+What are you-
 
 [PROTON]
 I have to go.

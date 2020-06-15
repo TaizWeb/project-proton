@@ -1,4 +1,10 @@
 [Zero]
+Augh...
+
+[PROTON]
+Are you done?
+
+[Zero]
 Damn you. That damned blood...
 
 [Zero]
@@ -36,30 +42,3 @@ My backup has arrived, I was just buying some time.
 
 [Zero]
 Goodbye, my blue friend.
-
-[PROTON]
-Urk!
-
-[PROTON]
-I'm coughing up... blood?
-
-[PROTON]
-There's too many... I can't.
-
-[???]
-MINIMUM SAFE LIFT DISTANCE REACHED
-
-[PROTON]
-I see.
-
-[Montague]
-...Try to be good when I'm gone.
-
-[PROTON]
-[FISSION CORE DESTABILIZED]
-
-[PROTON]
-[DETONATION OF PROTON SUIT IMMINENT]
-
-[Montague]
-Mission... Complete.
