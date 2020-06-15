@@ -134,6 +134,11 @@ function love.update(dt)
 end
 
 function love.draw()
+	if (string.sub(Heartbeat.levelName, 1, 1) == "s" or string.sub(Heartbeat.levelName, 1, 1) == "b" or Heartbeat.levelName == "end") then
+		Heartbeat.setBackgroundColor(0, .1, 0, 1)
+	else
+		Heartbeat.setBackgroundColor(.1, .1, .1, 1)
+	end
 	Heartbeat.beat()
 	if (Player.displayObjective) then
 		Player.drawObjective()

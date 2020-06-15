@@ -900,9 +900,15 @@ function Heartbeat.setDimensions(width, height)
 	Heartbeat.levelHeight = height
 end
 
+function Heartbeat.setBackgroundColor(red, green, blue)
+	Heartbeat.backgroundRed = red
+	Heartbeat.backgroundGreen = green
+	Heartbeat.backgroundBlue = blue
+end
+
 -- drawBackground: Draws the background, currently supports only solid colors
 function Heartbeat.drawBackground()
-	love.graphics.setColor(0, 0, 0, 1)
+	love.graphics.setColor(Heartbeat.backgroundRed, Heartbeat.backgroundBlue, Heartbeat.backgroundGreen, 1)
 	love.graphics.rectangle("fill", 0, 0, windowWidth, windowHeight)
 end
 
