@@ -53,7 +53,7 @@ Player = {
 		hasThirdHealth = false,
 		hasThirdMatter = false,
 		hasFourthMatter = false,
-		hasObjective = false
+		hasObjective = false,
 	}
 }
 
@@ -71,72 +71,74 @@ function Player.drawObjective()
 end
 
 function Player.draw(this)
-	local scaleX = 2
-	local scaleY = 2
-	local offsetX = 10
-	local offsetY = 2
-	-- Determine which way the player faces
-	if (Heartbeat.player.dx < 0) then
-		Heartbeat.player.forwardFace = false
-		Heartbeat.player.isWalking = true
-	elseif (Heartbeat.player.dx > 0) then
-		Heartbeat.player.forwardFace = true
-		Heartbeat.player.isWalking = true
-	else
-		Heartbeat.player.isWalking = false
-		Heartbeat.player.walkFrames = 0
-		Player.texture = Player.idle
-	end
-	if (not Heartbeat.player.forwardFace) then
-		scaleX = -2
-		offsetX = 22
-	end
-	-- Walk animation
-	if (Heartbeat.player.isWalking) then
-		Heartbeat.player.walkFrames = Heartbeat.player.walkFrames + 2
-		if (Heartbeat.player.walkFrames >= 60) then
+	if (not Zero.grabbedPlayer) then
+		local scaleX = 2
+		local scaleY = 2
+		local offsetX = 10
+		local offsetY = 2
+		-- Determine which way the player faces
+		if (Heartbeat.player.dx < 0) then
+			Heartbeat.player.forwardFace = false
+			Heartbeat.player.isWalking = true
+		elseif (Heartbeat.player.dx > 0) then
+			Heartbeat.player.forwardFace = true
+			Heartbeat.player.isWalking = true
+		else
+			Heartbeat.player.isWalking = false
 			Heartbeat.player.walkFrames = 0
+			Player.texture = Player.idle
 		end
-		Player.texture = Player.walk[1 + math.floor(Heartbeat.player.walkFrames / 10)]
-	end
-	-- Crouching
-	if (Heartbeat.player.isCrouched) then
-		if (Heartbeat.player.crouchFrames < 3) then
-			Player.texture = Player.crouch[2]
-			Heartbeat.player.crouchFrames = Heartbeat.player.crouchFrames + 1
-		else
-			Player.texture = Player.crouch[3]
+		if (not Heartbeat.player.forwardFace) then
+			scaleX = -2
+			offsetX = 22
 		end
-	end
-	-- Firing up
-	if (Heartbeat.player.isUp) then
-		if (Heartbeat.player.upFrames < 3) then
-			Player.texture = Player.up[2]
-			Heartbeat.player.upFrames = Heartbeat.player.upFrames + 1
-		else
-			Player.texture = Player.up[3]
+		-- Walk animation
+		if (Heartbeat.player.isWalking) then
+			Heartbeat.player.walkFrames = Heartbeat.player.walkFrames + 2
+			if (Heartbeat.player.walkFrames >= 60) then
+				Heartbeat.player.walkFrames = 0
+			end
+			Player.texture = Player.walk[1 + math.floor(Heartbeat.player.walkFrames / 10)]
 		end
-	end
+		-- Crouching
+		if (Heartbeat.player.isCrouched) then
+			if (Heartbeat.player.crouchFrames < 3) then
+				Player.texture = Player.crouch[2]
+				Heartbeat.player.crouchFrames = Heartbeat.player.crouchFrames + 1
+			else
+				Player.texture = Player.crouch[3]
+			end
+		end
+		-- Firing up
+		if (Heartbeat.player.isUp) then
+			if (Heartbeat.player.upFrames < 3) then
+				Player.texture = Player.up[2]
+				Heartbeat.player.upFrames = Heartbeat.player.upFrames + 1
+			else
+				Player.texture = Player.up[3]
+			end
+		end
 
-	-- Gravity
-	if (Player.isUpsideDown) then
-		Player.rotation = math.pi
-		offsetY = 32
-		scaleX = -1 * scaleX
-	else
-		Player.rotation = 0
-	end
+		-- Gravity
+		if (Player.isUpsideDown) then
+			Player.rotation = math.pi
+			offsetY = 32
+			scaleX = -1 * scaleX
+		else
+			Player.rotation = 0
+		end
 
-	-- Draw health/missile count
-	love.graphics.setColor(1, 1, 1, 1)
-	love.graphics.print("Health: " .. Heartbeat.player.health)
-	if (Player.maxMatter > 0) then
-		love.graphics.print("\nDark Matter: " .. Player.matter .. "/" .. Player.maxMatter)
+		-- Draw health/missile count
+		love.graphics.setColor(1, 1, 1, 1)
+		love.graphics.print("Health: " .. Heartbeat.player.health)
+		if (Player.maxMatter > 0) then
+			love.graphics.print("\nDark Matter: " .. Player.matter .. "/" .. Player.maxMatter)
+		end
+		if (not (Heartbeat.player.cooldownFrames <= 0)) then
+			love.graphics.setColor(1, 1, 1, .5)
+		end
+		love.graphics.draw(Player.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), Player.rotation, scaleX, scaleY, offsetX, offsetY)
 	end
-	if (not (Heartbeat.player.cooldownFrames <= 0)) then
-		love.graphics.setColor(1, 1, 1, .5)
-	end
-	love.graphics.draw(Player.texture, Camera.convert("x", this.x), Camera.convert("y", this.y), Player.rotation, scaleX, scaleY, offsetX, offsetY)
 end
 
 function Player.setCrouch()
