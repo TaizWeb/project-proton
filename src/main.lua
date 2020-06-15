@@ -18,6 +18,10 @@ Sounds = {
 	currentTheme = nil
 }
 
+Sounds.bunker_theme:setLooping(true)
+Sounds.cave_theme:setLooping(true)
+Sounds.boss_theme:setLooping(true)
+
 function love.load()
 	windowWidth = love.graphics.getWidth()
 	windowHeight = love.graphics.getHeight()
