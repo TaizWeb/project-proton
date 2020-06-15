@@ -109,7 +109,7 @@ MatterShot = {
 	scaleY = 1.2,
 	height = 16,
 	width = 16,
-	damage = 5,
+	damage = 10,
 	isEnemy = false
 }
 
@@ -130,7 +130,6 @@ function MatterShot.behaivor(this)
 	end
 	for i=1,#Heartbeat.entities do
 		if (Heartbeat.entities[i] == nil) then return end
-		print(Heartbeat.entities[i].id)
 		if (Heartbeat.entities[i].isEnemy and Heartbeat.checkEntityCollision(this, Heartbeat.entities[i])) then
 			Heartbeat.updateEntityHealth(Heartbeat.entities[i], Heartbeat.entities[i].health - MatterShot.damage)
 			Heartbeat.removeEntity(this)
