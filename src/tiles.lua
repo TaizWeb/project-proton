@@ -22,6 +22,17 @@ Pod = {
 	isSolid = false
 }
 
+EscapePod = {
+	id = "escape_pod",
+	texture = love.graphics.newImage("assets/tiles/escape.png"),
+	height = 1,
+	width = 1,
+	scaleX = 3,
+	offsetY = -6,
+	scaleY = 3,
+	isSolid = false
+}
+
 Corpse = {
 	id = "corpse",
 	texture = love.graphics.newImage("assets/misc/corpse.png"),
