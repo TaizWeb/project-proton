@@ -352,7 +352,8 @@ TILES
 150 25 bunker_wall
 175 25 bunker_wall
 125 25 bunker_wall
-0 450 bunker
+775 375 door
+0 450 bunker_floor_ext
 ENTITIES
 105 380 terminal
 ITEMS

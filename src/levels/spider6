@@ -128,8 +128,6 @@ TILES
 450 0 bunker_wall
 425 0 bunker_wall
 400 0 bunker_wall
-375 0 bunker_wall
-350 0 bunker_wall
 325 0 bunker_wall
 300 0 bunker_wall
 275 0 bunker_wall
@@ -158,6 +156,9 @@ TILES
 0 325 bunker_wall
 0 200 bunker_wall
 0 350 bunker_wall
+350 0 cobble
+375 0 cobble
+375 425 cobble
 ENTITIES
 233 369 specks
 ITEMS
