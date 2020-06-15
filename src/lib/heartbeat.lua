@@ -318,7 +318,8 @@ function Heartbeat.player.updateHealth(value)
 end
 
 function Heartbeat.player.killPlayer()
-	print("You died!")
+	print("You died, try again.")
+	love.event.quit()
 end
 
 function Heartbeat.lookupTile(id)
