@@ -19,6 +19,8 @@ function love.load()
 	Heartbeat.itemsList = {DarkMatterUpgrade, HealthTankUpgrade, GrappelUpgrade, LongJumpUpgrade, GravityUpgrade, ChargeBeamUpgrade, TriBeamUpgrade, HealthPickup, DarkPickup}
 	Heartbeat.dialog.speakers = {"Gray", "PROTON", "Montague", "Specks", "Elle", "Scientist", "???", "Zero"}
 	Heartbeat.editor.readLevel("start")
+	Heartbeat.player.x = 380
+	Heartbeat.player.y = 390
 	Heartbeat.setDimensions(windowWidth, windowHeight)
 end
 
