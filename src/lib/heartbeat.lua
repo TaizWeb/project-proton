@@ -101,7 +101,7 @@ end
 
 function Heartbeat.jump(entity)
 	if (not entity.isFalling) then
-		if (Player.hasJumpUpgrade) then
+		if (Player.hasJumpUpgrade and love.keyboard.isDown("lshift")) then
 			entity.dy = -18
 		else
 			entity.dy = -11
