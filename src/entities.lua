@@ -168,8 +168,8 @@ ZeroShot = {
 	},
 	scaleX = 1.2,
 	scaleY = 1.2,
-	height = 32,
-	width = 32,
+	height = 39,
+	width = 39,
 	damage = 5,
 	rotation = 0,
 	isEnemy = false
@@ -764,9 +764,9 @@ function Zero.behaivor(this)
 		Zero.event = true
 	end
 	if (not Heartbeat.dialog.isOpen and not Zero.isButtMad and Zero.event) then
-		this.dx = 5
+		this.dx = 16
 	end
-	if ((Heartbeat.checkEntityCollision(this, Heartbeat.player) or Zero.grabbedPlayer) and Zero.event) then
+	if ((Heartbeat.checkEntityCollision(this, Heartbeat.player) or Zero.grabbedPlayer) and Zero.event and not Zero.isButtMad) then
 		Zero.grabbedPlayer = true
 		love.audio.stop()
 		this.x = 922
