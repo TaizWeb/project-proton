@@ -308,7 +308,7 @@ function Heartbeat.player.hasInventoryItem(item)
 end
 
 function Heartbeat.player.updateHealth(value)
-	if (Heartbeat.player.cooldownFrames <= 0) then
+	if (Heartbeat.player.cooldownFrames <= 0 and not Heartbeat.dialog.isOpen) then
 		if (value <= 0) then
 			Heartbeat.player.killPlayer()
 		end
