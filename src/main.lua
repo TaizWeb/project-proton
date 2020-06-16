@@ -145,6 +145,16 @@ function love.update(dt)
 	if (Player.displayObjective) then
 		Player.objectiveCounter = Player.objectiveCounter + 1
 	end
+	-- Duct tape for falling out of the world
+	if (Heartbeat.player.y < 0) then
+		Heartbeat.player.y = 0
+	end
+	if (Heartbeat.player.x < 0) then
+		Heartbeat.player.x = 0
+	end
+	if ((Heartbeat.player.x + Heartbeat.player.width) > Heartbeat.levelWidth + 20) then
+		Heartbeat.player.x = Heartbeat.levelWidth - Heartbeat.player.width
+	end
 end
 
 function love.draw()
