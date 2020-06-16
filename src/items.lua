@@ -59,6 +59,9 @@ function DarkMatterUpgrade.onPickup(this)
 	if (Heartbeat.levelName == "cave6") then
 		Player.flags.hasThirdMatter = true
 	end
+	if (Heartbeat.levelName == "spider7") then
+		Player.flags.hasFourthMatter = true
+	end
 	Player.setNewObjective("Dark Matter Storage Increased by 5 Units")
 end
 
