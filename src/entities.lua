@@ -891,12 +891,11 @@ function limitbreak()
 	Heartbeat.newEntity(Imp, 123, 255)
 	Heartbeat.newEntity(Imp, 280, 300)
 	Heartbeat.dialog.openDialog("missioncomplete", detonate)
-	Heartbeat.player.health = 99999
 end
 
 function detonate()
 	whiteOut = true
-	Heartbeat.player.x = 1400
+	Heartbeat.player.x = 2000
 	-- Play that sad outro theme
 	if (Sounds.currentTheme ~= Sounds.outro_theme) then
 		love.audio.stop()
