@@ -149,7 +149,8 @@ function love.update(dt)
 	if (Heartbeat.player.y < 0) then
 		Heartbeat.player.y = 0
 	end
-	if (Heartbeat.player.x < 0) then
+	-- I had these exceptions but I'd have to rebuild the whole level
+	if (Heartbeat.player.x < 0 and Heartbeat.levelName ~= "bunker4") then
 		Heartbeat.player.x = 0
 	end
 	if ((Heartbeat.player.x + Heartbeat.player.width) > Heartbeat.levelWidth + 20) then
