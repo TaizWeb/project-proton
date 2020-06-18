@@ -1,6 +1,7 @@
 # Project Proton
 > A game about being human.
-Project Proton is a short game for the game jam [Metroidvania Month 8](https://itch.io/jam/metroidvania-month-8).
+
+Project Proton is a short game for the game jam [Metroidvania Month 8](https://itch.io/jam/metroidvania-month-8). I wrote a [blog post](https://taizweb.github.io/post/17JUN20/index.html) on the game's development as well.
 
 ![screenshot1](https://github.com/taizweb/project-proton/raw/master/screenshots/screenshot1.png)
 ![screenshot2](https://github.com/taizweb/project-proton/raw/master/screenshots/screenshot2.png)
