@@ -12,7 +12,7 @@ Project Proton is a short game for the game jam [Metroidvania Month 8](https://i
 Project Proton was created using [Heartbeat](https://github.com/taizweb/heartbeat), a simple platformer engine, which is built on the love2d libraries.
 
 ## Installation
-Refer to the [releases](https://github.com/TaizWeb/project-proton/releases) tab to get the game. If using Windows or MacOS, you do not need to manually install the dependencies. Alternatively, you can clone the repository and run love on the `src` folder directly.
+You can grab it right on [itch.io](https://taiz.itch.io/project-proton) or you can refer to the [releases](https://github.com/TaizWeb/project-proton/releases) tab to get the game. If using Windows or MacOS, you do not need to manually install the dependencies. Alternatively, you can clone the repository and run love on the `src` folder directly.
 
 ## Requirements (Manual Installation)
 * Lua 5.3 [Get it here](https://www.lua.org/download.html)
