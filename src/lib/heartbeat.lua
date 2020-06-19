@@ -311,15 +311,24 @@ function Heartbeat.player.updateHealth(value)
 	if (Heartbeat.player.cooldownFrames <= 0 and not Heartbeat.dialog.isOpen) then
 		if (value <= 0) then
 			Heartbeat.player.killPlayer()
+		else
+			Heartbeat.player.health = value
+			Heartbeat.player.cooldownFrames = 30
 		end
-		Heartbeat.player.health = value
-		Heartbeat.player.cooldownFrames = 30
 	end
 end
 
 function Heartbeat.player.killPlayer()
 	print("You died, try again.")
-	love.event.quit()
+	Heartbeat.player.health = Player.maxHealth
+	if (string.sub(Heartbeat.levelName, 1, 1) == "b") then
+		Heartbeat.gotoRoom("start", 749, 390)
+	elseif (string.sub(Heartbeat.levelName, 1, 1) == "c") then
+		Heartbeat.gotoRoom("cave1", 50, 440)
+	elseif (string.sub(Heartbeat.levelName, 1, 1) == "s") then
+		Heartbeat.gotoRoom("spider1", 30, 390)
+	end
+	--love.event.quit()
 end
 
 function Heartbeat.lookupTile(id)
